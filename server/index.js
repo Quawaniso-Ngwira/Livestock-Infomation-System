@@ -17,6 +17,8 @@ const usersRouter = require("./src/routes/Users");
 app.use("/auth", usersRouter);
 const likesRouter = require("./src/routes/Likes");
 app.use("/likes", likesRouter);
+const breedsRouter=require("./src/routes/Breeds");
+app.use("/api/breeds",breedsRouter);
 
 
 db.sequelize.sync().then(() => {
