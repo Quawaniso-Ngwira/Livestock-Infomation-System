@@ -5,7 +5,7 @@ const { validateToken } = require("../../config/middlewares/AuthMiddleware");
 
 breedsRouter.get("/", validateToken, async (req, res) => {
   const listOfBreeds = await Breeds.findAll();
-  res.json({ listOfBreeds: listBreeds});
+  res.json({ listOfBreeds: listOfBreeds});
 });
 
  breedsRouter.get("/byId/:id", async (req, res) => {
