@@ -12,17 +12,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      breedId:{
+        type: DataTypes.BIGINT,
+         autoIncrement: true, 
+         allowNull: false,
+          primaryKey: true ,
+          
+      }
     });
   
-    // Breeds.associate = (models) => {
-    //   Breeds.hasMany(models.Comments, {
-    //     onDelete: "cascade",
-    //   });
-  
-    //   Breeds.hasMany(models.Likes, {
-    //     onDelete: "cascade",
-    //   });
-    // };
     return Breeds;
   };
   
