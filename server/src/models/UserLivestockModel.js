@@ -1,20 +1,24 @@
 module.exports = (sequelize, DataTypes) => {
-    const Breeds = sequelize.define("Breeds", {
+    const UserLivestock = sequelize.define("UserLivestock", {
 
-      breedId:{
+      userBreedId:{
         type: DataTypes.BIGINT,
          autoIncrement: true, 
          allowNull: false,
           primaryKey: true ,
           
       },
-      breedName: {
+      userBreedName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       origin: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      region:{
+        type :DataTypes.STRING,
+        allowNull:false,
       },
       active: {
         type: DataTypes.STRING,
@@ -23,6 +27,6 @@ module.exports = (sequelize, DataTypes) => {
   
     });
   
-    return Breeds;
+    return UserLivestock;
   };
   
