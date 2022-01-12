@@ -1,0 +1,10 @@
+.chat {
+    flex: 4;
+    padding: 20px;
+    font-size: 10px;
+  }
+  .chatWidgets{
+    display: flex;
+    margin: 0px;
+  }
+ 
