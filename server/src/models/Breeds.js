@@ -22,6 +22,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     });
   
+    Breeds.associate = (models) => {
+      Breeds.hasMany(models.Livestock, {
+        onDelete: "cascade",
+      });
+    };
     return Breeds;
   };
   

@@ -4,8 +4,11 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/AuthContext";
+import { useParams } from "react-router"; 
 
 function NewBreed() {
+  let { id } = useParams();
+  //const[userId, setUserId] = useState();
   const { authState } = useContext(AuthContext);
 
   let navigate = useNavigate();
@@ -32,7 +35,7 @@ function NewBreed() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
-        navigate("/production");
+        navigate(`/production`);
       });
   };
 
