@@ -26,6 +26,13 @@ function Home() {
   const { authState } = useContext(AuthContext);
   let navigate = useNavigate();
 
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+    } else {
+     console.log("")
+    }
+  }, []);
 
  
   return (
