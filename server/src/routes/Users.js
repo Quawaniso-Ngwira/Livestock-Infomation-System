@@ -9,6 +9,13 @@ const { sign } = require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
   const { username, password } = req.body;
+
+  const duplicaterUser = await Users.findOne({ where: { username: username } });
+  if(duplicaterUser) return res.json("user already registered");
+
+  try{
+
+  
   bcrypt.hash(password, 10).then((hash) => {
     Users.create({
       username: username,
@@ -16,6 +23,10 @@ router.post("/", async (req, res) => {
     });
     res.json("SUCCESS");
   });
+}
+catch(err){
+  res.status(500).json({"message":err.message});
+}
 });
 
 //login, failed to put it in a controller for now
