@@ -20,8 +20,12 @@ module.exports = (sequelize, DataTypes) => {
     });
     Users.hasMany(models.Breeds,{
       onDelete:"cascade",
-    })
+    });
    
+   /* Users.hasMany(models.Livestock,{
+      onDelete:"cascade",
+    });
+  */
   };
 
   return Users;

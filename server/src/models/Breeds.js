@@ -11,8 +11,14 @@ module.exports = (sequelize, DataTypes) => {
       active: {
         type: DataTypes.STRING,
         allowNull: false,
-      }
+      } 
     });
+
+    Breeds.associate = (models) => {
+      Breeds.hasMany(models.Livestock, {
+        onDelete: "cascade",
+      });
+      };
   
     return Breeds;
   };

@@ -6,15 +6,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../helpers/AuthContext";
 
 
-function NewBreed() {
+function RegisterLivestock() {
   const[userId, setUserId] = useState();
-  const [listOfBreeds, setListOfBreeds] = useState([]);
+  const [listOfLivestocks, setListOfLivestocks] = useState([]);
   const { authState } = useContext(AuthContext);
 
   let navigate = useNavigate();
   const initialValues = {
-    breedName: "",
+    userBreedName: "",
+    Dob: "",
     origin: "",
+    region: "",
     active: "",
   };
 
@@ -29,15 +31,18 @@ function NewBreed() {
      
     }
   }, []);
+
   const validationSchema = Yup.object().shape({
-    breedName: Yup.string().required("You must input a Title!"),
+    userBreedName: Yup.string().required("You must input a Name!"),
+    Dob: Yup.string().required(),
     origin: Yup.string().required(),
+    region: Yup.string().required(),
     active: Yup.string().required()
   });
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:3001/api/breeds", data, {
+      .post("http://localhost:3001/api/livestock", data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
@@ -54,28 +59,44 @@ function NewBreed() {
       >
         <Form className="formContainer">
           <label>name: </label>
-          <ErrorMessage name="breedName" component="span" />
+          <ErrorMessage name="userBreedName" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            name="breedName"
+            name="userBreedName"
             placeholder="(Ex. Title...)"
           />
-           <label>Origin </label>
+           <label>Date of Birth </label>
+          <ErrorMessage name="Dob" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="Dob"
+            placeholder="(Ex. Title...)"
+          />
+          <label>Origin: </label>
           <ErrorMessage name="origin" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
             name="origin"
+            placeholder="(Ex. Post...)"
+          />
+           <label>Region </label>
+          <ErrorMessage name="region" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="region"
             placeholder="(Ex. Title...)"
           />
-          <label>Active: </label>
+           <label>Active </label>
           <ErrorMessage name="active" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
             name="active"
-            placeholder="(Ex. Post...)"
+            placeholder="(Ex. Title...)"
           />
 
           <button type="submit"> Create Post</button>
@@ -85,4 +106,4 @@ function NewBreed() {
   );
 }
 
-export default NewBreed;
+export default RegisterLivestock;
