@@ -2,6 +2,8 @@ const express = require("express");
 const livestockRouter = express.Router();
 const { Livestock: Livestock } = require("../models");
 const { validateToken } = require("../../config/middlewares/AuthMiddleware");
+const { sign } = require("jsonwebtoken");
+const { Breeds } = require("../models");
 
 livestockRouter.get("/", validateToken, async (req, res) => {
   const listOfLivestock = await Livestock.findAll();
@@ -16,20 +18,28 @@ livestockRouter.get("/", validateToken, async (req, res) => {
 
 livestockRouter.get("/byuserId/:id", async (req, res) => {
   const id = req.params.id;
-  const listOflivestock = await Livestock.findAll({ where: {BreedId: id}});
+  const listOflivestock = await Livestock.findAll({ where: {UserId: id}});
   res.json(listOflivestock);
 });
 
 
 livestockRouter.post("/", validateToken, async (req, res) => {
+  const userBreedName = req.body;
+  const breed = await Breeds.findOne({ where: { userBreedName: userBreedName } });
 
-  const livestock = req.body;
-  livestock.username = req.user.username;
-  //livestock.UserId = req.user.id;
-  livestock.breedId=req.breed.id;
-  await Livestock.create(livestock);
-  res.json(livestock);
+  const accessToken = sign(
+    { userBreedName: breed.userBreedName, id: breed.id },
+    "importantsecret"
+  );
+  res.json({ token: accessToken, userBreedName: userBreedName, id: breed.id });
+  
+  userBreedName.username = req.user.username;
+  userBreedName.UserId = req.user.id;
+  userBreedName.breedId=req.breed.id;
+  await BreedName.create(userBreedName);
+  res.json(userBreedName); 
 });
+
 
  livestockRouter.delete("/:livestockId", validateToken, async (req, res) => {
   const livestockId = req.params.livestockId;
