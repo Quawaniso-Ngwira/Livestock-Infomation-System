@@ -4,17 +4,11 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../helpers/AuthContext";
-import { useParams } from "react-router"; 
 
 
 function NewBreed() {
-<<<<<<< HEAD
-  const[userId, setUserId] = useState();
-  const [listOfBreeds, setListOfBreeds] = useState([]);
-=======
   let { id } = useParams();
-  //const[userId, setUserId] = useState();
->>>>>>> b29e97016f5b3c261a36818af45c57a6b08953a5
+  const[userId, setUserId] = useState();
   const { authState } = useContext(AuthContext);
 
   let navigate = useNavigate();
@@ -47,11 +41,7 @@ function NewBreed() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
-<<<<<<< HEAD
         navigate( `/production/${userId}`);
-=======
-        navigate(`/production`);
->>>>>>> b29e97016f5b3c261a36818af45c57a6b08953a5
       });
   };
 
