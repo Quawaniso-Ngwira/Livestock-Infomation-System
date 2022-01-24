@@ -19,8 +19,6 @@ const likesRouter = require("./src/routes/Likes");
 app.use("/likes", likesRouter);
 const breedsRouter=require("./src/routes/Breeds");
 app.use("/api/breeds",breedsRouter);
-const livestockRouter=require("./src/routes/Livestock");
-app.use("/api/livestock",livestockRouter);
 
 
 db.sequelize.sync().then(() => {

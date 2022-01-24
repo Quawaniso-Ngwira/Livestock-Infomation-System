@@ -3,8 +3,6 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import "./users.css";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -16,18 +14,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Users() {
-
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
-    } else {
-     console.log("")
-    }
-  }, []);
-
-
   return (
     <div className="user">
        

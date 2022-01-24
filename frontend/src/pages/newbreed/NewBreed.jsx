@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/AuthContext";
 import { useParams } from "react-router"; 
 
-
 function NewBreed() {
+<<<<<<< HEAD
 <<<<<<< HEAD
   const[userId, setUserId] = useState();
   const [listOfBreeds, setListOfBreeds] = useState([]);
@@ -15,6 +15,8 @@ function NewBreed() {
   let { id } = useParams();
   //const[userId, setUserId] = useState();
 >>>>>>> b29e97016f5b3c261a36818af45c57a6b08953a5
+=======
+>>>>>>> parent of 9dedc9a (updated frontend)
   const { authState } = useContext(AuthContext);
 
   let navigate = useNavigate();
@@ -24,15 +26,9 @@ function NewBreed() {
     active: "",
   };
 
-  useEffect(()=>{
-    setUserId(localStorage.getItem("id"))
-}, [])
-
-
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      navigate( "/home");
-     
+      navigate("/login");
     }
   }, []);
   const validationSchema = Yup.object().shape({
@@ -48,10 +44,14 @@ function NewBreed() {
       })
       .then((response) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
         navigate( `/production/${userId}`);
 =======
         navigate(`/production`);
 >>>>>>> b29e97016f5b3c261a36818af45c57a6b08953a5
+=======
+        navigate("/production");
+>>>>>>> parent of 9dedc9a (updated frontend)
       });
   };
 

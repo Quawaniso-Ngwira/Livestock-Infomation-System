@@ -7,8 +7,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import R from '../image/R.jpg';
-import User from '../image/login.jpg';
-
+import User from '../image/login.jpg'
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -31,7 +30,6 @@ function Login() {
         navigate("/registration");
   };
 
-  //function for the user to login upon clicking login button
   const login = () => {
     const data = { username: username, password: password };
     axios.post("http://localhost:3001/auth/login", data).then((response) => {

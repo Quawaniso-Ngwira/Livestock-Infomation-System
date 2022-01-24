@@ -4,25 +4,12 @@ import { useParams, useNavigate } from "react-router";
 import { Link } from "react-router-dom"; 
 import axios from "axios";
 import breedcategory from "../../image/breedtype.png";
-import Next from "../../image/next.png";
-import {  TextField, IconButton } from '@material-ui/core';
-import { SearchOutlined } from '@material-ui/icons';
 
 export default function Production() {
   let { id } = useParams();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [listOfBreeds, setListOfBreeds] = useState([]);
-  const [searchTitle, setSearchTitle] = useState("");
- 
-  useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
-    } else {
-     console.log("")
-    }
-  }, []);
-
 
   useEffect(() => { 
     axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
@@ -45,49 +32,27 @@ return <div className="production">
 
     { " "}
      <h2 style={{color: "blue", padding: "20px"}}>This is livestock owned by {username}  </h2>
-
-     <TextField onChange={(e) => setSearchTitle(e.target.value)}
-                fullWidth
-                id="standard-bare"
-                variant="outlined"
-                placeholder="(Search)"
-                InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <SearchOutlined />
-                    </IconButton>
-                  ),
-                }}
-              />
      </div>
 
 <div className="productionWidgets">
 
-{listOfBreeds.filter((value) => {
-            if (searchTitle === "") {
-              return value;
-            } else if (
-              value.breedName.toLowerCase().includes(searchTitle.toLowerCase())
-            ) {
-              return value;
-            }
-          }).map((value, key) => {
+{listOfBreeds.map((value, key) => {
   return (
        <div key={key} className="postbreed">
             <div className="title" >
-            
-            <div className="breeedcategory"
-              onClick={() => {
-                navigate(`/livestock/${value.id}`);
-               }}
-            >
-              <div className="arrange">
-              <img className="img" src={breedcategory} alt="breed" style={{height: "50px", width: "50px"}} />
-             <h3 className="breedname">{value.breedName} </h3> </div>
-             <img className="imgg" src={Next} alt="breed" style={{height: "30px", width: "30px"}} />
-            </div>
+            Breed Category:
+            <div className="breeedcategory">
+            <img src={breedcategory} alt="breed category" style={{ height: "50px", width: "50px"}} />
+                <h3>{value.breedName} </h3> </div>
            </div>
-            
+            <div
+              className="body"
+              onClick={() => {
+               navigate(`/post/${value.id}`);
+              }}
+            >
+              
+            </div>
             
           </div>
         );

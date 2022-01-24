@@ -13,17 +13,13 @@ import Production from "./pages/production/Production";
 import Forum from "./pages/forum/Forum";
 import Profile from "./pages/Profile"; 
 import { AuthContext } from "./helpers/AuthContext";
-import Livestock from "./pages/livestock/Livestock";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Users from "./pages/users/Users";
 import NewBreed from "./pages/newbreed/NewBreed";
-import RegisterLivestock from "./pages/registerLivestock/RegisterLivestock";
 import Sidebar from "./components/sidebar/Sidebar";
 import { Outlet } from 'react-router-dom';
 import Manage from "./pages/manage/Manage";
-import { connect } from 'react-redux';
-import { addContact } from './redux/action';
 
 
 const SidebarLayout = () => (
@@ -41,20 +37,10 @@ function App() {
     status: false,
   });
 
-//persist state after refreshing the page
-  useEffect(()=> {
-  const data = localStorage.getItem('maintain-logged-in-state');
-  if(data) {
-    setAuthState(JSON.parse(data));
-  }
-  },[]);
 
-useEffect(()=> {
-  localStorage.setItem("maintain-logged-in-state", JSON.stringify(authState));
-});
-
-// verify that the user has a valid token and is aunthticated
+  
   useEffect(() => {
+
     axios
       .get("http://localhost:3001/auth/auth", {
         headers: {
@@ -75,10 +61,9 @@ useEffect(()=> {
     
   }, []);
 
-//logout function 
+
   const logout = () => {
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("id");
     setAuthState({ username: "", id: 0, status: false });
     
   };
@@ -127,8 +112,6 @@ useEffect(()=> {
               <Route path="/forum" exact element={<Forum/>} />
               <Route path="/createpost" exact element={<CreatePost/>} />
               <Route path="/post/:id" exact element={<Post/>} />
-              <Route path="/livestock/:id" exact element={<Livestock/>} />
-              <Route path="/createlivestock" exact element={<RegisterLivestock/>} />
               <Route path="/manage" exact element={<Manage/>} />
               <Route path="/createbreed" exact element={<NewBreed/>} />
               <Route path="/profile/:id" exact element={<Profile/>} />
