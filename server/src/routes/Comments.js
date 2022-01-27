@@ -6,6 +6,7 @@ const deleteComment=require("../controllers/Comments/DeleteComment.controller");
 
 
 //posting comment route
+//localhost:3001/comments
 const postCommentRouter = require("../controllers/Comments/PostComment.controller");
 router.post('/',postCommentRouter);
 

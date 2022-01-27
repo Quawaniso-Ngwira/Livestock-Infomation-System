@@ -3,11 +3,14 @@ const breedsRouter = express.Router();
 const { Breeds: Breeds } = require("../models");
 const { validateToken } = require("../../config/middlewares/AuthMiddleware");
 
+//this is route for breeds
+//get all breeds via localhost:3001/api/breeds
 breedsRouter.get("/", validateToken, async (req, res) => {
   const listOfBreeds = await Breeds.findAll();
   res.json({ listOfBreeds: listOfBreeds});
 });
 
+//get by id
  breedsRouter.get("/byId/:id", async (req, res) => {
  const id = req.params.id;
   const breed = await Breeds.findByPk(id);
