@@ -25,11 +25,11 @@ breedsRouter.post("/", validateToken, async (req, res) => {
   console.log("executing posting breed now will console log req body");
   console.log(req.body);
   console.log("finished printing breed req body");
-  const breed = req.body;
-  breed.username = req.user.username;
-  breed.UserId = req.user.id;
-  await Breeds.create(breed);
-  res.json(breed);
+  const Breed = req.body;
+  Breed.username = req.user.username;
+  Breed.UserId = req.user.id;
+  await Breeds.create(Breed);
+  res.json(Breed);
 });
 
  breedsRouter.delete("/:breedId", validateToken, async (req, res) => {

@@ -1,13 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
     const Breeds = sequelize.define("Breeds", {
-/*
-      breedId:{
-        type: DataTypes.BIGINT,
-         autoIncrement: true, 
-         allowNull: false,
-          primaryKey: true ,
 
-      }, */
+      // breedId:{
+      //   type: DataTypes.BIGINT,
+      //    autoIncrement: true, 
+      //    allowNull: false,
+      //     primaryKey: true ,
+
+      // }, 
       breedName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -22,17 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       } 
     });
 
-    Breeds.associate = (models) => {
-      Breeds.hasMany(models.Livestock, {
-        onDelete: "cascade",
-      });
-      };
-  
-    Breeds.associate = (models) => {
-      Breeds.hasMany(models.Livestock, {
-        onDelete: "cascade",
-      });
-    };
     return Breeds;
   };
   

@@ -19,7 +19,7 @@ const likesRouter = require("./src/routes/Likes");
 app.use("/likes", likesRouter);
 const breedsRouter=require("./src/routes/Breeds");
 app.use("/api/breeds",breedsRouter);
-const livestockRouter=require("./src/routes/Livestock");
+const livestockRouter=require("./src/routes/UserLivestockRoute");
 app.use("/api/livestock",livestockRouter);
 
 
