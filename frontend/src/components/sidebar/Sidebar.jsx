@@ -1,6 +1,19 @@
 import { React, useState } from 'react';
 import './sidebar.css';
-import { Home, LineStyle, TimelapseTwoTone, TrendingUp, Feedback } from "@material-ui/icons";
+import { Home,
+         LineStyle,
+         TimelapseTwoTone,
+         TrendingUp, 
+         Feedback,
+         Timeline,
+         PermIdentity,
+         Storefront,
+         AttachMoney,
+         BarChart,
+         MailOutline,
+         DynamicFeed,
+         ChatBubbleOutline,
+         WorkOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import {  useEffect } from "react";
 import axios from "axios";
@@ -41,7 +54,7 @@ export default function Sidebar(){
                   </Link>
                   <Link to={`/production/${userId}`} className='link'>
                   <li className="sidebarListItem">
-                        <TrendingUp className="sidebarIcon"/>
+                        <DynamicFeed className="sidebarIcon"/>
                         Production
                   </li>
                   </Link>
@@ -52,7 +65,7 @@ export default function Sidebar(){
                   <h3 className="sidebarTitle">Quick Menu</h3>
                   <ul className="sidebarList"> 
                   <li className="sidebarListItem ">
-                        <LineStyle className="sidebarIcon"/>
+                        <WorkOutline className="sidebarIcon"/>
                        Health
                   </li>
 

@@ -20,15 +20,12 @@ module.exports = (sequelize, DataTypes) => {
     });
     Users.hasMany(models.Breeds,{
       onDelete:"cascade",
-    })
+    });
    
-<<<<<<< HEAD
     Users.hasMany(models.Livestock,{
       onDelete:"cascade",
     });
   
-=======
->>>>>>> parent of 9dedc9a (updated frontend)
   };
 
   return Users;

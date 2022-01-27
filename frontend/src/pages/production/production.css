@@ -5,10 +5,7 @@
   .productionWidgets{
     margin: 20px;
   }
-
-  
-    
-    
+ 
   .createBreed{
     height: 50px;
     width: 150px;
@@ -23,6 +20,7 @@
     height: 70px;
     margin: 0px 10px;
     padding: 5px;
+    position: sticky;
     border-radius: 10px;
     -webkit-box-shadow: 0px 0px 11px -1px #9b8989;
     box-shadow: 0px 0px 11px #9b8989;
@@ -31,7 +29,7 @@
     
 .postbreed {
   
-  height: 120px;
+  height: 70px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -46,7 +44,40 @@
   flex: 20%;
   display: grid;
   place-content: left;
-  margin-top: 30px;
-  margin-left: 40px;
+  margin-top: 5px;
+  margin-right: 350px;
   color: blue
+}
+
+.breeedcategory{
+  display: flex;
+  flex: 60%;
+  align-items: center;
+  cursor: pointer;
+  
+}
+.img{
+margin-left: 50px;
+}
+.breedname{
+  margin-left: 80px;
+
+}
+
+.arrange{
+  display: flex;
+  justify-content: space-between;
+}
+.imgg{
+  height: 50px;
+  width: 150px;
+  float: right;
+  cursor: pointer;
+  background-color: rgba(231, 10, 21, 0.452);
+}
+
+.split{
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
 }

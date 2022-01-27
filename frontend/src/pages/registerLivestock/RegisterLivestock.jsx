@@ -46,6 +46,7 @@ function RegisterLivestock() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
+
         navigate( `/livestock/${userId}`);
       });
   };
