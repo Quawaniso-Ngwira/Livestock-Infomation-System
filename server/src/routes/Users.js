@@ -11,11 +11,10 @@ router.post("/", async (req, res) => {
   const { username, password } = req.body;
 
   const duplicaterUser = await Users.findOne({ where: { username: username } });
-  if(duplicaterUser) return res.json("user already registered");
-
+  if(duplicaterUser) {
+    console.log("user already registered");
+    return res.json("user already registered");}
   try{
-
-  
   bcrypt.hash(password, 10).then((hash) => {
     Users.create({
       username: username,
