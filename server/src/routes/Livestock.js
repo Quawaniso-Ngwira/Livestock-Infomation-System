@@ -33,18 +33,18 @@ livestockRouter.post("/:breedId/:userId", async (req, res) => {
   const{breedId, userId} = req.params
   const{userBreedName, origin, region, active, Dob, id} = req.body
   // const{userName, origin, region, active, Dob, id} = req.body
-let userBreadName = {}
+let userBread = {}
   console.log(userId)
-  userBreadName.userBreedName = userBreedName;
-  userBreadName.userBreedId=id;
-  userBreadName.BreedId = breedId
-  userBreadName.origin = origin
-  userBreadName.region = region
-  userBreadName.active = active
-  userBreadName.UserId = userId
-  userBreadName.Dob = Dob
- await Livestock.create(userBreadName);
-  res.json(userBreadName); 
+  userBread.userBreedName = userBreedName;
+  userBread.userBreedId=id;
+  userBread.BreedId = breedId
+  userBread.origin = origin
+  userBread.region = region
+  userBread.active = active
+  userBread.UserId = userId
+  userBread.Dob = Dob
+ await Livestock.create(userBread);
+  res.json(userBread); 
 });
 
 
