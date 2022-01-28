@@ -3,11 +3,14 @@ const breedsRouter = express.Router();
 const { Breeds: Breeds } = require("../models");
 const { validateToken } = require("../../config/middlewares/AuthMiddleware");
 
+//this is route for breeds
+//get all breeds via localhost:3001/api/breeds
 breedsRouter.get("/", validateToken, async (req, res) => {
   const listOfBreeds = await Breeds.findAll();
   res.json({ listOfBreeds: listOfBreeds});
 });
 
+//get by id
  breedsRouter.get("/byId/:id", async (req, res) => {
  const id = req.params.id;
   const breed = await Breeds.findByPk(id);
@@ -25,11 +28,11 @@ breedsRouter.post("/", validateToken, async (req, res) => {
   console.log("executing posting breed now will console log req body");
   console.log(req.body);
   console.log("finished printing breed req body");
-  const breed = req.body;
-  breed.username = req.user.username;
-  breed.UserId = req.user.id;
-  await Breeds.create(breed);
-  res.json(breed);
+  const Breed = req.body;
+  Breed.username = req.user.username;
+  Breed.UserId = req.user.id;
+  await Breeds.create(Breed);
+  res.json(Breed);
 });
 
  breedsRouter.delete("/:breedId", validateToken, async (req, res) => {

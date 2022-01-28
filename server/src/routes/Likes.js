@@ -4,6 +4,7 @@ const { Likes } = require("../models");
 const { validateToken } = require("../../config/middlewares/AuthMiddleware");
 
 //post comment controller
+//localhost:3001/posts
 const postComment=require("../controllers/Likes/PostComment.controller");
 router.post('/',postComment);
 
