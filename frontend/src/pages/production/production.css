@@ -66,6 +66,7 @@ margin-left: 50px;
 
 .arrange{
   display: flex;
+
 }
 .imgg{
   height: 50px;
@@ -73,4 +74,10 @@ margin-left: 50px;
   float: right;
   cursor: pointer;
   background-color: rgba(231, 10, 21, 0.452);
+}
+
+.split{
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px
 }

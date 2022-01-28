@@ -1,13 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Livestock = sequelize.define("Livestock", {
 
-    userBreedId:{
-      type: DataTypes.BIGINT,
-       autoIncrement: true, 
-       allowNull: false,
-        primaryKey: true ,
-        
-    }, 
     userBreedName: {
       type: DataTypes.STRING,
       allowNull: false,

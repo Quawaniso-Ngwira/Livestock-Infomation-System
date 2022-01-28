@@ -22,24 +22,42 @@ livestockRouter.get("/byuserId/:id", async (req, res) => {
   res.json(listOflivestock);
 });
 
-
-livestockRouter.post("/", validateToken, async (req, res) => {
-  const userBreedName = req.body;
-  const breed = await Breeds.findOne({ where: { userBreedName: userBreedName } });
-
-  const accessToken = sign(
-    { userBreedName: breed.userBreedName, id: breed.id },
-    "importantsecret"
-  );
-  res.json({ token: accessToken, userBreedName: userBreedName, id: breed.id });
-  
-  userBreedName.username = req.user.username;
-  userBreedName.UserId = req.user.id;
-  userBreedName.breedId=req.breed.id;
-  await BreedName.create(userBreedName);
-  res.json(userBreedName); 
+livestockRouter.get("/:breedId", async (req, res) => {
+  const {breedId} = req.params;
+  const listOflivestock = await Livestock.findAll({ where: {BreedId: breedId}})
+  res.json(listOflivestock);
 });
 
+
+livestockRouter.post("/:breedId/:userId", async (req, res) => {
+  const{breedId, userId} = req.params
+  const{userBreedName, origin, region, active, Dob, id} = req.body
+  // const{userName, origin, region, active, Dob, id} = req.body
+let userBreadName = {}
+  console.log(userId, userBreadName)
+  userBreadName.userBreedName = userBreedName;
+  userBreadName.userBreedId=id;
+  userBreadName.BreedId = breedId
+  userBreadName.origin = origin
+  userBreadName.region = region
+  userBreadName.active = active
+  userBreadName.UserId = userId
+  userBreadName.Dob = Dob
+ await Livestock.create(userBreadName);
+  res.json(userBreadName); 
+});
+
+
+// livestockRouter.post("/:breedId", validateToken, async (req, res) => {
+//    const {breedId} = req.params
+//   console.log(req.body)
+//   const breed = req.body;
+//   breed.username = req.user.username;
+//   breed.UserId = req.user.id;
+//   breed.breedId = breedId;
+//   await Livestock.create(breed);
+//   res.json(breed);
+// });
 
  livestockRouter.delete("/:livestockId", validateToken, async (req, res) => {
   const livestockId = req.params.livestockId;

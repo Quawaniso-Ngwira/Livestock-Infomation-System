@@ -90,6 +90,15 @@ body {
   padding-top: 50px;
   z-index: 999;
 }
+/* Create livestock*/
+.createLivestock{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100% !important;
+  z-index: 999;
+}
+
 .formContainer {
   display: flex;
   flex-direction: column;

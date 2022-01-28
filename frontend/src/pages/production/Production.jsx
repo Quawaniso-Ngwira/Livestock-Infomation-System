@@ -8,7 +8,7 @@ import Next from "../../image/next.png";
 import {  TextField, IconButton } from '@material-ui/core';
 import { SearchOutlined } from '@material-ui/icons';
 
-export default function Production() {
+export default function Production(props) {
   let { id } = useParams();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -79,13 +79,16 @@ return <div className="production">
             <div className="breeedcategory"
               onClick={() => {
                 navigate(`/livestock/${value.id}`);
+                localStorage.setItem("breedId", JSON.stringify(value.id))
                }}
             >
               <div className="arrange">
               <img className="img" src={breedcategory} alt="breed" style={{height: "50px", width: "50px"}} />
-             <h3 className="breedname">{value.breedName} </h3> </div>
-             <img className="imgg" src={Next} alt="breed" style={{height: "30px", width: "30px"}} />
-            </div>
+             <div className="split">
+             <h3 className="breedname">{value.breedName} </h3>
+             <img className="imgg" src={Next} alt="breed" style={{height: "30px", width: "30px", marginTop: "10px"}} />
+             </div>
+              </div> </div>
            </div>
             
             
