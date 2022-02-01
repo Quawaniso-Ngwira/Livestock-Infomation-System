@@ -9,6 +9,7 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import CloseIcon from '@material-ui/icons/Close';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import RenderLivestock from "../RenderLivestock/RenderLivestock";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -45,10 +46,9 @@ const style = {
 
 function Livestock() {
   const navigate = useNavigate();
-  let { id} = useParams();
+  let { id } = useParams();
   const[userId, setUserId] = useState();
   const[breedId, setBreedId] = useState();
-
   const [postBreed, setBreedObject] = useState({});
   const [livestocks, setLivestocksObject] = useState([]);
   const { authState } = useContext(AuthContext);
@@ -57,9 +57,9 @@ function Livestock() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
   //initialising the input fieldsx
-  
-  const initialValues = {
+    const initialValues = {
     userBreedName: "",
     Dob: "",
     origin: "",
@@ -146,7 +146,7 @@ useEffect(()=>{
         BackdropComponent={Backdrop}
       >
         <Box sx={style}>
-          <h2 id="unstyled-modal-title" onClick={handleOpen} className="close-modal"><CloseIcon style={{width: "50px", height: "50px"}}/></h2>
+          <h2 id="unstyled-modal-title" onClick={handleClose} className="close-modal"><CloseIcon style={{width: "50px", height: "50px"}}/></h2>
           <div className="createLivestock">
           <h2 id="unstyled-modal-title">Register Livestock</h2>
       <Formik
@@ -210,6 +210,8 @@ useEffect(()=>{
       <h3>{postBreed.breedName} </h3>
     <img className="img" src={Download} alt="breed" style={{height: "45px", width: "45px"}}/>
     </div>
+    
+    <RenderLivestock/>
     </div>
     </div>
   );

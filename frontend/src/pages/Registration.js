@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 import { styled } from '@mui/material/styles';
@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import SignUp from '../image/signup.jpg';
 
+// style for the papers from material ui framework
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -21,17 +22,18 @@ const Item = styled(Paper)(({ theme }) => ({
 function Registration() {
 
   const navigate = useNavigate();
-
   const initialValues = {
     username: "",
     password: "",
+    comfirmPassword: "",
   };
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().min(3).max(15).required(),
     password: Yup.string().min(4).max(20).required(),
+    comfirmPassword: Yup.string().min(4).max(20).required(),
   });
-
+// onsubmit send the values and navigate to login page
   const onSubmit = (data) => {
     axios.post("http://localhost:3001/auth", data).then(() => {
       console.log(data);
@@ -66,7 +68,7 @@ function Registration() {
             autocomplete="off"
             id="inputCreatePost"
             name="username"
-            placeholder="(Ex. John123...)"
+            
           />
 
           <label>Password: </label>
@@ -76,9 +78,22 @@ function Registration() {
             type="password"
             id="inputCreatePost"
             name="password"
-            placeholder="Your Password..."
+         
           />
+
+          <label>Comfirm Password: </label>
+          <ErrorMessage name="comfirmPassword" component="span" />
+          <Field
+            autocomplete="off"
+            type="comfirmpassword"
+            id="inputCreatePost"
+            name="comfirmPassword"
+           
+          />
+
           <button type="submit"> Register</button>
+          <Link to="/login"><p className="RegisterStatement" style={{color: 'orangered'}}>Already registered? go to login</p></Link>
+       
         </Form>
       </Formik>
     </div>

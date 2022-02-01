@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete:"cascade",
     });
    
-    Users.hasMany(models.UserLivestock,{
+    Users.hasMany(models.Livestock,{
       onDelete:"cascade",
     });
   

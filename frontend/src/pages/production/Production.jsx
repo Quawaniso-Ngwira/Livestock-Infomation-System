@@ -15,6 +15,7 @@ export default function Production(props) {
   const [listOfBreeds, setListOfBreeds] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
  
+ 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
@@ -67,7 +68,7 @@ return <div className="production">
             if (searchTitle === "") {
               return value;
             } else if (
-              value.breedName.toLowerCase().includes(searchTitle.toLowerCase())
+              value.breedName?.toLowerCase().includes(searchTitle.toLowerCase())
             ) {
               return value;
             }

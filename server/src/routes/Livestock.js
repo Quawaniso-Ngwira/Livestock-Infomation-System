@@ -22,9 +22,9 @@ livestockRouter.get("/byuserId/:id", async (req, res) => {
   res.json(listOflivestock);
 });
 
-livestockRouter.get("/:breedId", async (req, res) => {
-  const {breedId} = req.params;
-  const listOflivestock = await Livestock.findAll({ where: {BreedId: breedId}})
+livestockRouter.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  const listOflivestock = await Livestock.findAll({ where: {BreedId: id}});
   res.json(listOflivestock);
 });
 
@@ -46,18 +46,6 @@ let userBreadName = {}
  await Livestock.create(userBreadName);
   res.json(userBreadName); 
 });
-
-
-// livestockRouter.post("/:breedId", validateToken, async (req, res) => {
-//    const {breedId} = req.params
-//   console.log(req.body)
-//   const breed = req.body;
-//   breed.username = req.user.username;
-//   breed.UserId = req.user.id;
-//   breed.breedId = breedId;
-//   await Livestock.create(breed);
-//   res.json(breed);
-// });
 
  livestockRouter.delete("/:livestockId", validateToken, async (req, res) => {
   const livestockId = req.params.livestockId;
