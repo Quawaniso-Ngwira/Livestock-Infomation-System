@@ -2,43 +2,29 @@ const express = require("express");
 const userLivestockRouter = express.Router();
 const { UserLivestock: UserLivestocks } = require("../models");
 const { validateToken } = require("../../config/middlewares/AuthMiddleware");
-
-userLivestockRouter.get("/", validateToken, async (req, res) => {
-  const listOfUserBreeds = await UserLivestocks.findAll();
-  res.json({ listOfBreeds: listOfUserBreeds});
-});
-
- userLivestockRouter.get("/byId/:id", async (req, res) => {
- const id = req.params.id;
-  const userlivestock = await UserLivestocks.findByPk(id);
-  res.json(userlivestock);
- });
-
-userLivestockRouter.get("/byuserId/:id", async (req, res) => {
-  const id = req.params.id;
-  const listOfUserBreeds = await UserLivestocks.findAll({ where: {UserId: id}});
-  res.json(listOfUserBreeds);
-});
+const swaggerJsDoc=require("swagger-jsdoc");
+const swaggerUi=require("swagger-ui-express");
 
 
-userLivestockRouter.post("/", validateToken, async (req, res) => {
 
-  const UserLivestock = req.body;
-  UserLivestock.username = req.user.username;
-  UserLivestock.UserId = req.user.id;
-  await UserLivestocks.create(UserLivestock);
-  res.json(UserLivestock);
-});
+const userLivestockController = require("../controllers/userLivestock/userLivestockController");
 
- userLivestockRouter.delete("/:breedId", validateToken, async (req, res) => {
-  const breedId = req.params.breedId;
-  await UserLivestocks.destroy({
-    where: {
-      id: breedId,
-    },
-  });
+//get all user livestock
+userLivestockRouter.get('/',userLivestockController);
 
-  res.json("DELETED SUCCESSFULLY");
-});
+//get userlivestock by ID of the user livestock
+userLivestockRouter.get("/byId/:id",userLivestockController);
+
+//get user livestock by userId 
+userLivestockRouter.get("/byuserId/:id",userLivestockController);
+
+//post user livestock with with body {userLivestockName,origin,active}
+userLivestockRouter.post("/",userLivestockController);
+
+//delete userlivestock by ID
+userLivestockRouter.delete("/:userBreedId",userLivestockController);
+
+//updating
+userLivestockRouter.put("/:userBreedId",userLivestockController);
 
 module.exports = userLivestockRouter;

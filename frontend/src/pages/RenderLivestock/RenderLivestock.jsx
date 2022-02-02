@@ -59,6 +59,7 @@ return(
                }}
             >
               <div className="arrange"> <div className="split">
+               
              <h3 className="breedname">{value.userBreedName} </h3> </div>
               </div> </div>
            </div>
