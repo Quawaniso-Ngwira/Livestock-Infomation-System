@@ -24,15 +24,19 @@ function Registration() {
   const navigate = useNavigate();
   const initialValues = {
     username: "",
+    email: "",
     password: "",
     comfirmPassword: "",
   };
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().min(3).max(15).required(),
+    email: Yup.string().email("Invalid email address format").min(11).max(150).required(),
     password: Yup.string().min(4).max(20).required(),
-    comfirmPassword: Yup.string().min(4).max(20).required(),
+    comfirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
   });
+
 // onsubmit send the values and navigate to login page
   const onSubmit = (data) => {
     axios.post("http://localhost:3001/auth", data).then(() => {
@@ -71,6 +75,17 @@ function Registration() {
             
           />
 
+
+         <label>Email: </label>
+          <ErrorMessage name="email" component="span" />
+          <Field
+            autocomplete="off"
+            type="email"
+            id="inputCreatePost"
+            name="email"
+         
+          />
+        
           <label>Password: </label>
           <ErrorMessage name="password" component="span" />
           <Field
@@ -85,7 +100,7 @@ function Registration() {
           <ErrorMessage name="comfirmPassword" component="span" />
           <Field
             autocomplete="off"
-            type="comfirmpassword"
+            type="password"
             id="inputCreatePost"
             name="comfirmPassword"
            
