@@ -8,16 +8,16 @@ const { validateToken } = require("../../config/middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, email, password } = req.body;
 
   const duplicaterUser = await Users.findOne({ where: { username: username } });
-  if(duplicaterUser) {
-    console.log("user already registered");
-    return res.json("user already registered");}
+  if(duplicaterUser) return res.json("user already registered");
+
   try{
   bcrypt.hash(password, 10).then((hash) => {
     Users.create({
       username: username,
+      email: email,
       password: hash,
     });
     res.json("SUCCESS");
