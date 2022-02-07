@@ -144,7 +144,7 @@ span {
 .navbar {
   width: 100%;
   height: 70px;
-  background-color: dodgerblue;
+  /* background-color: dodgerblue; */
   display: flex;
   align-items: center;
   position: sticky;
@@ -398,4 +398,21 @@ flex: 4;
 .EmailRecoveryOption{
   margin-top: 10px;
   margin-left: 30%;
+}
+
+/* top second navbar header */
+.inlineNav{
+  height: 10%;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+ margin-left: 350px;
+ margin-right: 350px;
+ justify-content: space-between;
+ color:aliceblue;
+
+}
+
+.searchKholabar{
+  display: flex;
 }
