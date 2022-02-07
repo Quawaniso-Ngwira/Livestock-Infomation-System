@@ -1,7 +1,7 @@
 const express = require("express");
 const postRouter = express.Router();
 const { Comments } = require("../../models");
-const { validateToken } = require("../../../config/middlewares/AuthMiddleware");
+const { validateToken } = require("../../../middlewares/AuthMiddleware");
 
 postRouter.post("/", validateToken, async (req, res) => {
     const comment = req.body;

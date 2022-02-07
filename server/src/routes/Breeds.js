@@ -1,7 +1,7 @@
 const express = require("express");
 const breedsRouter = express.Router();
 const { Breeds: Breeds } = require("../models");
-const { validateToken } = require("../../config/middlewares/AuthMiddleware");
+const { validateToken } = require("../../middlewares/AuthMiddleware");
 
 //this is route for breeds
 //get all breeds via localhost:3001/api/breeds

@@ -14,13 +14,15 @@ app.use("/posts", postRouter);
 const commentsRouter = require("./src/routes/Comments");
 app.use("/comments", commentsRouter);
 const usersRouter = require("./src/routes/Users");
-app.use("/auth", usersRouter);
+app.use("/", usersRouter);
 const likesRouter = require("./src/routes/Likes");
 app.use("/likes", likesRouter);
 const breedsRouter=require("./src/routes/Breeds");
 app.use("/api/breeds",breedsRouter);
 const livestockRouter=require("./src/routes/Livestock");
 app.use("/api/livestock",livestockRouter);
+const kholaRoute=require("./src/routes/Khola");
+app.use('/',kholaRoute);
 
 
 db.sequelize.sync().then(() => {

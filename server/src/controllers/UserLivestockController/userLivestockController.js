@@ -1,7 +1,7 @@
 const express = require("express");
 const userLivestockController = express.Router();
 const { UserLivestock: UserLivestocks } = require("../../models");
-const { validateToken } = require("../../../config/middlewares/AuthMiddleware");
+const { validateToken } = require("../../../middlewares/AuthMiddleware");
 
 userLivestockController.get("/", validateToken, async (req, res) => {
   const listOfUserBreeds = await UserLivestocks.findAll();

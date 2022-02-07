@@ -1,7 +1,7 @@
 const express = require("express");
 const livestockRouter = express.Router();
 const { Livestock: Livestock } = require("../models");
-const { validateToken } = require("../../config/middlewares/AuthMiddleware");
+const { validateToken } = require("../../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 const { Breeds } = require("../models");
 
