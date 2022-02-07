@@ -34,7 +34,7 @@ registerRouter.post("/auth/register", async (req, res) => {
       username: username,
       email:email,
       role:role,
-      password: hash,
+      password:hash,
     });
     res.json("user registred succesfully");
   });
