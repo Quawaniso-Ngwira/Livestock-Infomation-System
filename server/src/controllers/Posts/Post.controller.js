@@ -2,7 +2,7 @@ const express = require("express");
 const postRouter = express.Router();
 const { Posts, Likes } = require("../../models");
 
-const { validateToken } = require("../../../config/middlewares/AuthMiddleware");
+const { validateToken } = require("../../../middlewares/AuthMiddleware");
 
 postRouter.post("/", validateToken, async (req, res) => {
     const post = req.body;

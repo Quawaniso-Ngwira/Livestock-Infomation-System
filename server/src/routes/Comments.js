@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Comments } = require("../models");
-const { validateToken } = require("../../config/middlewares/AuthMiddleware");
+const { validateToken } = require("../../middlewares/AuthMiddleware");
 const deleteComment=require("../controllers/Comments/DeleteComment.controller");
 
 

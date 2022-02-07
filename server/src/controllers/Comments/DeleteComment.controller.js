@@ -3,7 +3,7 @@
 const express =require("express");
 const deleteRouter= express.Router();
 const { Comments } = require("../../models");
-const { validateToken } = require("../../../config/middlewares/AuthMiddleware");
+const { validateToken } = require("../../../middlewares/AuthMiddleware");
 
 deleteRouter.get("/:postId", async (req, res) => {
     const postId = req.params.postId;

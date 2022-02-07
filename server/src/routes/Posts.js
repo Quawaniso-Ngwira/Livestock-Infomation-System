@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Posts, Likes } = require("../models");
-const { validateToken } = require("../../config/middlewares/AuthMiddleware");
+const { validateToken } = require("../../middlewares/AuthMiddleware");
 
 //get allcontroller
 const all=require("../controllers/Posts/GetAll.controller");
