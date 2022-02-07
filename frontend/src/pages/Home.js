@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import { AuthContext } from "../helpers/AuthContext";
@@ -12,7 +11,6 @@ import cattlepig from '../image/cattlepig.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {  Link } from "react-router-dom";
-import { useParams } from "react-router"; 
 import {  TextField, IconButton } from '@material-ui/core';
 import { SearchOutlined } from '@material-ui/icons';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -20,6 +18,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { useParams, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -50,7 +49,7 @@ function Home() {
   // initialising classes to the methodof UseStyles() method
   const classes = useStyles();
   let { id } = useParams();
-  const [listOfKholas, setListOfKholas] = useState([]);
+  const [makola, setMakola] = useState([]);
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -70,8 +69,9 @@ function Home() {
   }, []);
 
   useEffect(() => { 
-    axios.get(`http://localhost:3001/Khola/ByUserId/${id}`).then((response) => {
-        setListOfKholas(response.data);
+    axios.get(`http://localhost:3001/khola/ByUserId/${id}`).then((response) => {
+        
+        setMakola(response.data);
     });
 }, []);
 
@@ -113,6 +113,23 @@ function Home() {
  {/* bar that is located in the homepage containing search functionality of the kholas */}
       
   <div className="createBreedContainer">
+
+
+
+  {makola.map((value, key) => {
+  return (
+       <div key={key} className="postbreed">
+            <div className="title" >
+            
+              <div className="arrange"><div className="split">
+             <h3 className="breedname">{value.KholaName} </h3> </div>
+              </div> </div>
+           </div>
+        );
+      })}
+
+
+
     <div className="searchKholabar">
 <div>
   
@@ -192,8 +209,6 @@ function Home() {
         </Select>
       </FormControl>
       </div>
-
-
       </div>
     </div>
     </div>

@@ -234,7 +234,7 @@ useEffect(()=> {
               <Route path="/profile/:id" exact element={<Profile/>} />
               <Route path="*" exact element={<PageNotFound/>} />
           </Route>
-           <Route path="/:id" element={<Home/>} />
+           <Route index element={<Home/>} />
           <Route path="/registration" exact element={<Registration/>} />
           <Route path="/login" exact element={<Login/>} />
           <Route path="/emailRecovery" exact element={<EmailRecovery/>} />
