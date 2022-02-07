@@ -34,6 +34,7 @@ function Login() {
   //function for the user to login upon clicking login button
   const login = () => {
     const data = { username: username, password: password };
+    console.log(data);
     axios.post("http://localhost:3001/auth/login", data).then((response) => {
       if (response.data.error) {
         alert(response.data.error);

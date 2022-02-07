@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import { AuthContext } from "../helpers/AuthContext";
@@ -19,6 +18,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { useParams, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -48,6 +48,8 @@ function Home() {
 
   // initialising classes to the methodof UseStyles() method
   const classes = useStyles();
+  let { id } = useParams();
+  const [makola, setMakola] = useState([]);
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -55,8 +57,6 @@ function Home() {
   };
 
 
-  const [listOfPosts, setListOfPosts] = useState([]);
-  const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
   let navigate = useNavigate();
 
@@ -67,6 +67,14 @@ function Home() {
      console.log("")
     }
   }, []);
+
+  useEffect(() => { 
+    axios.get(`http://localhost:3001/khola/ByUserId/${id}`).then((response) => {
+        
+        setMakola(response.data);
+    });
+}, []);
+
 
  
   return (
@@ -84,9 +92,11 @@ function Home() {
                 for sucessful cattle and pig production</p>
                 
               {/* Button that allows the user of the system to fill the form to create a khola */}
+              <Link to="/createKhola">
                 <Button variant="contained" color="secondary" style={{marginTop: "140px"}}>
                     <p style={{color: "white"}}> Create Your Khola</p>
                 </Button>
+                </Link>
                 
           </Item>
         </Grid>
@@ -103,6 +113,23 @@ function Home() {
  {/* bar that is located in the homepage containing search functionality of the kholas */}
       
   <div className="createBreedContainer">
+
+
+
+  {makola.map((value, key) => {
+  return (
+       <div key={key} className="postbreed">
+            <div className="title" >
+            
+              <div className="arrange"><div className="split">
+             <h3 className="breedname">{value.KholaName} </h3> </div>
+              </div> </div>
+           </div>
+        );
+      })}
+
+
+
     <div className="searchKholabar">
 <div>
   
@@ -183,9 +210,8 @@ function Home() {
       </FormControl>
       </div>
       </div>
-</div>
     </div>
-    
+    </div>
   );
 }
 

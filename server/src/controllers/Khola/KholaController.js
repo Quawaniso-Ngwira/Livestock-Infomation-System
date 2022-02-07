@@ -14,17 +14,17 @@ kholaRouter.get("/khola/All", validateToken, async (req, res) => {
   res.json(khola);
  });
 
-kholaRouter.get("/khola/ByUserId/:UserId",validateToken, async (req, res) => {
-  const id = req.params.UserId;
+kholaRouter.get("/khola/ByUserId/:id",validateToken, async (req, res) => {
+  const id = req.params.id;
   
   const user=await Users.findByPk(id);
-  const makola = await Kholas.findAll({ where: {UserId: id}});
+  const kholas = await Kholas.findAll({ where: {UserId: id}});
   if(user){
      try {
-      if(makola.length===0){
+      if(kholas.length===0){
         res.json("user does not own any khola");
       }else{
-        res.json(makola);
+        res.json(kholas);
       }
      } catch (error) {
        
