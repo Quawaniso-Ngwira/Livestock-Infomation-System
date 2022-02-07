@@ -12,6 +12,7 @@ import cattlepig from '../image/cattlepig.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {  Link } from "react-router-dom";
+import { useParams } from "react-router"; 
 import {  TextField, IconButton } from '@material-ui/core';
 import { SearchOutlined } from '@material-ui/icons';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -48,6 +49,8 @@ function Home() {
 
   // initialising classes to the methodof UseStyles() method
   const classes = useStyles();
+  let { id } = useParams();
+  const [listOfKholas, setListOfKholas] = useState([]);
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -55,8 +58,6 @@ function Home() {
   };
 
 
-  const [listOfPosts, setListOfPosts] = useState([]);
-  const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
   let navigate = useNavigate();
 
@@ -67,6 +68,13 @@ function Home() {
      console.log("")
     }
   }, []);
+
+  useEffect(() => { 
+    axios.get(`http://localhost:3001/Khola/ByUserId/${id}`).then((response) => {
+        setListOfKholas(response.data);
+    });
+}, []);
+
 
  
   return (
@@ -84,9 +92,11 @@ function Home() {
                 for sucessful cattle and pig production</p>
                 
               {/* Button that allows the user of the system to fill the form to create a khola */}
+              <Link to="/createKhola">
                 <Button variant="contained" color="secondary" style={{marginTop: "140px"}}>
                     <p style={{color: "white"}}> Create Your Khola</p>
                 </Button>
+                </Link>
                 
           </Item>
         </Grid>
@@ -182,10 +192,11 @@ function Home() {
         </Select>
       </FormControl>
       </div>
+
+
       </div>
-</div>
     </div>
-    
+    </div>
   );
 }
 

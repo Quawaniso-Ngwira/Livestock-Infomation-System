@@ -28,6 +28,7 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import R from './image/IMG-20220120-WA0010.png';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import CreateKhola from "./pages/createKhola/CreateKhola";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -218,6 +219,7 @@ useEffect(()=> {
         <div className="container">
        
        <Routes>
+       
           <Route element={<SidebarLayout/>}>
               <Route path="/chat" exact element={<Chat/>} />
               <Route path="/pigs" exact element={<Users/>} />
@@ -232,10 +234,11 @@ useEffect(()=> {
               <Route path="/profile/:id" exact element={<Profile/>} />
               <Route path="*" exact element={<PageNotFound/>} />
           </Route>
-           <Route index element={<Home/>} />
+           <Route path="/:id" element={<Home/>} />
           <Route path="/registration" exact element={<Registration/>} />
           <Route path="/login" exact element={<Login/>} />
           <Route path="/emailRecovery" exact element={<EmailRecovery/>} />
+          <Route path="/createKhola" exact element={<CreateKhola/>} />
        </Routes>
        </div>
         </Router>
