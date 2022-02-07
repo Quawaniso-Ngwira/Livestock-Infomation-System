@@ -25,6 +25,17 @@ import { Outlet } from 'react-router-dom';
 import Manage from "./pages/manage/Manage";
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
+import R from './image/IMG-20220120-WA0010.png';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -70,6 +81,8 @@ const SidebarLayout = () => (
 );
 
 function App() {
+  //assigning classes to the method useStyles()
+  const classes = useStyles();
 
    // for the register livestock modal
    const [open, setOpen] = React.useState(false);
@@ -134,23 +147,23 @@ useEffect(()=> {
             <div className="links">
             {!authState.status ? (
                 <> 
-                  <Link to="/login"><h2> LIS </h2></Link>
+                  <Link to="/login"><h2 style={{color:"black"}}> iWeta </h2></Link>
                   
                 </>
               ) : (
                 <>
-                  <Link to="/"> <h2> LIS</h2> </Link>
+                
+          <img src={R} alt="livestock pic" style={{ height: "80px", width: "120px"}} className=""/>
+                  <Link to="/"> <h2 style={{color: "black"}}> iWeta</h2> </Link>
                
                 </>
               )}
             </div>
            
             <div className="loggedInContainer">
-             
-            {authState.status && <NotificationsActiveOutlined className="account"> </NotificationsActiveOutlined>}
-             
-            
-            {authState.status && <PermIdentity onClick={handleOpen} className="account"> </PermIdentity>}
+            <h3 style={{color: "black", padding: "15px"}}> {authState.username} </h3>
+            <></>
+            {authState.status && <Button variant="contained" onClick={handleOpen}  className={classes.root}> Logout </Button>}
             <StyledModal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
@@ -168,18 +181,46 @@ useEffect(()=> {
         </Box>
       </StyledModal>
 
-              <h3>{authState.username} </h3>
-              
+      {/* <h3>{authState.username} </h3> */}
+            
            </div>
           </div>
+
+          {!authState.status ? (
+                <> 
+                 
+                  
+                </>
+              ) : (
+                <>
+                <div style={{backgroundColor: "black"}}>
+       <div className="inlineNav">
+         
+         <div><h4>HOME</h4></div>
+         <div><h4>MY KHOLA</h4></div>
+         <Link to="/pigs">
+         <div><h4>PIG</h4></div>
+         </Link>
+         <div><h4>CATTLE</h4></div>
+         <div><h4>ABOUT US</h4></div>
+       </div>
+       </div>
+                </>
+              )}
+
+
+
+
+
+
+        
 
         <div className="container">
        
        <Routes>
           <Route element={<SidebarLayout/>}>
-              <Route index element={<Home/>} />
               <Route path="/chat" exact element={<Chat/>} />
-              <Route path="/users" exact element={<Users/>} />
+              <Route path="/pigs" exact element={<Users/>} />
               <Route path="/production/:id" exact element={<Production/>}  />
               <Route path="/forum" exact element={<Forum/>} />
               <Route path="/createpost" exact element={<CreatePost/>} />
@@ -191,6 +232,7 @@ useEffect(()=> {
               <Route path="/profile/:id" exact element={<Profile/>} />
               <Route path="*" exact element={<PageNotFound/>} />
           </Route>
+           <Route index element={<Home/>} />
           <Route path="/registration" exact element={<Registration/>} />
           <Route path="/login" exact element={<Login/>} />
           <Route path="/emailRecovery" exact element={<EmailRecovery/>} />
