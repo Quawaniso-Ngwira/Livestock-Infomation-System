@@ -20,9 +20,9 @@ registerRouter.get("/auth/user", validateToken, (req, res) => {
   });
 
 registerRouter.post("/auth/register", async (req, res) => {
-  const { username,role,password } = req.body;
+  const { username,email,role,password } = req.body;
 
-  const duplicaterUser = await Users.findOne({ where: { username: username } });
+  const duplicaterUser = await Users.findOne({ where: { username: username ,email:email} });
 
   if(duplicaterUser) {
     console.log("user already registered");
@@ -32,6 +32,7 @@ registerRouter.post("/auth/register", async (req, res) => {
   bcrypt.hash(password, 10).then((hash) => {
     Users.create({
       username: username,
+      email:email,
       role:role,
       password: hash,
     });
