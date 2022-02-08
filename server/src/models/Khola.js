@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull:false,
       },
       Number: {
-        type: DataTypes.STRING,
+        type: DataTypes.BIGINT,
         allowNull: false,
       }
     });

@@ -38,12 +38,12 @@ kholaRouter.get("/khola/ByUserId/:id", async (req, res) => {
 
 
 kholaRouter.post("/khola/create", validateToken, async (req, res) => {
-  const { KholaName,Location,Animal } = req.body;
+  const { KholaName,Location,Animal,Number} = req.body;
 
   const duplicateKhola = await Kholas.findOne({ where: { KholaName:KholaName,Location:Location,Animal:Animal}});
 
   if(duplicateKhola) {
-    return res.json("khola of same same same location and same andimal already exists");}
+    return res.json("khola of same same same location and same animal already exists");}
   
   try {
     const khola = req.body;
