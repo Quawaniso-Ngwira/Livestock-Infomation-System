@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./users.css";
+import "./nutrition.css";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function Users() {
+export default function Nutrition() {
 
   let navigate = useNavigate();
 

@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import cattlepig from '../image/cattlepig.jpg';
+import cattlepig from '../image/livestock_banner.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {  Link } from "react-router-dom";
@@ -19,6 +19,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useParams, useNavigate } from "react-router-dom";
+import RenderKholas from "./RenderKholas/RenderKholas";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -48,8 +49,6 @@ function Home() {
 
   // initialising classes to the methodof UseStyles() method
   const classes = useStyles();
-  let { id } = useParams();
-  const [makola, setMakola] = useState([]);
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -67,13 +66,6 @@ function Home() {
      console.log("")
     }
   }, []);
-
-  useEffect(() => { 
-    axios.get(`http://localhost:3001/khola/ByUserId/${id}`).then((response) => {
-        
-        setMakola(response.data);
-    });
-}, []);
 
 
  
@@ -102,7 +94,7 @@ function Home() {
         </Grid>
         <Grid item xs={6}>
           <Item>
-          <img src={cattlepig} alt="cattlepig pic" style={{ height: "60%", width: "100%"}} className=""/>
+          <img src={cattlepig} alt="cattlepig pic" style={{ height: "100%", width: "100%"}} className=""/>
             </Item>
         </Grid>
       </Grid>
@@ -113,22 +105,6 @@ function Home() {
  {/* bar that is located in the homepage containing search functionality of the kholas */}
       
   <div className="createBreedContainer">
-
-
-
-  {makola.map((value, key) => {
-  return (
-       <div key={key} className="postbreed">
-            <div className="title" >
-            
-              <div className="arrange"><div className="split">
-             <h3 className="breedname">{value.KholaName} </h3> </div>
-              </div> </div>
-           </div>
-        );
-      })}
-
-
 
     <div className="searchKholabar">
 <div>
@@ -210,6 +186,7 @@ function Home() {
       </FormControl>
       </div>
       </div>
+      <RenderKholas/>
     </div>
     </div>
   );
