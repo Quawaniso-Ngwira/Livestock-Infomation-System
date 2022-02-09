@@ -70,7 +70,6 @@ function Home() {
 
   useEffect(() => { 
     axios.get(`http://localhost:3001/khola/ByUserId/${id}`).then((response) => {
-        
         setMakola(response.data);
     });
 }, []);
