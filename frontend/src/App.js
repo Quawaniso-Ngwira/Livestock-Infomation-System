@@ -9,7 +9,6 @@ import Registration from "./pages/Registration";
 import EmailRecovery from "./pages/EmailRecovery";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
-import Chat from "./pages/chat/Chat";
 import Production from "./pages/production/Production";
 import Forum from "./pages/forum/Forum";
 import Profile from "./pages/Profile"; 
@@ -17,12 +16,11 @@ import { AuthContext } from "./helpers/AuthContext";
 import Livestock from "./pages/livestock/Livestock";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Users from "./pages/users/Users";
+import Nutrition from "./pages/nutrition/Nutrition";
 import NewBreed from "./pages/newbreed/NewBreed";
 import RegisterLivestock from "./pages/registerLivestock/RegisterLivestock";
 import Sidebar from "./components/sidebar/Sidebar";
 import { Outlet } from 'react-router-dom';
-import Manage from "./pages/manage/Manage";
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import R from './image/IMG-20220120-WA0010.png';
@@ -66,7 +64,8 @@ const style = {
   width: 90,
   bgcolor: 'whitesmoke',
  // bgcolor: 'background.paper',
-  border: '2px solid blue',
+  //border: '2px solid blue',
+
   margin: 1,
   p: 2,
   px: 4,
@@ -111,7 +110,7 @@ useEffect(()=> {
 // verify that the user has a valid token and is aunthticated
   useEffect(() => {
     axios
-      .get("http://localhost:3001/auth/auth", {
+      .get("http://localhost:3001/auth/login", {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -194,12 +193,12 @@ useEffect(()=> {
                 </>
               ) : (
                 <>
-                <div style={{backgroundColor: "black"}}>
+                <div style={{backgroundColor: "#1C321C"}}>
        <div className="inlineNav">
          
          <div><h4>HOME</h4></div>
          <div><h4>MY KHOLA</h4></div>
-         <Link to="/pigs">
+         <Link to="/nutrition">
          <div><h4>PIG</h4></div>
          </Link>
          <div><h4>CATTLE</h4></div>
@@ -221,15 +220,13 @@ useEffect(()=> {
        <Routes>
        
           <Route element={<SidebarLayout/>}>
-              <Route path="/chat" exact element={<Chat/>} />
-              <Route path="/pigs" exact element={<Users/>} />
+              <Route path="/nutrition" exact element={<Nutrition/>} />
               <Route path="/production/:id" exact element={<Production/>}  />
               <Route path="/forum" exact element={<Forum/>} />
               <Route path="/createpost" exact element={<CreatePost/>} />
               <Route path="/post/:id" exact element={<Post/>}/>
               <Route path="/livestock/:id" exact element={<Livestock/>}/>
               <Route path="/createlivestock" exact element={<RegisterLivestock/>} />
-              <Route path="/manage" exact element={<Manage/>} />
               <Route path="/createbreed" exact element={<NewBreed/>} />
               <Route path="/profile/:id" exact element={<Profile/>} />
               <Route path="*" exact element={<PageNotFound/>} />

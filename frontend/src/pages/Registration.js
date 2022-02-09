@@ -3,21 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate, Link } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
-import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import SignUp from '../image/signup.jpg';
-
-// style for the papers from material ui framework
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  height: '75%',
-  color: theme.palette.text.secondary,
-}));
-
+import User from '../image/login.jpg';
 
 function Registration() {
 
@@ -49,24 +35,17 @@ function Registration() {
   
 
   return (
-    <Box sx={{ width: '100%' }}>
-    <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-      <Grid item xs={4}>
-        <Item>
-          <img src={SignUp} alt="livestock pic" className="imagesignup"/>
-            </Item>
-      </Grid>
-      <Grid item xs={8}>
-      <Item>
+    <div className="loginContainer">
         <h1>Register Account</h1>
-     <div className="createPostPage">
+        <img src={User} alt="login symbol" style={{ height: "70px", width: "70px"}} />
+     <div className="loginContainer">
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         
-        <Form className="formContainer">
+        <Form className="loginContainer">
           <label>Username: </label>
           <ErrorMessage name="username" component="span" />
           <Field
@@ -120,10 +99,7 @@ function Registration() {
         </Form>
       </Formik>
     </div>
-    </Item>
-      </Grid>
-    </Grid>
-  </Box>
+   </div>
    
   );
 }

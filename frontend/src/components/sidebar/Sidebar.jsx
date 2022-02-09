@@ -46,10 +46,10 @@ export default function Sidebar(){
                   </li>
                   </Link>
                  
-                  <Link to="/users" className="link">
+                  <Link to="/nutrition" className="link">
                   <li className="sidebarListItem">
                         <TrendingUp className="sidebarIcon"/>
-                        Users
+                        Nutrition
                   </li>
                   </Link>
                   <Link to={`/production/${userId}`} className='link'>
@@ -69,19 +69,6 @@ export default function Sidebar(){
                        Health
                   </li>
 
-             <Link to="/manage" className="link">
-                  <li className="sidebarListItem">
-                        <TimelapseTwoTone className="sidebarIcon"/>
-                        Manage
-                  </li>
-             </Link>
-
-                  <Link to="/chat" className="link">
-                  <li className="sidebarListItem">
-                        <TrendingUp className="sidebarIcon"/>
-                        Chat
-                  </li>
-                  </Link>
 
                   <Link to="/forum" className="link">
                   <li className="sidebarListItem">

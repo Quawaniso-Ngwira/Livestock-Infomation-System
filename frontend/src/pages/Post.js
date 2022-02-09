@@ -3,11 +3,21 @@ import {  Delete } from "@material-ui/icons";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
+import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import UserComment from '../image/commentUser.jpg'
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -19,6 +29,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 function Post() {
+  const classes = useStyles();
   let { id } = useParams();
   const [postObject, setPostObject] = useState({});
   const [comments, setComments] = useState([]);
@@ -111,7 +122,10 @@ function Post() {
               setNewComment(event.target.value);
             }}
           />
-          <button style={{height: "54px"}} onClick={addComment}> Add Comment</button>
+
+
+<Button variant="contained"  onClick={addComment} className={classes.root}> Add Comment </Button>
+           
         </div>
          </div>
         </Item>
