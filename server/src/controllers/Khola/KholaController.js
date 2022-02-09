@@ -3,7 +3,7 @@ const kholaRouter = express.Router();
 const {Khola: Kholas,Users } = require("../../models");
 const { validateToken } = require("../../../middlewares/AuthMiddleware");
 
-kholaRouter.get("/khola/All", validateToken, async (req, res) => {
+kholaRouter.get("/khola/All", async (req, res) => {
   const makola = await Kholas.findAll();
   res.json({ ListofAll: makola});
 });
