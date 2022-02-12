@@ -11,13 +11,6 @@ import cattlepig from '../image/livestock_banner.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {  Link } from "react-router-dom";
-import {  TextField, IconButton } from '@material-ui/core';
-import { SearchOutlined } from '@material-ui/icons';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { useParams, useNavigate } from "react-router-dom";
 import RenderKholas from "./RenderKholas/RenderKholas";
 
@@ -49,12 +42,7 @@ function Home() {
 
   // initialising classes to the methodof UseStyles() method
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
+  
 
   const { authState } = useContext(AuthContext);
   let navigate = useNavigate();
@@ -106,86 +94,6 @@ function Home() {
       
   <div className="createBreedContainer">
 
-    <div className="searchKholabar">
-<div>
-  
-  <TextField style={{margin: "5px"}}
-                
-                id="standard-bare"
-                variant="outlined"
-                placeholder="(Search Khola)"
-                InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <SearchOutlined />
-                    </IconButton>
-                  ),
-                }}
-              />
-              </div>
-              <div style={{display: "flex"}}> 
-    <h4>Show:</h4>
-    <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={age}
-          onChange={handleChange}
-          label="Age"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-      </div>
-
-      <div style={{display: "flex"}}> 
-        <h4>SortBy:</h4>
-    <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={age}
-          onChange={handleChange}
-          label="Age"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-      </div>
-
-      <div style={{display: "flex"}}> 
-        <h4>Filter:</h4>
-    <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={age}
-          onChange={handleChange}
-          label="Age"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-      </div>
-      </div>
       <RenderKholas/>
     </div>
     </div>

@@ -14,6 +14,7 @@ import Forum from "./pages/forum/Forum";
 import Profile from "./pages/Profile"; 
 import { AuthContext } from "./helpers/AuthContext";
 import Livestock from "./pages/livestock/Livestock";
+import SpecificKhola from "./pages/specificKhola/SpecificKhola";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Nutrition from "./pages/nutrition/Nutrition";
@@ -195,8 +196,9 @@ useEffect(()=> {
                 <>
                 <div style={{backgroundColor: "#1C321C"}}>
        <div className="inlineNav">
-         
+         <Link to="/">
          <div><h4>HOME</h4></div>
+         </Link>
          <div><h4>MY KHOLA</h4></div>
          <Link to="/nutrition">
          <div><h4>PIG</h4></div>
@@ -207,14 +209,7 @@ useEffect(()=> {
        </div>
                 </>
               )}
-
-
-
-
-
-
-        
-
+              
         <div className="container">
        
        <Routes>
@@ -236,6 +231,7 @@ useEffect(()=> {
           <Route path="/login" exact element={<Login/>} />
           <Route path="/emailRecovery" exact element={<EmailRecovery/>} />
           <Route path="/createKhola" exact element={<CreateKhola/>} />
+          <Route path="/specificKhola" exact element={<SpecificKhola/>} />
        </Routes>
        </div>
         </Router>

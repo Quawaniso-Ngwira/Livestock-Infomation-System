@@ -1,0 +1,13 @@
+.AddAnimal{
+    height: 50px;
+    width: 150px;
+    float: right;
+    cursor: pointer;
+    background-color: rgba(231, 10, 21, 0.452);
+  }
+
+  .icons{
+      width:35px;
+      height:35px;
+      cursor: pointer;
+  }
