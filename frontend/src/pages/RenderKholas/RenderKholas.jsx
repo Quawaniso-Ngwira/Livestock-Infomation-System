@@ -10,6 +10,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
+import './renderKhola.css';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -73,7 +74,7 @@ export default function RenderKholas(props) {
     <div className="searchKholabar">
 <div>
   
-  <TextField style={{margin: "5px"}}
+  <TextField style={{margin: "10px"}}
                 onChange={(e) => setSearchTitle(e.target.value)}
                 id="standard-bare"
                 variant="outlined"
@@ -160,7 +161,7 @@ export default function RenderKholas(props) {
             }
           }).map((value, key) => {
   return (
-       <div key={key} className="postbreed">
+       <div key={key} className="renderbreed">
             <div className="title" >
             
             <div className="breeedcategory"

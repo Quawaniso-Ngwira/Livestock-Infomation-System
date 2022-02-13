@@ -92,7 +92,7 @@ function Home() {
       </div>
  {/* bar that is located in the homepage containing search functionality of the kholas */}
       
-  <div className="createBreedContainer">
+  <div className="homesearchContainer">
 
       <RenderKholas/>
     </div>
