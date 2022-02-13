@@ -32,11 +32,17 @@ export default function RenderKholas(props) {
   const [listOfKhola, setListOfKhola] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
   const [age, setAge] = React.useState('');
+  const [region, setRegion] = React.useState('');
+  const [show, setShow] = React.useState('');
+  const [type, setType] = React.useState('');
 
   const classes = useStyles();
 
   const handleChange = (event) => {
     setAge(event.target.value);
+    setRegion(event.target.value);
+    setShow(event.target.value);
+    setType(event.target.value);
   };
 
 
@@ -84,20 +90,20 @@ export default function RenderKholas(props) {
               <div style={{display: "flex"}}> 
     <h4>Show:</h4>
     <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">All</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={age}
+          value={show}
           onChange={handleChange}
-          label="Age"
+          label="All"
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={10}>All</MenuItem>
+          <MenuItem value={20}>Partial</MenuItem>
+        
         </Select>
       </FormControl>
       </div>
@@ -105,20 +111,20 @@ export default function RenderKholas(props) {
       <div style={{display: "flex"}}> 
         <h4>SortBy:</h4>
     <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">Region</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={age}
+          value={region}
           onChange={handleChange}
           label="Age"
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={10}>Northen</MenuItem>
+          <MenuItem value={20}>Central</MenuItem>
+          <MenuItem value={30}>Sourthen</MenuItem>
         </Select>
       </FormControl>
       </div>
@@ -126,20 +132,20 @@ export default function RenderKholas(props) {
       <div style={{display: "flex"}}> 
         <h4>Filter:</h4>
     <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">Type</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={age}
+          value={type}
           onChange={handleChange}
-          label="Age"
+          label="type"
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={10}>Cattle</MenuItem>
+          <MenuItem value={20}>Pig</MenuItem>
+         
         </Select>
       </FormControl>
       </div>

@@ -12,11 +12,24 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import CloseIcon from '@material-ui/icons/Close';
 import * as Yup from "yup";
 import "./specificKhola.css";
-import { Home,
-  Add,
-  ArrowDownward,
-  WorkOutline } from "@material-ui/icons";
+import { makeStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import ListBreedsTable from '../listbreedsTable/ListBreedsTable';
 
+const useStyles = makeStyles((theme) => ({
+  fab: {
+    margin: theme.spacing(2),
+  },
+  absolute: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(3),
+  },
+}));
   
 const StyledModal = styled(ModalUnstyled)`
 position: fixed;
@@ -62,12 +75,14 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Item2 = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
-  padding: theme.spacing(2),
+  padding: theme.spacing(1),
   textAlign: 'right',
   color: theme.palette.text.secondary,
 }));
 
 export default function SpecificKhola(props) {
+
+  
     // let { id } = useParams();
     const [postKhola, setKholaObject] = useState({});
     //userID and Khola IDs have been declared as global variables in this file
@@ -78,7 +93,7 @@ export default function SpecificKhola(props) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
+    const classes = useStyles();
     
   //initialising the input fieldsx
   const initialValues = {
@@ -138,24 +153,32 @@ const onSubmit = (data) => {
  return(
    <div style={{ width: "100%", height: "100%"}}>
       <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={0}>
+      <Grid container spacing={3}>
         
         <Grid item xs={2}>
           <Item>
             {/* Rendering info about the khola which kacts as a container housing the livestock  of the selected type */}
-          <h2>{postKhola.KholaName} Khola</h2>
-          <h3>Location:{postKhola.Location} </h3>
-          <h3>Animal Type:{postKhola.Animal} </h3>
-          <h3>CreatedAt:{postKhola.createdAt} </h3>
+          <h2 style={{color: "blueviolet"}}>{postKhola.KholaName} Khola</h2>
+          <p>Location:{postKhola.Location} </p>
+          <p>Animal Type:{postKhola.Animal} </p>
+          <p>CreatedAt:{postKhola.createdAt} </p>
           </Item>
         </Grid>
         <Grid item xs={10}>
-          <Item2>
+          <Item>
           <Typography variant="subtitle1" component="div">
-          <Add className="icons"  onClick={handleOpen}/><></>
-          <ArrowDownward className="icons"/> 
-         
-
+          
+      <Tooltip title="Delete">
+        <IconButton aria-label="delete">
+          <GetAppIcon/>
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Add " aria-label="add">
+        <Fab color="primary" className={classes.fab}>
+          <AddIcon onClick={handleOpen} />
+        </Fab>
+      </Tooltip>
+     
           <StyledModal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
@@ -164,7 +187,7 @@ const onSubmit = (data) => {
         BackdropComponent={Backdrop}
       >
         <Box sx={style}>
-          <h2 id="unstyled-modal-title" onClick={handleClose} className="close-modal"><CloseIcon style={{width: "50px", height: "50px"}}/></h2>
+          <h2 id="unstyled-modal-title" onClick={handleClose} className="close-modal"><CloseIcon style={{width: "40px", height: "40px"}}/></h2>
           <div className="createLivestock">
           <h2 id="unstyled-modal-title">Register Livestock</h2>
       <Formik
@@ -172,14 +195,14 @@ const onSubmit = (data) => {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form className="formContainer">
+        <Form className="insertBleed">
           <label>name: </label>
           <ErrorMessage name="userBreedName" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
             name="userBreedName"
-            placeholder="(Tonde)"
+           
           />
            <label>Date of Birth </label>
           <ErrorMessage name="Dob" component="span" />
@@ -187,7 +210,8 @@ const onSubmit = (data) => {
             autocomplete="off"
             id="inputCreatePost"
             name="Dob"
-            placeholder="(20-July-2019)"
+            type="date"
+            
           />
           <label>Origin: </label>
           <ErrorMessage name="origin" component="span" />
@@ -195,7 +219,7 @@ const onSubmit = (data) => {
             autocomplete="off"
             id="inputCreatePost"
             name="origin"
-            placeholder="(Malawi)"
+            
           />
            <label>Region </label>
           <ErrorMessage name="region" component="span" />
@@ -203,7 +227,7 @@ const onSubmit = (data) => {
             autocomplete="off"
             id="inputCreatePost"
             name="region"
-            placeholder="(Northen)"
+           
           />
            <label>Active </label>
           <ErrorMessage name="active" component="span" />
@@ -211,7 +235,7 @@ const onSubmit = (data) => {
             autocomplete="off"
             id="inputCreatePost"
             name="active"
-            placeholder="(Yes/No)"
+           
           />
           
 
@@ -227,8 +251,9 @@ const onSubmit = (data) => {
               {/* <Link to="/createbreed">
                <button className="AddAnimal"> Register Breed </button>
               </Link> */}
-          </Item2>
-          kkk
+          </Item>
+         <h3 style={{color: "orange"}}>Total {postKhola.Animal} in the Khola as of to date</h3>
+         <ListBreedsTable/>
         </Grid>
       </Grid>
     </Box>
