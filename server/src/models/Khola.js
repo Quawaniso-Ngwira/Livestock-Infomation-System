@@ -18,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       }
     });
+    
+  Khola.associate = (models) => {
+      Khola.hasMany(models.UserLivestock, {
+      onDelete: "cascade",
+    });
+  };
   
     return Khola;
   };

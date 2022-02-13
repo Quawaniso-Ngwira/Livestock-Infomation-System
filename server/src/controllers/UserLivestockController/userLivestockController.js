@@ -3,51 +3,55 @@ const userLivestockController = express.Router();
 const { UserLivestock: UserLivestocks } = require("../../models");
 const { validateToken } = require("../../../middlewares/AuthMiddleware");
 
-userLivestockController.get("/", validateToken, async (req, res) => {
-  const listOfUserBreeds = await UserLivestocks.findAll();
-  res.json({ listOfBreeds: listOfUserBreeds});
+userLivestockController.get("/api/khola/livestock", async (req, res) => {
+  const allKholaLivestock = await UserLivestocks.findAll();
+  res.status(200).json({ listInThisKhola: allKholaLivestock});
 });
 
- userLivestockController.get("/byId/:id", async (req, res) => {
+ userLivestockController.get("/api/khola/livestock/byId/:id", async (req, res) => {
  const id = req.params.id;
   const userlivestock = await UserLivestocks.findByPk(id);
   res.json(userlivestock);
  });
 
-userLivestockController.get("/byuserId/:id", async (req, res) => {
-  const id = req.params.id;
-  const listOfUserBreeds = await UserLivestocks.findAll({ where: {UserId: id}});
-  res.json(listOfUserBreeds);
-});
 
+userLivestockController.post("/api/khola/livestock/:id",async (req, res) => {
+  const id=req.params.id;
+  const {Name,type,Breed}=req.body;
+    const UserLivestock = req.body;
+    const duplicate=await UserLivestocks.findOne({where:{Name:Name,type:type,Breed:Breed,KholaId:id}})
+  // UserLivestock.username = req.user.username;
+  if(duplicate){return res.status(406).json("duplicates are not allowed")}
 
-userLivestockController.post("/", validateToken, async (req, res) => {
-
-  const UserLivestock = req.body;
-  UserLivestock.username = req.user.username;
-  UserLivestock.UserId = req.user.id;
+  try {
+    UserLivestock.KholaId = id;
   await UserLivestocks.create(UserLivestock);
-  res.json(UserLivestock);
+  res.status(200).json(UserLivestock);
+  } catch (error) {
+    
+  }
+  
 });
 
- userLivestockController.delete("/:userBreedId", validateToken, async (req, res) => {
-  const breedId = req.params.userBreedId;
+
+ userLivestockController.delete("/api/khola/livestock/:id", async (req, res) => {
+  const livestockID = req.params.id;
   await UserLivestocks.destroy({
     where: {
-      userBreedId:breedId,
+      id:livestockID,
     },
   });
-  res.json("DELETED SUCCESSFULLY");
+  res.status(200).json("DELETED SUCCESSFULLY");
 });
 
-userLivestockController.put("/:userBreedId", validateToken, async (req, res) => {
-  const breedId = req.params.userBreedId;
+userLivestockController.put("/api/khola/livestock/:id", async (req, res) => {
+  const id = req.params.id;
   await UserLivestocks.update(req.body,{
     where: {
-      userBreedId:breedId,
+      id:id,
     },
   });
-  res.json("updated succesfully");
+  res.status(200).json("updated succesfully");
 });
 
 module.exports = userLivestockController;

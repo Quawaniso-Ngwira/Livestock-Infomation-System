@@ -6,39 +6,6 @@ const swaggerUI=require("swagger-ui-express");
 
 const registerRouter=require("../controllers/user/authController");
 
-
-/**
- * @swagger
- * definitions:
- *  User:
- *    type:object
- *    properties:
- *      id:
- *        type:intiger
- *         description:auto incremented attribute no need to specify
- *         example:'1'
- *      username:
- *         type:string
- *      email:
- *          type:string
- *      role:
- *          type:string
- *          description:can be either farmer or admin
- */
-
-
-/**
- * @swagger
- * /auth/register
- *  post:
- *   summary:create user(registration)
- *   description:register user into the system
- *   requestBody:
- *    content:
- *      application/json:
- *      
- */
-
 //register at /auth/register
 router.post("/auth/register",registerRouter);
 

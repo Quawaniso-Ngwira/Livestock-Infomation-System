@@ -29,9 +29,7 @@ breedsRouter.get("/byuserId/:id", async (req, res) => {
   res.json(listOfPosts);
 });
 
-
-//deleting is triggering error when using controller, so for now will leave it here
-//this is happening with login too
+//delete post
 breedsRouter.delete("/:postId", validateToken, async (req, res) => {
   const postId = req.params.postId;
   await Posts.destroy({
