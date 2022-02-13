@@ -27,10 +27,11 @@ export default function RenderKholas(props) {
 
   // });
   var id = localStorage.getItem('id');
+ 
     axios.get(`http://localhost:3001/khola/ByUserId/${id}`).then((response) => {
         console.log(response.data);
        setListOfKhola(response.data);
-        console.log(id);
+        
     });
 }, []);
 //(`http://localhost:3001/api/breeds/byuserId/${id}`)
