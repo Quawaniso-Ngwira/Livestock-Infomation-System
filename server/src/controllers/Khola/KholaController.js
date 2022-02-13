@@ -31,7 +31,7 @@ kholaRouter.get("/khola/ByUserId/:id", async (req, res) => {
   //    } 
       
   // }
-  // else{
+  // else
   //     res.json("user not found");
   // }
 });
