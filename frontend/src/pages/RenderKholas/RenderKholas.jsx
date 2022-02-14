@@ -60,10 +60,11 @@ export default function RenderKholas(props) {
 
   useEffect(() => { 
   var id = localStorage.getItem('id');
+ 
     axios.get(`http://localhost:3001/khola/ByUserId/${id}`).then((response) => {
         console.log(response.data);
        setListOfKhola(response.data);
-        console.log(id);
+        
     });
 }, []);
 
