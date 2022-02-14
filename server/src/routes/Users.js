@@ -1,7 +1,9 @@
 
 const express = require("express");
 const router = express.Router();
- 
+const swaggerJSDoc=require("swagger-jsdoc");
+const swaggerUI=require("swagger-ui-express");
+
 const registerRouter=require("../controllers/user/authController");
 
 //register at /auth/register

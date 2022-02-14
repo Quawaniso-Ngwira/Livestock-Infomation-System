@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-
+const swaggerUI=require("swagger-ui-express");
+const YAML=require('yamljs');
+const swaggerJSDocs=YAML.load("./swagger.yaml");
 
 app.use(express.json());
 app.use(cors());
+
+app.use('/api/swagger-docs',swaggerUI.serve,swaggerUI.setup(swaggerJSDocs));
 
 const db = require("./src/models");
 
@@ -20,10 +24,11 @@ app.use("/likes", likesRouter);
 const breedsRouter=require("./src/routes/Breeds");
 app.use("/api/breeds",breedsRouter);
 const livestockRouter=require("./src/routes/Livestock");
+const userLivestock=require("./src/routes/UserLivestockRoute");
+app.use("/",userLivestock);
 app.use("/api/livestock",livestockRouter);
 const kholaRoute=require("./src/routes/Khola");
-app.use('/',kholaRoute);
-
+app.use("/",kholaRoute);
 
 db.sequelize.sync().then(() => {
   app.listen(3001, () => {

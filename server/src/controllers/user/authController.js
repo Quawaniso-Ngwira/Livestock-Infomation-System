@@ -4,15 +4,12 @@ const { Users } = require("../../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../../../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
-const {authoriseRoute}=require("../../../middlewares/RoleMiddleware");
-const { DATE } = require("sequelize");
-
 
 
 registerRouter.get("/auth/user", validateToken, (req, res) => {
 
   try {
-    res.json(req.user);  
+    res.status(200).json(req.user);  
   } catch (error) {
     res.status(500).json("message",error.message);
   }
@@ -26,7 +23,7 @@ registerRouter.post("/auth/register", async (req, res) => {
 
   if(duplicaterUser) {
     console.log("user already registered");
-    return res.json("user already registered");}
+    return res.status(409).json("user already registered");}
   
   try{
   bcrypt.hash(password, 10).then((hash) => {
@@ -36,7 +33,7 @@ registerRouter.post("/auth/register", async (req, res) => {
       role:role,
       password:hash,
     });
-    res.json("user registred succesfully");
+    res.status(201).json("user registred succesfully");
   });
 }
 catch(err){
@@ -52,7 +49,7 @@ registerRouter.put("/auth/update/:id",validateToken, async (req, res) => {
   const findId=await Users.findByPk(id);
   if(!findId) {
     console.log("sorry id not found");
-    return res.json('no user with that id');
+    return res.status(404).json('no user with that id');
   }
   try{
 
@@ -63,7 +60,7 @@ registerRouter.put("/auth/update/:id",validateToken, async (req, res) => {
       password:hash},{
      where:{ id:id}
     });
-    res.json("user updated succesfully");
+    res.status(200).json("user updated succesfully");
   });
 }
 catch(err){
@@ -71,13 +68,12 @@ catch(err){
 }
 });
 
-//login, failed to put it in a controller for now
 registerRouter.post("/auth/login", async (req, res) => {
   const { username, password } = req.body;
 
   const user = await Users.findOne({ where: { username: username } });
 
-  if (!user) res.json({ error: "User Doesn't Exist" });
+  if (!user) res.status(403).json({ error: "User Doesn't Exist" });
 
   bcrypt.compare(password, user.password).then(async (match) => {
     if (!match) res.json({ error: "Wrong Username And Password Combination" });
