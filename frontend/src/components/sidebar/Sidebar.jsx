@@ -49,7 +49,7 @@ export default function Sidebar(){
                   <Link to="/nutrition" className="link">
                   <li className="sidebarListItem">
                         <TrendingUp className="sidebarIcon"/>
-                        Nutrition
+                        Diseases
                   </li>
                   </Link>
                   <Link to={`/production/${userId}`} className='link'>

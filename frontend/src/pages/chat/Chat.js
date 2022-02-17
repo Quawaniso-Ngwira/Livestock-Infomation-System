@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {  Bar } from "react-chartjs-2";
+import {  Pie } from "react-chartjs-2";
 import axios from "axios";
 
 const Chat = () => {
@@ -43,7 +43,7 @@ const Chat = () => {
     <div className="App">
       
       <div >
-        <Bar
+        <Pie
           data={chartData}
           options={{
             responsive: true,

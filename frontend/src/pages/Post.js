@@ -11,7 +11,10 @@ import Box from '@mui/material/Box';
 import UserComment from '../image/commentUser.jpg'
 import Button from '@material-ui/core/Button';
 
+
+
 const useStyles = makeStyles((theme) => ({
+
   root: {
     '& > *': {
       margin: theme.spacing(1),
@@ -123,7 +126,6 @@ function Post() {
             }}
           />
 
-
 <Button variant="contained"  onClick={addComment} className={classes.root}> Add Comment </Button>
            
         </div>
@@ -144,7 +146,7 @@ function Post() {
                 {" "}
               </Delete>
             )}
-            <p>Delete Main Post</p>
+           
           </div>
         </Item>
       </Grid>

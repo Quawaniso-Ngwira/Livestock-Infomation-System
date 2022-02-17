@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Link, } from "react-router-dom";
-import {  PermIdentity, NotificationsActiveOutlined } from "@material-ui/icons";
+import {  PermIdentity, NotificationsActiveOutlined, PowerSettingsNewOutlined } from "@material-ui/icons";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
@@ -172,13 +172,13 @@ useEffect(()=> {
         onClose={handleClose}
         BackdropComponent={Backdrop}>
         <Box sx={style}>
-        <PermIdentity style={{color: "blue", width: "60px", height: "40px"}}> </PermIdentity> 
+        {/* <PermIdentity style={{color: "blue", width: "60px", height: "40px"}}> </PermIdentity>  */}
         <Link to="/login">
       
-       <h3 onClick={logout} style={{color: "orange"}}>Logout</h3>
+       <p onClick={logout} style={{color: "orange", display: "flex"}}><PowerSettingsNewOutlined/>Logout</p>
        </Link>
       
-       <h3>Profile</h3>
+       <p style={{ display: "flex"}}><PermIdentity/>Profile</p>
         </Box>
       </StyledModal>
 

@@ -19,6 +19,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import ListBreedsTable from '../listbreedsTable/ListBreedsTable';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -87,6 +88,7 @@ export default function SpecificKhola(props) {
     const [postKhola, setKholaObject] = useState({});
     //userID and Khola IDs have been declared as global variables in this file
     var id = localStorage.getItem('id');
+    var userlivestockNumber = localStorage.getItem('userlivestockNumber');
     var KholaId = localStorage.getItem('KholaId');
     //inintialising the pop over content
     const [open, setOpen] = React.useState(false);
@@ -94,17 +96,22 @@ export default function SpecificKhola(props) {
     const handleClose = () => setOpen(false);
 
     const classes = useStyles();
-    
+    let navigate = useNavigate();
   //initialising the input fieldsx
   const initialValues = {
-    userBreedName: "",
-    Dob: "",
-    origin: "",
-    region: "",
-    active: "",
-    
+    Name: "",
+    type: "",
+    Breed: "",
+    Vaccinated: "",
   };
 
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate( "/home");
+     
+    }
+  }, []);
   
 //persist state after refreshing the page
 useEffect(()=> {
@@ -121,18 +128,11 @@ useEffect(()=> {
  //for posting data to the database
   
  const validationSchema = Yup.object().shape({
-  userBreedName: Yup.string().required("You must input a Name!"),
-  Dob: Yup.string().required(),
-  origin: Yup.string().required(),
-  region: Yup.string().required(),
-  active: Yup.string().required(),
+  Name: Yup.string().required("You must input a Khola Name!"),
+  type: Yup.string().required(),
+  Breed: Yup.string().required(),
+  Vaccinated: Yup.string().required()
 });
-
-//onsubmit function for posting to the database
-const onSubmit = (data) => {
-  console.log(data)
-  
- };
 
 
  //for getting data from the database
@@ -149,7 +149,19 @@ const onSubmit = (data) => {
     });
 }, []);
 
-   
+// onsubmit register the livestock to the database in the backend
+const onSubmit = (data) => {
+  console.log(data)
+   axios
+     .post(`http://localhost:3001/api/khola/livestock/${KholaId}`, data, {
+       headers: { accessToken: localStorage.getItem("accessToken") },
+     })
+     .then((response) => {
+      handleClose();
+      
+     }).catch(err=>console.log(err));
+ };
+
  return(
    <div style={{ width: "100%", height: "100%"}}>
       <Box sx={{ flexGrow: 1 }}>
@@ -165,18 +177,34 @@ const onSubmit = (data) => {
           </Item>
         </Grid>
         <Grid item xs={10}>
-          <Item>
+          <Item2>
           <Typography variant="subtitle1" component="div">
           
+          {/* <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<CloudUploadIcon />}
+      >
+        Upload
+      </Button> */}
+
+
       <Tooltip title="Delete">
         <IconButton aria-label="delete">
           <GetAppIcon/>
         </IconButton>
       </Tooltip>
-      <Tooltip title="Add " aria-label="add">
-        <Fab color="primary" className={classes.fab}>
-          <AddIcon onClick={handleOpen} />
-        </Fab>
+      <Tooltip title="Add Livestock" aria-label="add">
+      <Button
+        onClick={handleOpen}
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<AddIcon />}
+      >
+        Add Livestock
+      </Button>
       </Tooltip>
      
           <StyledModal
@@ -190,56 +218,44 @@ const onSubmit = (data) => {
           <h2 id="unstyled-modal-title" onClick={handleClose} className="close-modal"><CloseIcon style={{width: "40px", height: "40px"}}/></h2>
           <div className="createLivestock">
           <h2 id="unstyled-modal-title">Register Livestock</h2>
-      <Formik
+          <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form className="insertBleed">
-          <label>name: </label>
-          <ErrorMessage name="userBreedName" component="span" />
+        <Form className="formContainer">
+          <label>Livestock Name: </label>
+          <ErrorMessage name="Name" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            name="userBreedName"
-           
+            name="Name" 
           />
-           <label>Date of Birth </label>
-          <ErrorMessage name="Dob" component="span" />
+           <label>Type: </label>
+          <ErrorMessage name="type" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            name="Dob"
-            type="date"
-            
+            name="type"
           />
-          <label>Origin: </label>
-          <ErrorMessage name="origin" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="origin"
-            
-          />
-           <label>Region </label>
-          <ErrorMessage name="region" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="region"
-           
-          />
-           <label>Active </label>
-          <ErrorMessage name="active" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="active"
-           
-          />
-          
 
-          <button type="submit"> Create Livestock</button>
+          <label>Breed: </label>
+          <ErrorMessage name="Breed" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="Breed"
+          />
+
+        <label>Vaccination Status: </label>
+          <ErrorMessage name="Vaccinated" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="Vaccinated"
+          />
+
+          <button type="submit"> Add Livestock</button>
         </Form>
       </Formik>
     </div>
@@ -251,8 +267,8 @@ const onSubmit = (data) => {
               {/* <Link to="/createbreed">
                <button className="AddAnimal"> Register Breed </button>
               </Link> */}
-          </Item>
-         <h3 style={{color: "orange"}}>Total {postKhola.Animal} in the Khola as of to date</h3>
+          </Item2>
+         <h3> You have {userlivestockNumber} {postKhola.Animal}  in your {postKhola.KholaName} Khola as of to date</h3>
          <ListBreedsTable/>
         </Grid>
       </Grid>

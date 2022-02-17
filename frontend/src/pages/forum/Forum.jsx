@@ -6,12 +6,29 @@ import { useNavigate } from "react-router-dom";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import { AuthContext } from "../../helpers/AuthContext";
 import {  Link } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: 'right',
+    color: theme.palette.text.primary,
+  },
+}));
 
 export default function Forum() {
-
+  const classes = useStyles();
   const [listOfPosts, setListOfPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
+  const listOfPostsNumber = listOfPosts.length
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -72,14 +89,41 @@ export default function Forum() {
   return (
     <div className="forum">
 
-<div className="createpostcontainer">
+
+<div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          
+    <Paper className={classes.paper}>
+          <Link to="/createpost">   
+      <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<AddIcon />}
+      >
+        Publish Querry
+      </Button>
+      </Link> 
+      </Paper>
+
+
+        </Grid>
+        
+      </Grid>
+    </div>
+
+
+{/* 
+
 <Link to="/createpost">
-               <button className="createPost"> Create a post </button>
-               </Link>
-            </div>
-
-
+               <button className="createPostt"> Create a post </button>
+               </Link> */}
+        
       <div className="forumWidgets">
+        {/* displaying the number of available posts */}
+      <h3> Total Available Querries:  {listOfPostsNumber} </h3>
+       {/* array printing the available post made using map method */}
     {listOfPosts.map((value, key) => {
         return (
           <div key={key} className="post">
@@ -108,7 +152,7 @@ export default function Forum() {
                   }
                 />
 
-                <label> {value.Likes.length}</label>
+                <label style={{color: "black"}}> {value.Likes.length}</label>
               </div>
             </div>
           </div>

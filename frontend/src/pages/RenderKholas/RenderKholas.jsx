@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 export default function RenderKholas(props) {
   const navigate = useNavigate();
   const [listOfKhola, setListOfKhola] = useState([]);
+   const listOfKholaNumber = listOfKhola.length
   const [searchTitle, setSearchTitle] = useState("");
   const [age, setAge] = React.useState('');
   const [region, setRegion] = React.useState('');
@@ -56,8 +57,6 @@ export default function RenderKholas(props) {
   }, []);
 
   
-
-
   useEffect(() => { 
   var id = localStorage.getItem('id');
  
@@ -130,7 +129,7 @@ export default function RenderKholas(props) {
         </Select>
       </FormControl>
       </div>
-
+     
       <div style={{display: "flex"}}> 
         <h4>Filter:</h4>
     <FormControl variant="outlined" className={classes.formControl}>
@@ -151,6 +150,7 @@ export default function RenderKholas(props) {
         </Select>
       </FormControl>
       </div>
+      <h3 style={{paddingLeft: "500px"}}> Available Kholas:{listOfKholaNumber}  </h3>
       </div>
      {listOfKhola.filter((value) => {
             if (searchTitle === "") {
@@ -181,7 +181,6 @@ export default function RenderKholas(props) {
           </div>
         );
       })}
-
 
    </div>
  )

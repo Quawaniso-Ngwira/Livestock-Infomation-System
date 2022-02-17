@@ -35,7 +35,10 @@ function CreatePost() {
   };
 
   return (
+
+    <div className="forum">
     <div className="createPostPage">
+    <p>Create Post</p>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -48,7 +51,6 @@ function CreatePost() {
             autocomplete="off"
             id="inputCreatePost"
             name="title"
-            placeholder="(Ex. Title...)"
           />
           <label>Post: </label>
           <ErrorMessage name="postText" component="span" />
@@ -56,13 +58,13 @@ function CreatePost() {
             autocomplete="off"
             id="inputCreatePost"
             name="postText"
-            placeholder="(Ex. Post...)"
           />
 
           <button type="submit"> Create Post</button>
         </Form>
       </Formik>
     </div>
+ </div>
   );
 }
 
