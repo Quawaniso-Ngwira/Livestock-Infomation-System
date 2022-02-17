@@ -6,6 +6,7 @@ const { validateToken } = require("../../../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 
 
+
 registerRouter.get("/auth/user", validateToken, (req, res) => {
 
   try {
@@ -69,6 +70,7 @@ catch(err){
 });
 
 registerRouter.post("/auth/login", async (req, res) => {
+  
   const { username, password } = req.body;
 
   const user = await Users.findOne({ where: { username: username } });
@@ -82,7 +84,7 @@ registerRouter.post("/auth/login", async (req, res) => {
       { username: user.username, id: user.id },
       "importantsecret"
     );
-    res.json({ token: accessToken, username: username,role:user.role,id: user.id});
+    res.status(200).json({ token: accessToken, username: username,role:user.role,id: user.id});
   });
 });
 
@@ -101,6 +103,7 @@ const basicInfo = await Users.findByPk(id, {
 registerRouter.get("/auth/users", validateToken,async (req, res) => {
  
   const allUsers = await Users.findAll({attributes: {exclude: ["password "]}});
+
   
     res.json({allusers: allUsers});
   

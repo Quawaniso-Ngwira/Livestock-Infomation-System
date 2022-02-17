@@ -4,6 +4,7 @@ const cors = require("cors");
 const swaggerUI=require("swagger-ui-express");
 const YAML=require('yamljs');
 const swaggerJSDocs=YAML.load("./swagger.yaml");
+const dotenv=require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
@@ -30,8 +31,10 @@ app.use("/api/livestock",livestockRouter);
 const kholaRoute=require("./src/routes/Khola");
 app.use("/",kholaRoute);
 
+
+const   PORT=process.env.PORT||3001;
 db.sequelize.sync().then(() => {
-  app.listen(3001, () => {
-    console.log("Server running on port 3001");
+  app.listen(PORT, () => {
+    console.log(`Server running on port http://localhost:${PORT}`);
   });
 });
