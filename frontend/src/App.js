@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes, Link, } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link, Navigate, } from "react-router-dom";
 import {  PermIdentity, NotificationsActiveOutlined, PowerSettingsNewOutlined } from "@material-ui/icons";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
@@ -62,8 +62,9 @@ const Backdrop = styled('div')`
 `;
 
 const style = {
-  width: 90,
+  width: 120,
   bgcolor: 'whitesmoke',
+  borderRadius: 5,
  // bgcolor: 'background.paper',
   //border: '2px solid blue',
 
@@ -135,9 +136,14 @@ useEffect(()=> {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("id");
     setAuthState({ username: "", id: 0, status: false });
-    handleClose()
-    
+    handleClose() 
   };
+
+  const profile = () => {
+    handleClose() 
+  };
+  
+
 
   return (
 
@@ -175,10 +181,13 @@ useEffect(()=> {
         {/* <PermIdentity style={{color: "blue", width: "60px", height: "40px"}}> </PermIdentity>  */}
         <Link to="/login">
       
-       <p onClick={logout} style={{color: "orange", display: "flex"}}><PowerSettingsNewOutlined/>Logout</p>
+       <p onClick={logout} style={{color: "blue",display: "flex", margin: "4"}}><PowerSettingsNewOutlined/>Logout</p>
        </Link>
-      
-       <p style={{ display: "flex"}}><PermIdentity/>Profile</p>
+       
+      <Link to="/profile">
+       <p onClick={profile} style={{color: "blue", display: "flex"}}><PermIdentity />Profile</p>
+       </Link>
+        
         </Box>
       </StyledModal>
 
@@ -223,12 +232,12 @@ useEffect(()=> {
               <Route path="/livestock/:id" exact element={<Livestock/>}/>
               <Route path="/createlivestock" exact element={<RegisterLivestock/>} />
               <Route path="/createbreed" exact element={<NewBreed/>} />
-              <Route path="/profile/:id" exact element={<Profile/>} />
               <Route path="*" exact element={<PageNotFound/>} />
           </Route>
            <Route index element={<Home/>} />
           <Route path="/registration" exact element={<Registration/>} />
           <Route path="/login" exact element={<Login/>} />
+          <Route path="/profile" exact element={<Profile/>} />
           <Route path="/emailRecovery" exact element={<EmailRecovery/>} />
           <Route path="/createKhola" exact element={<CreateKhola/>} />
           <Route path="/specificKhola" exact element={<SpecificKhola/>} />
@@ -237,6 +246,7 @@ useEffect(()=> {
         </Router>
       </AuthContext.Provider>
     </div>
+    
   );
 }
 

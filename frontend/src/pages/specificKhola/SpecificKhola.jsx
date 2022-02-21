@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(3),
   },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
 }));
   
 const StyledModal = styled(ModalUnstyled)`
@@ -83,7 +88,10 @@ const Item2 = styled(Paper)(({ theme }) => ({
 
 export default function SpecificKhola(props) {
 
-  
+  //getting the current date and assigning it to the variable of date
+  const current = new Date();
+  const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
     // let { id } = useParams();
     const [postKhola, setKholaObject] = useState({});
     //userID and Khola IDs have been declared as global variables in this file
@@ -143,11 +151,11 @@ useEffect(()=> {
     });
   }, []);
 
-    useEffect(() => {     
-    axios.get(`http://localhost:3001/khola/ByUserId/${id}/${KholaId}`).then((response) => {
-        console.log(response.data);
-    });
-}, []);
+//     useEffect(() => {     
+//     axios.get(`http://localhost:3001/khola/ByUserId/${id}/${KholaId}`).then((response) => {
+//         console.log(response.data);
+//     });
+// }, []);
 
 // onsubmit register the livestock to the database in the backend
 const onSubmit = (data) => {
@@ -268,11 +276,12 @@ const onSubmit = (data) => {
                <button className="AddAnimal"> Register Breed </button>
               </Link> */}
           </Item2>
-         <h3> You have {userlivestockNumber} {postKhola.Animal}  in your {postKhola.KholaName} Khola as of to date</h3>
+         <h4> You have {userlivestockNumber} {postKhola.Animal}  in your {postKhola.KholaName} Khola as of {date}.</h4>
          <ListBreedsTable/>
         </Grid>
       </Grid>
     </Box>
+    {/* <ListBreedsTable/> */}
    </div>
  );
    

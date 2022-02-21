@@ -1,126 +1,230 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router"; 
-import { Link } from "react-router-dom"; 
-import axios from "axios";
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import React, { useState, useEffect } from 'react';
+import { forwardRef } from 'react';
+import Avatar from 'react-avatar';
+import Grid from '@material-ui/core/Grid'
+import MaterialTable from "material-table";
+import AddBox from '@material-ui/icons/AddBox';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import Check from '@material-ui/icons/Check';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import Clear from '@material-ui/icons/Clear';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import Edit from '@material-ui/icons/Edit';
-import Delete from '@material-ui/icons/Delete';
-import { orange } from "@material-ui/core/colors";
-import {  TextField, IconButton } from '@material-ui/core';
-import { SearchOutlined } from '@material-ui/icons';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Remove from '@material-ui/icons/Remove';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Search from '@material-ui/icons/Search';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+import axios from 'axios'
+import Alert from '@material-ui/lab/Alert';
+import './listbreedstable.css';
+
+const tableIcons = {
+  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+  Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+  Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+  DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+  Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+  ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+};
+
+const api = axios.create({
+  baseURL: `http://localhost:3001/`
+})
 
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
+function ListBreedsTable() {
 
-export default function ListBreedsTable(props) {
-  const navigate = useNavigate();
-  const [userlivestock, setUserlivestock] = useState([]);
-  const [searchTitle, setSearchTitle] = useState("");
-  const classes = useStyles();
-  const userlivestockNumber = userlivestock.length
+  var columns = [
+    {title: "id", field: "id", hidden: true},
+    {title: "Avatar", render: rowData => <Avatar maxInitials={1} size={40} round={true} name={rowData === undefined ? " " : rowData.Name} />  },
+    {title: "Name", field: "Name"},
+    {title: "Type", field: "type"},
+    {title: "Breed", field: "Breed"},
+    {title: "Vaccination", field: "Vaccinated"}
+  ]
+  const [data, setData] = useState([]); //table data
+  const userlivestockNumber = data.length
   localStorage.setItem("userlivestockNumber", userlivestockNumber);
 
-  useEffect(() => {
+  //for error handling
+  const [iserror, setIserror] = useState(false)
+  const [errorMessages, setErrorMessages] = useState([])
+
+  const getLivestock = async()=>{
     var KholaId = localStorage.getItem('KholaId');
-    axios.get(`http://localhost:3001/api/khola/livestock/byId/${KholaId}`).then((response) => {
-      setUserlivestock(response.data);
-     console.log(response.data);
-  });
-  }, []);
- 
-  const deleteLivestock = (KholaId) => {
-    axios
-      .delete(`http://localhost:3001/api/khola/livestock/${KholaId}`, {
-        headers: { accessToken: localStorage.getItem("accessToken") },
-      })
-      .then(() => {
-        setUserlivestock(
-          userlivestock.filter((val) => {
-            return val.KholaId != KholaId;
-          })
-        );
-      });
+    await api.get(`/api/khola/livestock/byId/${KholaId}`).then(Response=>{
+      setData(Response.data);
+    })
   };
 
- return(
-  <TableContainer component={Paper}>
-    {/* rendering the search bar inside the table and floating it to the left */}
-    {/* {userlivestockNumber} */}
-<TextField  className={classes.search}
-                style={{margin: "10px"}} 
-                onChange={(e) => setSearchTitle(e.target.value)}
-                id="standard-bare"
-                variant="outlined"
-                placeholder="(Search Livestock)"
-                InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <SearchOutlined />
-                    </IconButton>
-                  ),
-                }}
-              />
-{/* end of the search feild */}
-  <Table className={classes.table} size="small" aria-label="a dense table">
-    <TableHead>
-      <TableRow style={{fontWeight: "bold"}}>
-        <TableCell><h2>Name</h2></TableCell>
-        <TableCell align="right"><h2>Type</h2></TableCell>
-        <TableCell align="right"><h2>Vaccination Status</h2></TableCell>
-        <TableCell align="right"><h2>Breed</h2></TableCell>
-        <TableCell align="right"><h2>Actions</h2></TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-   
-    {userlivestock.filter((value) => {
-            if (searchTitle === "") {
-              return value;
-            } else if (
-              value.Name?.toLowerCase().includes(searchTitle.toLowerCase())
-            ) {
-              return value;
-            }
-          }).map((value, key) => {
-  return (
-    <TableRow key={key}>
-    <TableCell component="th" scope="row">
-    {value.Name}
-    </TableCell>  
-     <TableCell align="right">{value.type}</TableCell>
-              <TableCell align="right">{value.Breed}</TableCell>
-              <TableCell align="right">{value.Vaccinated}</TableCell>
-              <TableCell align="right">
-              <Edit style={{color: orange}} />
-              
-                  <Delete className="deletePersonalcomment"
-                    onClick={() => {
-                      deleteLivestock(value.id);
-                    }}
-                  >
-                  
-                  </Delete>
-               
+  useEffect(()=>{
+    getLivestock();
+  }, []);
 
-              </TableCell>
-            </TableRow> 
-            )
-          })}
-             </TableBody>
-       </Table>
-      </TableContainer>
+  const handleRowUpdate = (newData, oldData, resolve) => {
+    //validation
+    let errorList = []
+    if(newData.Name === ""){
+      errorList.push("Please enter Name")
+    }
+    if(newData.type === ""){
+      errorList.push("Please enter Type")
+    }
+    if(newData.Breed === ""){
+      errorList.push("Please enter Breed")
+    }
+    if(newData.Vaccinated === ""){
+      errorList.push("Please enter Vaccination Status")
+    }
   
- )
-   
+    if(errorList.length < 1){
+      api.put("/api/khola/livestock/"+newData.id, newData)
+      .then(res => {
+        const dataUpdate = [...data];
+        const index = oldData.tableData.id;
+        dataUpdate[index] = newData;
+        setData([...dataUpdate]);
+        resolve()
+        setIserror(false)
+        setErrorMessages([])
+      })
+      .catch(error => {
+        setErrorMessages(["Update failed! Server error"])
+        setIserror(true)
+        resolve()
+        
+      })
+    }else{
+      setErrorMessages(errorList)
+      setIserror(true)
+      resolve()
+
+    }
+    
+  }
+
+  const handleRowAdd = (newData, resolve) => {
+    //validation
+    let errorList = []
+    
+
+    if(newData.Name === ""){
+      errorList.push("Please enter Name")
+    }
+    if(newData.type === ""){
+      errorList.push("Please enter Type")
+    }
+    if(newData.Breed === ""){
+      errorList.push("Please enter Breed")
+    }
+    if(newData.Vaccinated === ""){
+      errorList.push("Please enter Vaccination Status")
+    }
+    //  .post(`http://localhost:3001/api/khola/livestock/${KholaId}`, data, {
+    if(errorList.length < 1){ //no error
+      var KholaId = localStorage.getItem('KholaId');
+      api.post(`/api/khola/livestock/${KholaId}`, newData)
+      .then(res => {
+        let dataToAdd = [...data];
+        dataToAdd.push(newData);
+        setData(dataToAdd);
+        resolve()
+        setErrorMessages([])
+        setIserror(false)
+      })
+      .catch(error => {
+        setErrorMessages(["Cannot add data. Server error!"])
+        setIserror(true)
+        resolve()
+      })
+    }else{
+      setErrorMessages(errorList)
+      setIserror(true)
+      resolve()
+    }
+
+    
+  }
+ 
+  //Deleting data from the table
+  const handleRowDelete = (oldData, resolve) => {
+    
+    api.delete("/api/khola/livestock/"+oldData.id)
+      .then(res => {
+        const dataDelete = [...data];
+        const index = oldData.tableData.id;
+        dataDelete.splice(index, 1);
+        setData([...dataDelete]);
+        resolve()
+      })
+      .catch(error => {
+        setErrorMessages(["Delete failed! Server error"])
+        setIserror(true)
+        resolve()
+      })
+  }
+
+
+  return (
+    <div className="table">
+      
+      <Grid container spacing={1}>
+          <Grid item xs={0}></Grid>
+          <Grid item xs={12}>
+          <div>
+            {iserror && 
+              <Alert severity="error">
+                  {errorMessages.map((msg, i) => {
+                      return <div key={i}>{msg}</div>
+                  })}
+              </Alert>
+            }       
+          </div>
+            <MaterialTable
+              title="Available Livestocks in the Khola"
+              columns={columns}
+              data={data}
+              icons={tableIcons}
+              editable={{
+                onRowUpdate: (newData, oldData) =>
+                  new Promise((resolve) => {
+                      handleRowUpdate(newData, oldData, resolve);
+                      
+                  }),
+                onRowAdd: (newData) =>
+                  new Promise((resolve) => {
+                    handleRowAdd(newData, resolve)
+                  }),
+                onRowDelete: (oldData) =>
+                  new Promise((resolve) => {
+                    handleRowDelete(oldData, resolve)
+                  }),
+              }}
+              options = {{
+                exportButton : true,
+                actionsColumnIndex: -1
+              }}
+            />
+          </Grid>
+          <Grid item xs={3}></Grid>
+        </Grid>
+    </div>
+  );
 }
+
+export default ListBreedsTable;

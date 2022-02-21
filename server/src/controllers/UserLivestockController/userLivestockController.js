@@ -10,7 +10,7 @@ userLivestockController.get("/api/khola/livestock", async (req, res) => {
 
  userLivestockController.get("/api/khola/livestock/byId/:id", async (req, res) => {
  const id = req.params.id;
-  const userlivestock = await UserLivestocks.findByPk(id);
+  const userlivestock = await UserLivestocks.findAll({ where: {KholaId: id}});
   res.json(userlivestock);
  });
 

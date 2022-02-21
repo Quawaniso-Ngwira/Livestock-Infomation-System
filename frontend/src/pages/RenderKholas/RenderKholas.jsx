@@ -4,12 +4,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import {  TextField, IconButton } from '@material-ui/core';
 import { SearchOutlined } from '@material-ui/icons';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+
 import { makeStyles } from '@material-ui/core/styles';
+import breedcategory from "../../image/fence.jpg";
 import './renderKhola.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,20 +29,11 @@ export default function RenderKholas(props) {
   const navigate = useNavigate();
   const [listOfKhola, setListOfKhola] = useState([]);
    const listOfKholaNumber = listOfKhola.length
+   localStorage.setItem("listOfKholaNumber", listOfKholaNumber);
   const [searchTitle, setSearchTitle] = useState("");
-  const [age, setAge] = React.useState('');
-  const [region, setRegion] = React.useState('');
-  const [show, setShow] = React.useState('');
-  const [type, setType] = React.useState('');
+
 
   const classes = useStyles();
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-    setRegion(event.target.value);
-    setShow(event.target.value);
-    setType(event.target.value);
-  };
 
 
   useEffect(() => {
@@ -74,7 +62,7 @@ export default function RenderKholas(props) {
     <div className="searchKholabar">
 <div>
   
-  <TextField style={{margin: "10px"}}
+  <TextField style={{margin: "10px", backgroundColor: "#fafafa"}}
                 onChange={(e) => setSearchTitle(e.target.value)}
                 id="standard-bare"
                 variant="outlined"
@@ -88,69 +76,9 @@ export default function RenderKholas(props) {
                 }}
               />
               </div>
-              <div style={{display: "flex"}}> 
-    <h4>Show:</h4>
-    <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">All</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={show}
-          onChange={handleChange}
-          label="All"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>All</MenuItem>
-          <MenuItem value={20}>Partial</MenuItem>
-        
-        </Select>
-      </FormControl>
-      </div>
-
-      <div style={{display: "flex"}}> 
-        <h4>SortBy:</h4>
-    <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Region</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={region}
-          onChange={handleChange}
-          label="Age"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Northen</MenuItem>
-          <MenuItem value={20}>Central</MenuItem>
-          <MenuItem value={30}>Sourthen</MenuItem>
-        </Select>
-      </FormControl>
-      </div>
-     
-      <div style={{display: "flex"}}> 
-        <h4>Filter:</h4>
-    <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Type</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={type}
-          onChange={handleChange}
-          label="type"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Cattle</MenuItem>
-          <MenuItem value={20}>Pig</MenuItem>
-         
-        </Select>
-      </FormControl>
-      </div>
-      <h3 style={{paddingLeft: "500px"}}> Available Kholas:{listOfKholaNumber}  </h3>
+      
+  
+      <h3 style={{paddingLeft: "900px"}}> Available Kholas:{listOfKholaNumber}  </h3>
       </div>
      {listOfKhola.filter((value) => {
             if (searchTitle === "") {
@@ -162,6 +90,7 @@ export default function RenderKholas(props) {
             }
           }).map((value, key) => {
   return (
+
        <div key={key} className="renderbreed">
             <div className="title" >
             
@@ -173,12 +102,13 @@ export default function RenderKholas(props) {
                }}
             >
               <div className="arrange"><div className="split">
-             <h3 className="breedname">{value.KholaName} </h3> </div>
+             <h3 className="breedname">{value.KholaName} Khola </h3>
+              </div>
               </div> </div>
            </div>
+           </div>
             
-            
-          </div>
+        
         );
       })}
 
