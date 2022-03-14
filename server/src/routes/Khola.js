@@ -5,9 +5,8 @@ const Khola = express.Router();
 
  
 const KholaController=require("../controllers/Khola/KholaController");
-
 //register at /khola/create
-Khola.post("/khola/create",KholaController);
+Khola.post("/khola/create/:id",KholaController);
 //all of specific user
 Khola.get("/khola/ByUserId/:UserId",kholaRouter);
 //find all users  at auth/users
@@ -20,7 +19,6 @@ Khola.put("/khola/update/:id",KholaController);
 
 //delete  by id at 3001/khola/delete/:id
 Khola.delete("/khola/delete/:id",KholaController);
-
-
-
+//category
+Khola.post("/khola/category/create",KholaController);
 module.exports = Khola;

@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    phone:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -12,13 +16,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  
     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
  
 });
-
 
   Users.associate = (models) => {
     Users.hasMany(models.Likes, {
@@ -30,11 +38,11 @@ module.exports = (sequelize, DataTypes) => {
     Users.hasMany(models.Khola, {
       onDelete: "cascade",
     });
-    Users.hasMany(models.Breeds,{
+ 
+    Users.hasMany(models.Livestock,{
       onDelete:"cascade",
     });
-   
-    Users.hasMany(models.Livestock,{
+    Users.hasMany(models.Product,{
       onDelete:"cascade",
     });
   

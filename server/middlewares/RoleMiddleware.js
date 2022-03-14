@@ -1,6 +1,7 @@
 
-const authoriseRoute=(permissions)=>{
-    return (req,res,next)=>{
+const validateRole=(req,res,next)=>{
+    const permissions=["farmer","user","User","Farmer"];
+    return ()=>{
         const userRole=req.body.role;
         console.log(userRole)
         if(permissions.includes(userRole)){
@@ -12,4 +13,4 @@ const authoriseRoute=(permissions)=>{
 
 
 }
-module.exports={authoriseRoute}
+module.exports={validateRole}

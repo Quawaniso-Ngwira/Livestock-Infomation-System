@@ -57,6 +57,7 @@ function ListBreedsTable() {
     {title: "Breed", field: "Breed"},
     {title: "Vaccination", field: "Vaccinated"}
   ]
+  
   const [data, setData] = useState([]); //table data
   const userlivestockNumber = data.length
   localStorage.setItem("userlivestockNumber", userlivestockNumber);
@@ -69,6 +70,7 @@ function ListBreedsTable() {
     var KholaId = localStorage.getItem('KholaId');
     await api.get(`/api/khola/livestock/byId/${KholaId}`).then(Response=>{
       setData(Response.data);
+      console.log(Response.data);
     })
   };
 

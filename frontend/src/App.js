@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Link, Navigate, } from "react-router-dom";
-import {  PermIdentity, NotificationsActiveOutlined, PowerSettingsNewOutlined } from "@material-ui/icons";
+import {  PermIdentity, NotificationsNone, PowerSettingsNewOutlined } from "@material-ui/icons";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
@@ -28,6 +28,9 @@ import R from './image/IMG-20220120-WA0010.png';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CreateKhola from "./pages/createKhola/CreateKhola";
+import UpDateKhola from "./pages/createKhola/UpDateKhola";
+import KholaPage from "./pages/KholaPage/KholaPage";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -90,12 +93,14 @@ function App() {
    const [open, setOpen] = React.useState(false);
    const handleOpen = () => setOpen(true);
    const handleClose = () => setOpen(false);
+  
 
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
     status: false,
   });
+  
 
 //persist state after refreshing the page
   useEffect(()=> {
@@ -137,19 +142,21 @@ useEffect(()=> {
     localStorage.removeItem("id");
     setAuthState({ username: "", id: 0, status: false });
     handleClose() 
+    localStorage.removeItem("listOfKholaNumber");
   };
 
   const profile = () => {
     handleClose() 
   };
   
-
-
+  
   return (
-
+   
     <div className="App">
+     
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
+      
           <div className="navbar">
             <div className="links">
             {!authState.status ? (
@@ -169,6 +176,11 @@ useEffect(()=> {
            
             <div className="loggedInContainer">
             <h3 style={{color: "black", padding: "15px"}}> {authState.username} </h3>
+            <></>
+            {authState.status && <div className="topbarIconContainer">
+                        <NotificationsNone/>
+                        <span className="topIconBadge">6</span>
+                    </div>}
             <></>
             {authState.status && <Button variant="contained" onClick={handleOpen}  className={classes.root}> Logout </Button>}
             <StyledModal
@@ -192,9 +204,9 @@ useEffect(()=> {
       </StyledModal>
 
       {/* <h3>{authState.username} </h3> */}
-            
+      </div> 
            </div>
-          </div>
+        
 
           {!authState.status ? (
                 <> 
@@ -208,7 +220,9 @@ useEffect(()=> {
          <Link to="/">
          <div><h4>HOME</h4></div>
          </Link>
+         <Link to="/kholaPage">
          <div><h4>MY KHOLA</h4></div>
+         </Link>
          <Link to="/nutrition">
          <div><h4>PIG</h4></div>
          </Link>
@@ -216,13 +230,14 @@ useEffect(()=> {
          <div><h4>ABOUT US</h4></div>
        </div>
        </div>
+  
                 </>
               )}
-              
+     
+      
+        
         <div className="container">
-       
        <Routes>
-       
           <Route element={<SidebarLayout/>}>
               <Route path="/nutrition" exact element={<Nutrition/>} />
               <Route path="/production/:id" exact element={<Production/>}  />
@@ -238,15 +253,17 @@ useEffect(()=> {
           <Route path="/registration" exact element={<Registration/>} />
           <Route path="/login" exact element={<Login/>} />
           <Route path="/profile" exact element={<Profile/>} />
+          <Route path="/kholaPage" exact element={<KholaPage/>} />
           <Route path="/emailRecovery" exact element={<EmailRecovery/>} />
           <Route path="/createKhola" exact element={<CreateKhola/>} />
+          <Route path="/upDateKhola" exact element={<UpDateKhola/>} />
           <Route path="/specificKhola" exact element={<SpecificKhola/>} />
        </Routes>
        </div>
         </Router>
       </AuthContext.Provider>
     </div>
-    
+   
   );
 }
 

@@ -3,7 +3,8 @@ const router = express.Router();
 const { Likes } = require("../../models");
 const { validateToken } = require("../../../middlewares/AuthMiddleware");
 
-router.post("/", validateToken, async (req, res) => {
+router.post("/", validateToken, async (req, res,next) => {
+  try {
     const { PostId } = req.body;
     const UserId = req.user.id;
   
@@ -19,5 +20,9 @@ router.post("/", validateToken, async (req, res) => {
       });
       res.json({ liked: false });
     }
+  } catch (error) {
+    next(error);
+  }
+    
   });
   module.exports=router;

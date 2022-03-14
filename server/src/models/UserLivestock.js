@@ -1,9 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const UserLivestock = sequelize.define("UserLivestock", {
   
-      Name: {
-        type: DataTypes.STRING,
+      IdentityNumber:{
+        type: DataTypes.BIGINT, 
         allowNull: false,
+         //primaryKey: true 
       },
       type:{
         type :DataTypes.STRING,
@@ -14,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       Vaccinated:{
-        type :DataTypes.STRING,
+        type :DataTypes.BOOLEAN,
         allowNull:false,
       },
     });

@@ -1,58 +1,75 @@
 const express = require("express");
 const registerRouter = express.Router();
-const { Users } = require("../../models");
+const { Users ,Officer,Roles} = require("../../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../../../middlewares/AuthMiddleware");
+const {validateRole}=require("../../../middlewares/RoleMiddleware");
 const { sign } = require("jsonwebtoken");
+const role=require("../../models/Role.json");
 
 
 
-registerRouter.get("/auth/user", validateToken, (req, res) => {
+
+
+registerRouter.get("/auth/user", validateToken, (req, res,next) => {
 
   try {
     res.status(200).json(req.user);  
   } catch (error) {
-    res.status(500).json("message",error.message);
+  next(error);
   }
     
   });
 
-registerRouter.post("/auth/register", async (req, res) => {
-  const { username,email,role,password } = req.body;
+registerRouter.post("/auth/register",async (req, res,next) => {
+  try {
 
-  const duplicaterUser = await Users.findOne({ where: { username: username ,email:email} });
-
-  if(duplicaterUser) {
-    console.log("user already registered");
-    return res.status(409).json("user already registered");}
+      const { username,phone,email,role,address,password } = req.body;
+      const Email=email.toLowerCase();
+      const userRole=role.toLowerCase();
+      const duplicaterUser = await Users.findOne({ where: { username: username ,phone:phone,email:Email} });
+    
+      if(duplicaterUser) {
+        console.log("user already registered");
+        return res.status(409).json("user already registered");
+      }
+        const roles=["farmer","officer","supplier"];
+        if(roles.includes(userRole)){
+      bcrypt.hash(password, 10).then((hash) => {
+        Users.create({
+          username: username,
+          phone:phone,
+          email:Email,
+          role:userRole,
+          address:address,
+          password:hash,
+        });
+        res.status(200).json("user registred succesfully");
+      });
+    }else{
+      console.log("Invalid role");
+      res.status(400).json("INVALID ROLE");
+    }
+  } catch (error) {
+    next(error);
+  }
   
-  try{
-  bcrypt.hash(password, 10).then((hash) => {
-    Users.create({
-      username: username,
-      email:email,
-      role:role,
-      password:hash,
-    });
-    res.status(201).json("user registred succesfully");
-  });
-}
-catch(err){
-  res.status(500).json({"message":err.message});
-}
 });
 
+//register officer
 //update
-registerRouter.put("/auth/update/:id",validateToken, async (req, res) => {
-  const id=req.params.id;
+registerRouter.put("/auth/update/:id",validateToken, async (req, res,next) => {
+  try {
+    const id=req.params.id;
   const { username,role,password} = req.body;
+
+  
 
   const findId=await Users.findByPk(id);
   if(!findId) {
     console.log("sorry id not found");
     return res.status(404).json('no user with that id');
   }
-  try{
 
   bcrypt.hash(password, 10).then((hash) => {
     Users.update({
@@ -63,63 +80,78 @@ registerRouter.put("/auth/update/:id",validateToken, async (req, res) => {
     });
     res.status(200).json("user updated succesfully");
   });
-}
-catch(err){
-  res.status(500).json({"message":err.message});
-}
+
+  } catch (error) {
+    next(error);
+  }
+  
 });
 
-registerRouter.post("/auth/login", async (req, res) => {
-  
-  const { username, password } = req.body;
-
+registerRouter.post("/auth/login", async (req, res,next) => {
+  try {
+    const {username,password } = req.body;
   const user = await Users.findOne({ where: { username: username } });
 
   if (!user) res.status(403).json({ error: "User Doesn't Exist" });
 
   bcrypt.compare(password, user.password).then(async (match) => {
-    if (!match) res.json({ error: "Wrong Username And Password Combination" });
+    if (!match) res.json({ error: "Wrong username And Password Combination" });
 
     const accessToken = sign(
-      { username: user.username, id: user.id },
+      { username:user.username, id: user.id },
       "importantsecret"
     );
-    res.status(200).json({ token: accessToken, username: username,role:user.role,id: user.id});
+    res.status(200).json({ token: accessToken, username:user.username,email:user.email,role:user.role,id: user.id});
   });
+  } catch (error) {
+    next(error);
+  }
+  
 });
 
 
-registerRouter.get("/auth/basicinfo/:id", validateToken,async (req, res) => {
-
-const id = req.params.id;
+registerRouter.get("/auth/basicinfo/:id", validateToken,async (req, res,next) => {
+  try {
+    const id = req.params.id;
 
 const basicInfo = await Users.findByPk(id, {
   attributes: {exclude: ["password "]},});
 
   res.json(basicInfo);
+  } catch (error) {
+    next(error);
+  }
 
 });
 
-registerRouter.get("/auth/users", validateToken,async (req, res) => {
- 
+registerRouter.get("/auth/users",validateToken, async (req, res,next) => {
+ try {
+
+
   const allUsers = await Users.findAll({attributes: {exclude: ["password "]}});
 
   
-    res.json({allusers: allUsers});
+  res.json({allusers: allUsers});
+ } catch (error) {
+   next(error);
+ }
+ 
   
   });
-  registerRouter.delete("/auth/delete/:id", validateToken, async (req, res) => {
-    const id = req.params.id;
+  registerRouter.delete("/auth/delete/:id", validateToken, async (req, res,next) => {
+    try {
+      const id = req.params.id;
     await Users.destroy({
       where: {
         id:id,
       },
     });
     res.json("DELETED SUCCESSFULLY");
+    } catch (error) {
+      next(error);
+    }
+  
   });
-
-
-
 
 
 

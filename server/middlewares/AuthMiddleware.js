@@ -14,7 +14,7 @@ const validateToken = (req, res, next) => {
       return next();
     }
   } catch (err) {
-    return res.status(500).json({ error: err });
+    next(err);
   }
 };
 

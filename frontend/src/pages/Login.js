@@ -32,7 +32,7 @@ function Login() {
         localStorage.setItem("accessToken", response.data.token);
         localStorage.setItem("id", response.data.id);
         setAuthState({
-          username: response.data.username,
+          username:response.data.username,
           id: response.data.id,
           status: true,
         });

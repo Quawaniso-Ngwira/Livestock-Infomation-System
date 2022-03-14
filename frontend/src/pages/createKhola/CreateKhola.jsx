@@ -6,7 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../helpers/AuthContext";
 import './createKhola.css';
 
-
 function CreateKhola() {
   let { id } = useParams();
   const[userId, setUserId] = useState();
@@ -14,10 +13,11 @@ function CreateKhola() {
 
   let navigate = useNavigate();
   const initialValues = {
-    kholaName: "",
-    locationName: "",
-    animalType: "",
-    animalNumber: "",
+    KholaName: "",
+    Location: "",
+    AnimalType: "",
+    Breed:"",
+    Number: "",
   };
 
   useEffect(()=>{
@@ -34,22 +34,26 @@ function CreateKhola() {
   const validationSchema = Yup.object().shape({
     KholaName: Yup.string().required("You must input a Khola Name!"),
     Location: Yup.string().required(),
-    Animal: Yup.string().required(),
+    AnimalType: Yup.string().required(),
+    Breed: Yup.string().required(),
     Number: Yup.string().required()
   });
 
   const onSubmit = (data) => {
+   var id = localStorage.getItem("id");
+   console.log(data);
     axios
-      .post("http://localhost:3001/khola/create", data, {
+      .post(`http://localhost:3001/khola/create/${id}`, data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
-        navigate("/");
+        navigate("/kholaPage");
       });
   };
 
   return (
     <div className="createPostPage">
+      <p>Create Your Khola</p>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -72,22 +76,34 @@ function CreateKhola() {
           />
 
           <label>Animal Type: </label>
-          <ErrorMessage name="Animal" component="span" />
+          <ErrorMessage name="AnimalType" component="span" />
+          <Field
+            component="select"
+            autocomplete="off"
+            id="inputCreatePost"
+            name="AnimalType"
+          >
+            <option value="choose">Select below</option>
+            <option value="cattle">Cattle</option>
+            <option value="pig">Pig</option>
+          </Field>
+          <label>Breed: </label>
+          <ErrorMessage name="Location" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            name="Animal"
+            name="Breed"
           />
-
         <label>Number of Animal: </label>
           <ErrorMessage name="Number" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
+            type="number"
             name="Number"
           />
 
-          <button type="submit"> Create Post</button>
+          <button type="submit"> Create Khola</button>
         </Form>
       </Formik>
     </div>

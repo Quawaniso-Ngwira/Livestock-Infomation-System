@@ -1,0 +1,13 @@
+
+.kholas{
+    flex: 1;
+    height: 70px;
+    width:  100%;
+    padding: 15px;
+    position: sticky;
+    border-radius: 5px;
+    /* border-radius: 10px; */
+    -webkit-box-shadow: 0px 0px 11px 0px #ccdcf1;
+    box-shadow: 0px 0px 11px #e0e7f8;
+
+    }
