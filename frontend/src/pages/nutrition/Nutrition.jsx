@@ -32,6 +32,7 @@ export default function Nutrition() {
 
   return (
     <div className="user">
+      <br/>
        <TextField style={{margin: "10px"}}
                 fullWidth
                 id="standard-bare"

@@ -37,7 +37,7 @@ export default function Sidebar(){
         <div className="sidebar">
           <div className="sidebarWrapper">
               <div className="sidebarMenu">
-                  <h3 className="sidebarTitle">Dashbord</h3>
+                  <h3 className="sidebarTitle">Quick Menu</h3>
                   <ul className="sidebarList"> 
                   <Link to="/" className="link">
                   <li className="sidebarListItem active">
@@ -52,34 +52,21 @@ export default function Sidebar(){
                         Diseases
                   </li>
                   </Link>
-                  <Link to={`/production/${userId}`} className='link'>
+                  {/* <Link to={`/production/${userId}`} className='link'>
                   <li className="sidebarListItem">
                         <DynamicFeed className="sidebarIcon"/>
                         Production
                   </li>
-                  </Link>
-                </ul>
-              </div>
-             
-              <div className="sidebarMenu">
-                  <h3 className="sidebarTitle">Quick Menu</h3>
-                  <ul className="sidebarList"> 
-                  <li className="sidebarListItem ">
-                        <WorkOutline className="sidebarIcon"/>
-                       Health
-                  </li>
-
+                  </Link> */}
 
                   <Link to="/forum" className="link">
                   <li className="sidebarListItem">
                         <Feedback className="sidebarIcon"/>
-                         Forum
+                        pig Forum
                   </li>
                   </Link>
-
                 </ul>
               </div>
-
           </div>
      </div>
     );

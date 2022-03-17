@@ -8,11 +8,13 @@
   .widgetLgTitle {
     font-size: 22px;
     font-weight: 600;
+    justify-content: space-between;
+    display: flex;
   }
   
   .widgetLgTable{
     width: 100%;
-    border-spacing: 20px;
+    /* border-spacing: 10px; */
   }
   
   .widgetLgTh{
@@ -24,9 +26,7 @@
     /* font-weight: 300; */
   }
   
-  .widgetLgDate,.widgetLgAmount{
-    font-weight: 300;
-  }
+  
   
  
   

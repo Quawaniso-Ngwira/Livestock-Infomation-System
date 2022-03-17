@@ -5,11 +5,13 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../helpers/AuthContext";
 import './createKhola.css';
+import Notifications from '../Notifications';
 
 function CreateKhola() {
   let { id } = useParams();
   const[userId, setUserId] = useState();
   const { authState } = useContext(AuthContext);
+  const [notify, setNotify] = useState({isOpen: false, message:"", type:""})
 
   let navigate = useNavigate();
   const initialValues = {
@@ -40,6 +42,12 @@ function CreateKhola() {
   });
 
   const onSubmit = (data) => {
+    setNotify({
+      isOpen:true,
+      message: 'Submitted Suceessfully',
+      type: 'success'
+    
+    })
    var id = localStorage.getItem("id");
    console.log(data);
     axios
@@ -103,7 +111,14 @@ function CreateKhola() {
             name="Number"
           />
 
-          <button type="submit"> Create Khola</button>
+          <button type="submit" style={{cursor: "pointer"}}> Create Khola</button>
+          {/* ********************************** * */}
+          <Notifications
+          notify={notify}
+          setNotify={setNotify}
+          />
+ {/* *************************************       */}
+    
         </Form>
       </Formik>
     </div>

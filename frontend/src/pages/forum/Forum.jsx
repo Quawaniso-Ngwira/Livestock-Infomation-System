@@ -11,9 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-//socket io
-
-
+import { io } from "socket.io-client";
+ 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -30,8 +29,23 @@ export default function Forum() {
   const [listOfPosts, setListOfPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
+  const [socket, setSocket] = useState(null); 
+  const  [user, setUser] = useState("")
   const listOfPostsNumber = listOfPosts.length
   let navigate = useNavigate();
+
+
+  useEffect(() => {
+   const socket = io("http://localhost:5000");
+   console.log(socket.on("firstEvent",(msg)=>{
+     console.log(msg);
+   }));
+  }, []);
+
+  // useEffect(() => {
+  //  socket.emit("newUser", user);
+  //  }, [socket, user]);
+
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -52,7 +66,6 @@ export default function Forum() {
     }
   }, []);
 
-
   const likeAPost = (postId) => {
     axios
       .post(
@@ -65,7 +78,7 @@ export default function Forum() {
           listOfPosts.map((post) => {
             if (post.id === postId) {
               if (response.data.liked) {
-                return { ...post,Likes: [...post.Likes, 0],};
+                return { ...post, Likes: [...post.Likes, 0] };
               } else {
                 const likesArray = post.Likes;
                 likesArray.pop();
@@ -89,10 +102,9 @@ export default function Forum() {
       });
   };
 
-
   return (
     <div className="forum">
-
+ <br/>
 
 <div className={classes.root}>
       <Grid container spacing={3}>
@@ -130,7 +142,7 @@ export default function Forum() {
        {/* array printing the available post made using map method */}
     {listOfPosts.map((value, key) => {
         return (
-          <div key={key} className="post">
+          <div key={key} socket={socket} user={user} className="post">
             <div className="title"> {value.title} </div>
             <div
               className="body"

@@ -13,9 +13,6 @@ import Button from '@material-ui/core/Button';
 import {  Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import Chart from './Charts/BarChart';
-//notification
-import Notification from "./notifications/notifications";
-
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -70,9 +67,10 @@ function Home() {
           <Item className={classes.root}>
              
              <h2 style={{color:"blue"}}> Livestock Information System</h2>
+            
              <p>iWeta gives you all the infomation you need
                 for sucessful cattle and pig production</p>
-                <br/><br/><br/>
+                <br/><br/><br/> <br/><br/><br/>
               {/* Button that allows the user of the system to fill the form to create a khola */}
               <Link to="/createKhola">
                 <Button variant="contained" color="secondary" >
@@ -84,9 +82,11 @@ function Home() {
         </Grid>
         <Grid item xs={6}>
           <Item>
-            <Chart style={{width: "50", height: "50"}}/>
+          <h2> Number of Your Kholas</h2>
+          <br/>
+         <h1> {listOfKholaNumber} </h1>
+         <p> Compared to last month</p>
           {/* <img src={cattlepig} alt="cattlepig pic" style={{ height: "100%", width: "100%"}} className=""/> */}
-          <Notification/>
             </Item>
         </Grid>
         <Grid item xs={6}>
@@ -94,9 +94,7 @@ function Home() {
         </Grid>
         <Grid item xs={6}>
           <Item>
-          <h2> Number of Your Kholas</h2>
-         <h1> {listOfKholaNumber} </h1>
-         <p> Compared to last month</p>
+         kkk
           </Item>
         </Grid>
       </Grid>

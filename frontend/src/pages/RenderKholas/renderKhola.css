@@ -26,3 +26,8 @@
     cursor: pointer;
     
   }
+
+  .alignnumbertokhola{
+    display: flex;
+    justify-content: flex-end;
+  }

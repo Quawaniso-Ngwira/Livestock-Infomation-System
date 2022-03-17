@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./vaccinationTable.css";
+import { PrintOutlined } from "@material-ui/icons";
 
 export default function VaccinationTable() {
 
@@ -29,7 +30,7 @@ export default function VaccinationTable() {
   
   return (
     <div className="widgetLg">
-      <h3 className="widgetLgTitle">Vaccination Report</h3>
+      <h3 className="widgetLgTitle"><p>Vaccination Report</p> <PrintOutlined/> </h3>
       <table className="widgetLgTable">
         <tr className="widgetLgTr">
           <th className="widgetLgTh">Type</th>

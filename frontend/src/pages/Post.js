@@ -13,7 +13,6 @@ import Button from '@material-ui/core/Button';
 
 
 
-
 const useStyles = makeStyles((theme) => ({
 
   root: {
@@ -40,9 +39,7 @@ function Post() {
   const [newComment, setNewComment] = useState("");
   const { authState } = useContext(AuthContext);
 
-
   let navigate = useNavigate();
-
 
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {

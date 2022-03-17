@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../helpers/AuthContext";
 import './createKhola.css';
+import Notifications from '../Notifications';
 
 function UpDateKhola() {
   let { id } = useParams();
@@ -12,6 +13,7 @@ function UpDateKhola() {
   const [ Breed, setBreed] = useState('');
   const [ Number, setNumber] = useState(0);
   const { authState } = useContext(AuthContext);
+  const [notify, setNotify] = useState({isOpen: false, message:"", type:""})
 
 
   let navigate = useNavigate();
@@ -43,6 +45,12 @@ function UpDateKhola() {
     
 //updating the khola info
 const updateKhola = () => {
+  setNotify({
+    isOpen:true,
+    message: 'Submitted Suceessfully',
+    type: 'success'
+  
+  })
   // data to be updated crucial
 const data = {
   KholaName: KholaName,
@@ -99,6 +107,12 @@ const data = {
             onChange={(e)=>{setNumber(e.target.value)}}
       />
       <button onClick={updateKhola} style={{cursor: "pointer"}}> Update Khola</button>
+          {/* ********************************** * */}
+          <Notifications
+          notify={notify}
+          setNotify={setNotify}
+          />
+ {/* *************************************       */}
      </div>
     </div>
     

@@ -11,19 +11,19 @@ function Registration() {
   const initialValues = {
     username: "",
     phone:"",
-    email: "",
-    role:"",
+    email:"",
+    role: "",
     address:"",
     password: "",
     comfirmPassword: "",
   };
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().min(3).max(20).required(),
-    phone: Yup.string().min(10).max(20).required(),
+    username: Yup.string().min(3).max(15).required(),
+    phone: Yup.string().min(10).max(15).required(),
     email: Yup.string().email("Invalid email address format").min(11).max(150).required(),
     role: Yup.string().min(3).max(15).required(),
-    address: Yup.string().min(3).max(30).required(),
+    address: Yup.string().min(3).max(15).required(),
     password: Yup.string().min(4).max(20).required(),
     comfirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
@@ -59,15 +59,13 @@ function Registration() {
             name="username"
             
           />
-          <label>Phone Number: </label>
+  <label>Phone number: </label>
           <ErrorMessage name="phone" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
             name="phone"
-            
           />
-
           
          <label>Email: </label>
           <ErrorMessage name="email" component="span" />
@@ -85,15 +83,13 @@ function Registration() {
             id="inputCreatePost"
             name="role"
           />
-
-          <label>Address: </label>
+  <label>Address: </label>
           <ErrorMessage name="address" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
             name="address"
           />
-          
           <label>Password: </label>
           <ErrorMessage name="password" component="span" />
           <Field

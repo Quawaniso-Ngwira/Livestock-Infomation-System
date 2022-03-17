@@ -9,22 +9,10 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import "./specificKhola.css";
 import VaccinationTable from '../vaccinationTable/VaccinationTable';
+import FeedsTable from '../feedsTable/FeedsTable';
 import KholaSideDetails from '../KholaSideDetails/KholaSideDetails';
 import {  Delete, Edit } from "@material-ui/icons";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  color: theme.palette.text.secondary,
- 
-}));
-
-const Item2 = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 export default function SpecificKhola(props) {
 
@@ -72,13 +60,13 @@ export default function SpecificKhola(props) {
 
   //for generating reports into our application
 
-//  useEffect(() => {
-//   var KholaId = localStorage.getItem('KholaId');
-//     axios.get(`http://localhost:3001/khola/report/vaccination/${KholaId}`).then((response) => {
-//       setFinalReport(response.data);
-//       console.log(response.data)
-//     });
-//   }, []);
+ useEffect(() => {
+  var KholaId = localStorage.getItem('KholaId');
+    axios.get(`http://localhost:3001/khola/report/vaccination/${KholaId}`).then((response) => {
+      setFinalReport(response.data);
+      console.log(response.data)
+    });
+  }, []);
 // //deleting the khola
 //   const deleteKhola = () => {
 //     var KholaId = localStorage.getItem('KholaId');
@@ -99,24 +87,11 @@ export default function SpecificKhola(props) {
 
  return(
    <div style={{ width: "100%", height: "100%"}}>
-      <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={3}>
-        
-        <Grid item xs={3}>
-          <Item>
+     <br/>
           <KholaSideDetails/>
-              </Item>
-        </Grid>
-        <Grid item xs={9}>
-          <Item>
+      <br/>        
           <VaccinationTable/>
-          </Item>
-
-      
-      
-        </Grid>
-      </Grid>
-    </Box>
+        
     {/* <ListBreedsTable/> */}
    </div>
  );
