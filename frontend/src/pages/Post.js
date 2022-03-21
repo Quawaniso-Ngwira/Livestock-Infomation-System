@@ -54,7 +54,7 @@ function Post() {
   const addComment = () => {
     axios
       .post(
-        "http://localhost:3001/comments",
+        "https://serveriweta.herokuapp.com/comments",
         {
           commentBody: newComment,
           PostId: id,
