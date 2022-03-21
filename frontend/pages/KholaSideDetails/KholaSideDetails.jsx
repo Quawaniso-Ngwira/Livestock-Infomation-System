@@ -14,7 +14,7 @@ export default function KholaSideDetails() {
 
   useEffect(() => {
       var KholaId = localStorage.getItem('KholaId');
-        axios.get(`http://localhost:3001/khola/ById/${KholaId}`).then((response) => {
+        axios.get(`https://serveriweta.herokuapp.com/khola/ById/${KholaId}`||`http://localhost:3001/khola/ById/${KholaId}`).then((response) => {
           setKholaObject(response.data);
           console.log(response.data)
         });
@@ -25,7 +25,7 @@ export default function KholaSideDetails() {
 const deleteKhola = () => {
 var KholaId = localStorage.getItem('KholaId');
 axios
-  .delete(`http://localhost:3001/khola/delete/${KholaId}`, {
+  .delete(`https://serveriweta.herokuapp.com/khola/delete/${KholaId}`||`http://localhost:3001/khola/delete/${KholaId}`, {
     headers: { accessToken: localStorage.getItem("accessToken") },
   })
   .then(() => {

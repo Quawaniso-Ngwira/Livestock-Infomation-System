@@ -10,8 +10,12 @@ import Notifications from '../Notifications';
 function CreateKhola() {
   let { id } = useParams();
   const[userId, setUserId] = useState();
+  const [isDisabled,setIsDisabled]=useState(false);
   const { authState } = useContext(AuthContext);
   const [notify, setNotify] = useState({isOpen: false, message:"", type:""})
+
+const [value, setValue] = React.useState("");
+
 
   let navigate = useNavigate();
   const initialValues = {
@@ -20,6 +24,7 @@ function CreateKhola() {
     AnimalType: "",
     Breed:"",
     Number: "",
+    DateOfBirth:""
   };
 
   useEffect(()=>{
@@ -38,7 +43,8 @@ function CreateKhola() {
     Location: Yup.string().required(),
     AnimalType: Yup.string().required(),
     Breed: Yup.string().required(),
-    Number: Yup.string().required()
+    Number: Yup.string().required(),
+    DateOfBirth: Yup.date().required()
   });
 
   const onSubmit = (data) => {
@@ -58,6 +64,11 @@ function CreateKhola() {
         navigate("/kholaPage");
       });
   };
+
+  function handleChange(e) {
+    setValue(e.target.value);
+   setIsDisabled(true);
+}
 
   return (
     <div className="createPostPage">
@@ -87,21 +98,28 @@ function CreateKhola() {
           <ErrorMessage name="AnimalType" component="span" />
           <Field
             component="select"
-            autocomplete="off"
+            autocomplete="off" 
             id="inputCreatePost"
             name="AnimalType"
+            
           >
-            <option value="choose">Select below</option>
+            <option  value="choose">Select type</option>
             <option value="cattle">Cattle</option>
             <option value="pig">Pig</option>
           </Field>
           <label>Breed: </label>
-          <ErrorMessage name="Location" component="span" />
+          <ErrorMessage name="Breed" component="span" />
           <Field
+            component="select"
             autocomplete="off"
             id="inputCreatePost"
             name="Breed"
-          />
+          >
+            <option value="choose">Select breed</option>
+            <option value="beef">Beef</option>
+            <option value="dairy">Dairy</option>
+            <option value="pig">Pig</option>
+            </Field>
         <label>Number of Animal: </label>
           <ErrorMessage name="Number" component="span" />
           <Field
@@ -110,7 +128,14 @@ function CreateKhola() {
             type="number"
             name="Number"
           />
-
+        <label>Date of Birth: </label>
+          <ErrorMessage name="DateOfBirth" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            type="date"
+            name="DateOfBirth"
+          />
           <button type="submit" style={{cursor: "pointer"}}> Create Khola</button>
           {/* ********************************** * */}
           <Notifications
