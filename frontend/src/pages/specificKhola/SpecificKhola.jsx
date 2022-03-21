@@ -62,7 +62,7 @@ export default function SpecificKhola(props) {
 
  useEffect(() => {
   var KholaId = localStorage.getItem('KholaId');
-    axios.get(`http://localhost:3001/khola/report/vaccination/${KholaId}`).then((response) => {
+    axios.get(`https://serveriweta.herokuapp.com/khola/report/vaccination/${KholaId}`).then((response) => {
       setFinalReport(response.data);
       console.log(response.data)
     });

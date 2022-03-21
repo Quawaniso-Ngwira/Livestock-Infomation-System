@@ -42,7 +42,7 @@ function Profile(){
 // verify that the user has a valid token and is aunthticated
 useEffect(() => {
   axios
-    .get("http://localhost:3001/auth/login", {
+    .get("https://serveriweta.herokuapp.com/auth/login", {
       headers: {
         accessToken: localStorage.getItem("accessToken"),
       },
