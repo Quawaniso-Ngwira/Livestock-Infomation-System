@@ -36,7 +36,7 @@ export default function Forum() {
 
 
   useEffect(() => {
-   const socket = io("https://serveriweta.heroku");
+   const socket = io("https://serveriweta.herokuapp.com/");
    console.log(socket.on("firstEvent",(msg)=>{
      console.log(msg);
    }));
