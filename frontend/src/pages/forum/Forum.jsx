@@ -35,12 +35,12 @@ export default function Forum() {
   let navigate = useNavigate();
 
 
-  useEffect(() => {
-   const socket = io("https://serveriweta.herokuapp.com/notifications");
-   console.log(socket.on("firstEvent",(msg)=>{
-     console.log(msg);
-   }));
-  }, []);
+  // useEffect(() => {
+  //   socket = io("http://localhost:5000");
+  //  console.log(socket.on("firstEvent",(msg)=>{
+  //    console.log(msg);
+  //  }));
+  // }, []);
 
   // useEffect(() => {
   //  socket.emit("newUser", user);
