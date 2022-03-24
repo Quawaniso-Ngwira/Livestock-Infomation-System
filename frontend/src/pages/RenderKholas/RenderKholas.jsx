@@ -45,7 +45,7 @@ export default function RenderKholas(props) {
   ///khola/ByUserId/
   useEffect(() => { 
   var id = localStorage.getItem('id');
-    axios.get(`https://serveriweta.herokuapp.com/khola/ByUserId/${id}`).then((response) => {
+    axios.get(`http://localhost:3001/khola/ByUserId/${id}`).then((response) => {
         console.log(response.data);
        setMakolaById(response.data);
         
@@ -76,7 +76,7 @@ export default function RenderKholas(props) {
               </div>
       
   
-      <h3 style={{paddingLeft: "1135px"}}> Available Kholas:{listOfKholaNumber}  </h3>
+      <h3 style={{paddingLeft: "1100px"}}> Available Kholas:{listOfKholaNumber}  </h3>
       </div>
       <br/>
 

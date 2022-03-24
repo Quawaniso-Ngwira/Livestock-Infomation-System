@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import CommentIcon from "@material-ui/icons/Comment";
 import { AuthContext } from "../../helpers/AuthContext";
 import {  Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Forum() {
   const classes = useStyles();
+  var numberOfComments = localStorage.getItem("numberOfComments");
   const [listOfPosts, setListOfPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
@@ -35,12 +37,12 @@ export default function Forum() {
   let navigate = useNavigate();
 
 
-  // useEffect(() => {
-  //   socket = io("http://localhost:5000");
-  //  console.log(socket.on("firstEvent",(msg)=>{
-  //    console.log(msg);
-  //  }));
-  // }, []);
+  useEffect(() => {
+   const socket = io("http://localhost:5000");
+   console.log(socket.on("firstEvent",(msg)=>{
+     console.log(msg);
+   }));
+  }, []);
 
   // useEffect(() => {
   //  socket.emit("newUser", user);
@@ -52,7 +54,7 @@ export default function Forum() {
       navigate("/login");
     } else {
       axios
-        .get("https://serveriweta.herokuapp.com/posts", {
+        .get("http://localhost:3001/posts", {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -69,7 +71,7 @@ export default function Forum() {
   const likeAPost = (postId) => {
     axios
       .post(
-        "https://serveriweta.herokuapp.com/likes",
+        "http://localhost:3001/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
@@ -159,6 +161,8 @@ export default function Forum() {
                 </Link>
                 </div>
               <div className="buttons">
+              <CommentIcon  style={{ color: 'black'}}/>
+              <label style={{color: "black"}}> {numberOfComments}</label>
                 <ThumbUpAltIcon  style={{ color: 'black'}}
                   onClick={() => {
                     likeAPost(value.id);

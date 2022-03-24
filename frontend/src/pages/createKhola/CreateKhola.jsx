@@ -10,12 +10,8 @@ import Notifications from '../Notifications';
 function CreateKhola() {
   let { id } = useParams();
   const[userId, setUserId] = useState();
-  const [isDisabled,setIsDisabled]=useState(false);
   const { authState } = useContext(AuthContext);
   const [notify, setNotify] = useState({isOpen: false, message:"", type:""})
-
-const [value, setValue] = React.useState("");
-
 
   let navigate = useNavigate();
   const initialValues = {
@@ -24,7 +20,7 @@ const [value, setValue] = React.useState("");
     AnimalType: "",
     Breed:"",
     Number: "",
-    DateOfBirth:""
+    Age: " ",
   };
 
   useEffect(()=>{
@@ -44,7 +40,7 @@ const [value, setValue] = React.useState("");
     AnimalType: Yup.string().required(),
     Breed: Yup.string().required(),
     Number: Yup.string().required(),
-    DateOfBirth: Yup.date().required()
+    Age: Yup.string().required()
   });
 
   const onSubmit = (data) => {
@@ -57,18 +53,13 @@ const [value, setValue] = React.useState("");
    var id = localStorage.getItem("id");
    console.log(data);
     axios
-      .post(`https://serveriweta.herokuapp.com/khola/create/${id}`, data, {
+      .post(`http://localhost:3001/khola/create/${id}`, data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
         navigate("/kholaPage");
       });
   };
-
-  function handleChange(e) {
-    setValue(e.target.value);
-   setIsDisabled(true);
-}
 
   return (
     <div className="createPostPage">
@@ -98,28 +89,21 @@ const [value, setValue] = React.useState("");
           <ErrorMessage name="AnimalType" component="span" />
           <Field
             component="select"
-            autocomplete="off" 
+            autocomplete="off"
             id="inputCreatePost"
-            name="AnimalType"
-            
-          >
-            <option  value="choose">Select type</option>
+            name="AnimalType">
+            <option value="choose">Select below</option>
             <option value="cattle">Cattle</option>
             <option value="pig">Pig</option>
           </Field>
+
           <label>Breed: </label>
-          <ErrorMessage name="Breed" component="span" />
+          <ErrorMessage name="Location" component="span" />
           <Field
-            component="select"
             autocomplete="off"
             id="inputCreatePost"
             name="Breed"
-          >
-            <option value="choose">Select breed</option>
-            <option value="beef">Beef</option>
-            <option value="dairy">Dairy</option>
-            <option value="pig">Pig</option>
-            </Field>
+          />
         <label>Number of Animal: </label>
           <ErrorMessage name="Number" component="span" />
           <Field
@@ -128,14 +112,16 @@ const [value, setValue] = React.useState("");
             type="number"
             name="Number"
           />
-        <label>Date of Birth: </label>
-          <ErrorMessage name="DateOfBirth" component="span" />
+
+<label>Age of Animal(s): </label>
+          <ErrorMessage name="Age" component="span" />
           <Field
             autocomplete="off"
             id="inputCreatePost"
-            type="date"
-            name="DateOfBirth"
+            type="number"
+            name="Age"
           />
+
           <button type="submit" style={{cursor: "pointer"}}> Create Khola</button>
           {/* ********************************** * */}
           <Notifications

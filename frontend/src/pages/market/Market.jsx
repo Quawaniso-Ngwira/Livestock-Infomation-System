@@ -8,6 +8,8 @@ import Box from '@mui/material/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import {  Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
+import {  TextField, IconButton } from '@material-ui/core';
+import { SearchOutlined } from '@material-ui/icons';
 import './market.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,8 +40,10 @@ function Market() {
 
   // initialising classes to the methodof UseStyles() method
   const classes = useStyles();
-  
+  const [products, setProducts] = useState([]);
+  const [searchTitle, setSearchTitle] = useState("");
   let navigate = useNavigate();
+  
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -49,29 +53,73 @@ function Market() {
     }
   }, []);
 
-  return (
-    <div className="home">
-     
-      <div className="homeWidgets">
-          <div className="featured">
-          <Box sx={{ width: '100%' }}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={12}>
-         
-          <Item className={classes.root}> 
-          
-             <h2 style={{color:"blue", marginTop:"10%"}}> Welcome to the market segment</h2>    
-          </Item>
-          
-        </Grid>
-
-      </Grid>
-    </Box>
-
-          </div>
-      </div>
+ // getting list of user products based on user id /product/All
+  useEffect(() => { 
  
-    </div>
+    axios.get("https://serveriweta.herokuapp.com/product/All"||"http://localhost:3001/product/All").then((response) => {
+        console.log(response.data);
+       setProducts(response.data);
+        
+    });
+}, []);
+
+
+  return (
+    <div className="home"> 
+         
+           <br/>
+           
+       
+          <TextField style={{margin: "10px", backgroundColor: "#fafafa"}}
+          onChange={(e) => setSearchTitle(e.target.value)}
+               
+                id="standard-bare"
+                variant="outlined"
+                placeholder="(Search Product)"
+                InputProps={{
+                  endAdornment: (
+                    <IconButton>
+                      <SearchOutlined />
+                    </IconButton>
+                  ),
+                }}
+              />
+              <hr/>
+    
+<div className="cards-container">
+
+{products.filter((value) => {
+           if (searchTitle === "") {
+             return value;
+           } else if (
+             value.Name?.toLowerCase().includes(searchTitle.toLowerCase())
+           ) {
+             return value;
+           }
+         }).map((value, key) => {
+ return (
+
+ <div key={key} className="card">
+           <div className="card__title">{value.Name} </div>
+           <div className="card__body">
+           <p className="breedname">{value.Description} </p>
+           <p className="breedname">{value.Category} </p>
+           <p className="breedname">MK:{value.Price} </p>
+
+           </div>
+
+       </div>
+
+       );
+     })}
+
+</div>
+
+
+     </div>
+   
+ 
+    
   );
 }
 

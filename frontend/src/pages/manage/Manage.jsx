@@ -29,7 +29,7 @@ export default function Manage() {
   useEffect(() => {
 
     axios
-      .get("https://serveriweta.herokuapp.com/auth/auth", {
+      .get("http://localhost:3001/auth/auth", {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

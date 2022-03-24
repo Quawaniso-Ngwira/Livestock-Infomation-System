@@ -20,6 +20,7 @@ function Profile(){
   var id = localStorage.getItem('id');
   var userlivestockNumber = localStorage.getItem('userlivestockNumber');
   var listOfKholaNumber = localStorage.getItem('listOfKholaNumber');
+  var role = localStorage.getItem('role');
     const navigate = useNavigate();
     const [listOfPosts, setListOfPosts] = useState([]);
 
@@ -42,7 +43,7 @@ function Profile(){
 // verify that the user has a valid token and is aunthticated
 useEffect(() => {
   axios
-    .get("https://serveriweta.herokuapp.com/auth/login", {
+    .get("http://localhost:3001/auth/login", {
       headers: {
         accessToken: localStorage.getItem("accessToken"),
       },
@@ -81,7 +82,7 @@ useEffect(() => {
             
             <img src={commentUser} alt="User who commented" style={{ height: "4%", width: "10%"}}/>
             <h3 style={{color: "blue", padding: "15px"}}> {authState.username}'s Profile </h3>
-           
+            <h3 style={{color: "blue", padding: "15px"}}> {role} </h3>
              </div>
           </Item>
           

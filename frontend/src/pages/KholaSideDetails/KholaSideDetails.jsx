@@ -14,7 +14,7 @@ export default function KholaSideDetails() {
 
   useEffect(() => {
       var KholaId = localStorage.getItem('KholaId');
-        axios.get(`https://serveriweta.herokuapp.com/khola/ById/${KholaId}`).then((response) => {
+        axios.get(`http://localhost:3001/khola/ById/${KholaId}`).then((response) => {
           setKholaObject(response.data);
           console.log(response.data)
         });
@@ -25,7 +25,7 @@ export default function KholaSideDetails() {
 const deleteKhola = () => {
 var KholaId = localStorage.getItem('KholaId');
 axios
-  .delete(`https://serveriweta.herokuapp.com/khola/delete/${KholaId}`, {
+  .delete(`http://localhost:3001/khola/delete/${KholaId}`, {
     headers: { accessToken: localStorage.getItem("accessToken") },
   })
   .then(() => {
@@ -55,7 +55,7 @@ const updateKhola = () => {
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">{postKhola.Number}</span>
         </div>
-        <span className="featuredSub">Compared to last month</span>
+        <span className="featuredSub">{postKhola.Breed}</span>
       </div>
       <div className="featuredItem">
         <span className="featuredTitle">Resources</span>

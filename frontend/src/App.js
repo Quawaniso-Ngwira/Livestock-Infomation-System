@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes, Link, Navigate, } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link, Navigate, NavLink } from "react-router-dom";
 import {  PermIdentity, PostAdd, NotificationsNone, PowerSettingsNewOutlined } from "@material-ui/icons";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
@@ -37,6 +37,7 @@ import Market from "./pages/market/Market";
 import Supplier from "./pages/supplierLandingPage/Supplier";
 import SupplierMarket from "./pages/supplierMarket/SupplierMarket";
 import SupplierProducts from "./pages/supplierProducts/SupplierProducts";
+import SupplierSProduct from "./pages/supplierSproduct/SupplierSProduct";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -84,63 +86,65 @@ const style = {
 
 
 const SidebarLayout = () => (
-  <>
-    <Sidebar />
+  <div style={{display: "flex"}}>
+    <Sidebar/>
+    <div style={{flex: 4}}>
     <Outlet />
-  </>
+    </div>
+  </div>
 );
 
-// const AdminLayout = () => (
+const AdminLayout = () => (
  
-//   <div>
-//   <div style={{backgroundColor: "#1C321C", width: "190vh"}}>
-//        <div className="inlineNav">
-//          <Link to="/supplier">
-//          <div><h4>SUPPLIER</h4></div>
-//          </Link>
-//          <Link to="/supplierProducts">
-//          <div><h4>MY PRODUCTS</h4></div>
-//          </Link>
-//          <Link to="/supplierMarket">
-//          <div><h4>MARKET</h4></div>
-//          </Link>
+  <div>
+  <div style={{backgroundColor: "blue", width: "190vh", position:"sticky", top: 0}}>
+       <div className="inlineNav">
+         <NavLink to="/supplier">
+         <div><h4>SUPPLIER</h4></div>
+         </NavLink>
+         <NavLink to="/supplierProducts">
+         <div><h4>ADD PRODUCT</h4></div>
+         </NavLink>
+         <NavLink to="/supplierMarket">
+         <div><h4>MARKET</h4></div>
+         </NavLink>
          
-//        </div>
-//        </div>
+       </div>
+       </div>
   
               
-//     <Outlet />
-//     </div>
-// );
+    <Outlet />
+    </div>
+);
 
-// const TopbarLayout = () => (
+const TopbarLayout = () => (
  
-//   <div>
-//   <div style={{backgroundColor: "#1C321C", width: "192vh"}}>
-//        <div className="inlineNav">
-//          <Link to="/">
-//          <div><h4>HOME</h4></div>
-//          </Link>
-//          <Link to="/kholaPage">
-//          <div><h4>MY KHOLA</h4></div>
-//          </Link>
-//          <Link to="/choose">
-//          <div><h4>MANAGE</h4></div>
-//          </Link>
-//          <Link to="/market">
-//          <div><h4>MARKET</h4></div>
-//          </Link>
-//          <Link to="/aboutUs">
-//          <div><h4>ABOUT US</h4></div>
-//          </Link>
-//        </div>
-//        </div>
+  <div>
+  <div style={{backgroundColor: "#1C321C", width: "192vh", position:"sticky", top: 0}}>
+       <div className="inlineNav">
+         <NavLink to="/">
+         <div><h4>HOME</h4></div>
+         </NavLink>
+         <NavLink to="/kholaPage">
+         <div><h4>MY KHOLA</h4></div>
+         </NavLink>
+         <NavLink to="/choose">
+         <div><h4>MANAGE</h4></div>
+         </NavLink>
+         <NavLink to="/market">
+         <div><h4>MARKET</h4></div>
+         </NavLink>
+         <NavLink to="/aboutUs">
+         <div><h4>ABOUT US</h4></div>
+         </NavLink>
+       </div>
+       </div>
   
               
-//     <Outlet />
-//     </div>
+    <Outlet />
+    </div>
   
-// );
+);
 
 function App() {
   //assigning classes to the method useStyles()
@@ -150,6 +154,7 @@ function App() {
    const [open, setOpen] = React.useState(false);
    const handleOpen = () => setOpen(true);
    const handleClose = () => setOpen(false);
+   var role = localStorage.getItem("role")
 
   const [authState, setAuthState] = useState({
     username: "",
@@ -196,6 +201,7 @@ useEffect(()=> {
   const logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("id");
+    localStorage.removeItem("role");
     setAuthState({ username: "", id: 0, status: false });
     handleClose() 
     localStorage.removeItem("listOfKholaNumber");
@@ -231,7 +237,7 @@ useEffect(()=> {
             </div>
            
             <div className="loggedInContainer">
-            <h3 style={{color: "black", padding: "15px"}}> {authState.username} {authState.role} </h3>
+            <h3 style={{color: "black", padding: "15px"}}> {authState.username} ({role}) </h3>
             <></>
             {authState.status && <div className="topbarIconContainer">
                         <NotificationsNone/>
@@ -262,7 +268,7 @@ useEffect(()=> {
       {/* <h3>{authState.username} </h3> */}
       </div> 
            </div>
-          {!authState.status ? (
+          {/* {!authState.status ? (
                 <>   
                 </>
               ) : (
@@ -289,13 +295,13 @@ useEffect(()=> {
        </div>
   
                 </>
-              )}
+              )} */}
       </div>
       
         
         <div className="container">
        <Routes>
-     
+       <Route element={<TopbarLayout/>}>
           <Route element={<SidebarLayout/>}>
               <Route path="/nutrition" exact element={<Nutrition/>} />
               <Route path="/production/:id" exact element={<Production/>}  />
@@ -317,11 +323,15 @@ useEffect(()=> {
           <Route path="/aboutUs" exact element={<AboutUs/>} />
           <Route path="/upDateKhola" exact element={<UpDateKhola/>} />
           <Route path="/specificKhola" exact element={<SpecificKhola/>} />
+        </Route>
           <Route path="/registration" exact element={<Registration/>} />
           <Route path="/login" exact element={<Login/>} />
-          <Route path="/supplier" exact element={<Supplier/>} />
-          <Route path="/supplierProducts" exact element={<SupplierProducts/>} />
-          <Route path="/supplierMarket" exact element={<SupplierMarket/>} />
+        <Route element={<AdminLayout/>}>  
+        <Route path="/supplier" exact element={<Supplier/>} />
+        <Route path="/supplierProducts" exact element={<SupplierProducts/>} />
+        <Route path="/supplierSProduct" exact element={<SupplierSProduct/>} />
+        <Route path="/supplierMarket" exact element={<SupplierMarket/>} />
+        </Route>
        </Routes>
        </div>
         </Router>

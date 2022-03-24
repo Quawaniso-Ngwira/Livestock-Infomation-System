@@ -12,7 +12,7 @@ console.log(`khola id is ${KholaId}`);
 const [chart,setChart]=useState([])
 //this is by each khola
 //var baseUrl=`http://localhost:3001/api/khola/livestock/Report/${KholaId}`
-var baseUrl="https://serveriweta.herokuapp.com/api/khola/livestock/Report"
+var baseUrl="http://localhost:3001/api/khola/livestock/Report"
 //var proxyUrl='https://cors-anywhere.herokuapp.com/'
 
 useEffect(()=>{

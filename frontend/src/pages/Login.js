@@ -34,7 +34,7 @@ function Login() {
 
     const data = { username: username, password: password };
     console.log(data);
-    axios.post("https://serveriweta.herokuapp.com/auth/login", data).then((response) => {
+    axios.post("https://serveriweta.herokuapp.com/auth/login"||"http://localhost:3001/auth/login", data).then((response) => {
       if (response.data.error) {
         alert(response.data.error);
       } else {
@@ -47,16 +47,18 @@ function Login() {
           status: true,
         });
         
-        navigate("/")
-        // const role=response.data.role;
-        // // default login for user
-        // if(role==="farmer"){
-        //   navigate("/");
-        // }
-        //   // default login for supplier
-        // if(role==="supplier"){
-        //   navigate("/supplier");
-        // }
+        // navigate("/")
+        const role=response.data.role;
+        // default login for user
+        if(role==="farmer"){
+          localStorage.setItem("role", role);
+          navigate("/");
+        }
+          // default login for supplier
+        if(role==="supplier"){
+          localStorage.setItem("role", role);
+          navigate("/supplier");
+        }
         //   // default login for admin
         // if(role==="admin"){
         //   navigate("/admin");
