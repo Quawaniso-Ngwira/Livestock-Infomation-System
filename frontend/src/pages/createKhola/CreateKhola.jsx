@@ -11,7 +11,11 @@ function CreateKhola() {
   let { id } = useParams();
   const[userId, setUserId] = useState();
   const { authState } = useContext(AuthContext);
+  const [isDisabled,setIsDisabled]=useState(false);
   const [notify, setNotify] = useState({isOpen: false, message:"", type:""})
+
+  
+const [value, setValue] = React.useState("");
 
   let navigate = useNavigate();
   const initialValues = {
@@ -21,6 +25,7 @@ function CreateKhola() {
     Breed:"",
     Number: "",
     Age: " ",
+    DateOfBirth:""
   };
 
   useEffect(()=>{
@@ -40,7 +45,7 @@ function CreateKhola() {
     AnimalType: Yup.string().required(),
     Breed: Yup.string().required(),
     Number: Yup.string().required(),
-    Age: Yup.string().required()
+    DateOfBirth: Yup.date().required()
   });
 
   const onSubmit = (data) => {
@@ -53,74 +58,95 @@ function CreateKhola() {
    var id = localStorage.getItem("id");
    console.log(data);
     axios
-      .post(`http://localhost:3001/khola/create/${id}`, data, {
+      .post(`https://serveriweta.herokuapp.com/khola/create/${id}`, data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
         navigate("/kholaPage");
       });
   };
-
+//   function handleChange(e) {
+//     setValue(e.target.value);
+//    
+//    console.log("onchange called")
+// }
+const handleChange = (e) => {
+  if(e.target.value==="pig"){
+    setIsDisabled(true);
+  }else if(e.target.value==="cattle"||e.target.value==="choose"){
+    setIsDisabled(false);
+  }
+  
+ console.log(e.target.value);
+}
   return (
     <div className="createPostPage">
-      <p>Create Your Khola</p>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        <Form className="formContainer">
-          <label>Khola Name: </label>
-          <ErrorMessage name="KholaName" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="KholaName" 
-          />
-           <label>Location: </label>
-          <ErrorMessage name="Location" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="Location"
-          />
+    <p>Create Your Khola</p>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      <Form className="formContainer">
+        <label>Khola Name: </label>
+        <ErrorMessage name="KholaName" component="span" />
+        <Field
+          autocomplete="off"
+          id="inputCreatePost"
+          name="KholaName" 
+        />
+         <label>Location: </label>
+        <ErrorMessage name="Location" component="span" />
+        <Field
+          autocomplete="off"
+          id="inputCreatePost"
+          name="Location"
+        />
 
-          <label>Animal Type: </label>
-          <ErrorMessage name="AnimalType" component="span" />
-          <Field
-            component="select"
-            autocomplete="off"
-            id="inputCreatePost"
-            name="AnimalType">
-            <option value="choose">Select below</option>
-            <option value="cattle">Cattle</option>
-            <option value="pig">Pig</option>
+        <label>Animal Type: </label>
+        <ErrorMessage name="AnimalType" component="span" />
+        {/* <Field
+        
+          component="select"
+     
+        > */}
+        <select id="inputCreatePost"  name="AnimalType"  autocomplete="off"  onChange={(e) => handleChange(e)}>
+          <option  value="choose">Select type</option>
+          <option value="cattle">Cattle</option>
+          <option  value="pig">Pig</option>
+        </select>
+        
+         
+        {/* </Field> */}
+        <label>Breed: </label>
+        <ErrorMessage name="Breed" component="span" />
+        <Field
+          component="select"
+          autocomplete="off"
+          id="inputCreatePost"
+          name="Breed"
+        >
+          <option value="choose">Select breed</option>
+          <option disabled={isDisabled} value="beef">Beef</option>
+          <option disabled={isDisabled} value="dairy">Dairy</option>
+          <option value="pig">Pig</option>
           </Field>
-
-          <label>Breed: </label>
-          <ErrorMessage name="Location" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="Breed"
-          />
-        <label>Number of Animal: </label>
-          <ErrorMessage name="Number" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            type="number"
-            name="Number"
-          />
-
-<label>Age of Animal(s): </label>
-          <ErrorMessage name="Age" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            type="number"
-            name="Age"
-          />
+      <label>Number of Animal: </label>
+        <ErrorMessage name="Number" component="span" />
+        <Field
+          autocomplete="off"
+          id="inputCreatePost"
+          type="number"
+          name="Number"
+        />
+      <label>Date of Birth: </label>
+        <ErrorMessage name="DateOfBirth" component="span" />
+        <Field
+          autocomplete="off"
+          id="inputCreatePost"
+          type="date"
+          name="DateOfBirth"
+        />
 
           <button type="submit" style={{cursor: "pointer"}}> Create Khola</button>
           {/* ********************************** * */}
