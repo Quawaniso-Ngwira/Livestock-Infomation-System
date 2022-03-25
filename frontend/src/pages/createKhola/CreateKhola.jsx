@@ -79,7 +79,7 @@ const handleChange = (e) => {
     setIsDisabled(false);
     setIsCattle(true);
   }
-  
+  return;
  console.log(e.target.value);
 }
   return (
@@ -113,11 +113,20 @@ const handleChange = (e) => {
           component="select"
      
         > */}
-        <select id="inputCreatePost"  name="AnimalType"  autocomplete="off"  onChange={(e) => handleChange(e)}>
+        
+        <Field
+          component="select"
+          autocomplete="off"
+          id="inputCreatePost"
+          name="AnimalType"
+         // onChange={(e) => handleChange(e)}
+        >
           <option  value="choose">Select type</option>
-          <option value="cattle">Cattle</option>
+          <option  value="cattle">Cattle</option>
           <option  value="pig">Pig</option>
-        </select>
+   
+          </Field>
+        
         
          
         {/* </Field> */}
