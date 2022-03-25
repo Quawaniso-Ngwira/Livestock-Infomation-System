@@ -56,7 +56,7 @@ function Login() {
         }
         if(role==="officer"){
           localStorage.setItem("role", role);
-          navigate("/");
+          navigate("/forum");
         }
           // default login for supplier
         if(role==="supplier"){
