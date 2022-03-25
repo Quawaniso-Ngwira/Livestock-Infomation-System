@@ -104,7 +104,8 @@ function Market() {
            <div className="card__body">
            <p className="breedname">{value.Description} </p>
            <p className="breedname">{value.Category} </p>
-           <p className="breedname">MK:{value.Price} </p>
+           <p className="breedname" style={{fontWeight:'bold',color:'#f79502'}} >MK:{value.Price} </p>
+           <h3 className="breedname" style={{color:'#915199'}}>Supplier:  {value.Supplier} </h3>
 
            </div>
 

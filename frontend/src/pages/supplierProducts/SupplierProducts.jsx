@@ -83,8 +83,8 @@ function SupplierProducts() {
             name="Category"
             >
             <option value="choose"> </option>
-            <option value="cattle">Vaccine</option>
-            <option value="pig">Feed</option>
+            <option value="Vaccine">Vaccine</option>
+            <option value="Feed">Feed</option>
           </Field>
 
 
