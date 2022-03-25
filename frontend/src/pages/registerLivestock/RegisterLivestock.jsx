@@ -43,7 +43,7 @@ function RegisterLivestock() {
   const onSubmit = (data) => {
     console.log(data)
     axios
-      .post("http://localhost:3001/api/livestock", data, {
+      .post("https://serveriweta.herokuapp.com/api/livestock", data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {

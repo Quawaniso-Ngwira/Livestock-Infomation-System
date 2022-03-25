@@ -37,12 +37,12 @@ export default function Forum() {
   let navigate = useNavigate();
 
 
-  useEffect(() => {
-   const socket = io("http://localhost:5000");
-   console.log(socket.on("firstEvent",(msg)=>{
-     console.log(msg);
-   }));
-  }, []);
+  // useEffect(() => {
+  //  const socket = io("http://localhost:5000");
+  //  console.log(socket.on("firstEvent",(msg)=>{
+  //    console.log(msg);
+  //  }));
+  // }, []);
 
   // useEffect(() => {
   //  socket.emit("newUser", user);
@@ -54,7 +54,7 @@ export default function Forum() {
       navigate("/login");
     } else {
       axios
-        .get("http://localhost:3001/posts", {
+        .get("https://serveriweta.herokuapp.com/posts", {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -71,7 +71,7 @@ export default function Forum() {
   const likeAPost = (postId) => {
     axios
       .post(
-        "http://localhost:3001/likes",
+        "https://serveriweta.herokuapp.com/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )

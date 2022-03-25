@@ -15,7 +15,7 @@ function RenderLivestock() {
   
   useEffect(() => { 
     
-    axios.get(`http://localhost:3001/api/livestock/${id}`).then((response) => {
+    axios.get(`https://serveriweta.herokuapp.com/api/livestock/${id}`).then((response) => {
       setListOfLivestock(response.data);
       console.log(response.data)
     });
