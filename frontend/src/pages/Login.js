@@ -54,6 +54,10 @@ function Login() {
           localStorage.setItem("role", role);
           navigate("/");
         }
+        if(role==="officer"){
+          localStorage.setItem("role", role);
+          navigate("/");
+        }
           // default login for supplier
         if(role==="supplier"){
           localStorage.setItem("role", role);

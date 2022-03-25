@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 import User from '../image/login.jpg';
+import phone from "yup-phone";
 
 function Registration() {
 
@@ -19,11 +20,11 @@ function Registration() {
   };
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().min(3).max(15).required(),
-    phone: Yup.string().min(10).max(15).required(),
+    username: Yup.string().min(3).max(20).required(),
+    phone: Yup.string().phone().required(),
     email: Yup.string().email("Invalid email address format").min(11).max(150).required(),
     role: Yup.string().min(3).max(15).required(),
-    address: Yup.string().min(3).max(15).required(),
+    address: Yup.string().min(3).max(150).required(),
     password: Yup.string().min(4).max(20).required(),
     comfirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
@@ -65,6 +66,7 @@ function Registration() {
             autocomplete="off"
             id="inputCreatePost"
             name="phone"
+            placeholder="Eg +265"
           />
           
          <label>Email: </label>
@@ -74,6 +76,7 @@ function Registration() {
             type="email"
             id="inputCreatePost"
             name="email"
+            placeholder="youremail@something.com"
          
           />
            <label>Role: </label>
@@ -82,6 +85,7 @@ function Registration() {
             autocomplete="off"
             id="inputCreatePost"
             name="role"
+            placeholder="Either farmer,supplier,or officer"
           />
   <label>Address: </label>
           <ErrorMessage name="address" component="span" />
