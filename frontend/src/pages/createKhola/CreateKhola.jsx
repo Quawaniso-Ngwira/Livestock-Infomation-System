@@ -12,6 +12,7 @@ function CreateKhola() {
   const[userId, setUserId] = useState();
   const { authState } = useContext(AuthContext);
   const [isDisabled,setIsDisabled]=useState(false);
+  const [isCattle,setIsCattle]=useState();
   const [notify, setNotify] = useState({isOpen: false, message:"", type:""})
 
   
@@ -72,9 +73,11 @@ const [value, setValue] = React.useState("");
 // }
 const handleChange = (e) => {
   if(e.target.value==="pig"){
+    setIsCattle(false);
     setIsDisabled(true);
-  }else if(e.target.value==="cattle"||e.target.value==="choose"){
+  }else if(e.target.value==="cattle"){
     setIsDisabled(false);
+    setIsCattle(true);
   }
   
  console.log(e.target.value);
@@ -129,7 +132,7 @@ const handleChange = (e) => {
           <option value="choose">Select breed</option>
           <option disabled={isDisabled} value="beef">Beef</option>
           <option disabled={isDisabled} value="dairy">Dairy</option>
-          <option value="pig">Pig</option>
+          <option disabled={isCattle} value="pig">Pig</option>
           </Field>
       <label>Number of Animal: </label>
         <ErrorMessage name="Number" component="span" />
