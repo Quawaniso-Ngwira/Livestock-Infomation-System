@@ -89,7 +89,7 @@ function Post() {
 
   const deleteComment = (id) => {
     axios
-      .delete(`http://localhost:3001/comments/${id}`, {
+      .delete(`https://serveriweta.herokuapp.acom/comments/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
@@ -103,7 +103,7 @@ function Post() {
 
   const deletePost = (id) => {
     axios
-      .delete(`https://serveriweta.herokuapp.com//${id}`, {
+      .delete(`https://serveriweta.herokuapp.com/posts/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
