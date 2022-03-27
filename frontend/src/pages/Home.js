@@ -85,7 +85,7 @@ function Home() {
           <h2> Number of Your Kholas</h2>
           <br/>
          <h1> {listOfKholaNumber} </h1>
-         <p> Compared to last month</p>
+      
           {/* <img src={cattlepig} alt="cattlepig pic" style={{ height: "100%", width: "100%"}} className=""/> */}
             </Item>
         </Grid>

@@ -122,16 +122,16 @@ useEffect(()=>{
       }).catch(err=>console.log(err));
   };
   //for getting data from the database
-  useEffect(() => {
-    axios.get(`https://serveriweta.herokuapp.com/api/breeds/byId/${id}`).then((response) => {
-      setBreedObject(response.data);
-      console.log(setBreedObject);
-    });
+  // useEffect(() => {
+  //   axios.get(`https://serveriweta.herokuapp.com/api/breeds/byId/${id}`).then((response) => {
+  //     setBreedObject(response.data);
+  //     console.log(setBreedObject);
+  //   });
 
-    axios.get(`https://serveriweta.herokuapp.com/api/livestock/${id}`).then((response) => {
-      setLivestocksObject(response.data);
-    });
-  }, []);
+  //   axios.get(`https://serveriweta.herokuapp.com/api/livestock/${id}`).then((response) => {
+  //     setLivestocksObject(response.data);
+  //   });
+  // }, []);
 
   return (
     <div className="livestock">
