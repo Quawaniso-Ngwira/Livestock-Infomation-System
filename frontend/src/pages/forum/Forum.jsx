@@ -37,12 +37,12 @@ export default function Forum() {
   let navigate = useNavigate();
 
 
-  // useEffect(() => {
-  //  const socket = io("http://localhost:5000");
-  //  console.log(socket.on("firstEvent",(msg)=>{
-  //    console.log(msg);
-  //  }));
-  // }, []);
+  useEffect(() => {
+   const socket = io("http://localhost:5000");
+   console.log(socket.on("firstEvent",(msg)=>{
+     console.log(msg);
+   }));
+  }, []);
 
   // useEffect(() => {
   //  socket.emit("newUser", user);
@@ -54,7 +54,7 @@ export default function Forum() {
       navigate("/login");
     } else {
       axios
-        .get("https://serveriweta.herokuapp.com/posts", {
+        .get("http://localhost:3001/posts", {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -71,7 +71,7 @@ export default function Forum() {
   const likeAPost = (postId) => {
     axios
       .post(
-        "https://serveriweta.herokuapp.com/likes",
+        "http://localhost:3001/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
@@ -124,19 +124,10 @@ export default function Forum() {
       </Button>
       </Link> 
       </Paper>
-
-
-        </Grid>
-        
+        </Grid>   
       </Grid>
     </div>
-
-
-{/* 
-
-<Link to="/createpost">
-               <button className="createPostt"> Create a post </button>
-               </Link> */}
+<hr/>
         
       <div className="forumWidgets">
         {/* displaying the number of available posts */}

@@ -34,7 +34,7 @@ function Login() {
 
     const data = { username: username, password: password };
     console.log(data);
-    axios.post("https://serveriweta.herokuapp.com/auth/login", data).then((response) => {
+    axios.post("http://localhost:3001/auth/login", data).then((response) => {
       if (response.data.error) {
         alert(response.data.error);
       } else {
@@ -53,10 +53,6 @@ function Login() {
         if(role==="farmer"){
           localStorage.setItem("role", role);
           navigate("/");
-        }
-        if(role==="officer"){
-          localStorage.setItem("role", role);
-          navigate("/forum");
         }
           // default login for supplier
         if(role==="supplier"){

@@ -82,7 +82,7 @@ span {
   /* display: flex; */
   align-items: center;
   position: sticky;
-  top: -1;
+  top: 0;
   z-index:999;
   font-family: Arial, Helvetica, sans-serif;
 } 
@@ -365,6 +365,11 @@ flex: 4;
   position: fixed;
 }
 
+.searchKholabar{
+  display: flex;
+  justify-content: space-between;
+}
+
 /* 
 
 .navbar .links {
@@ -373,10 +378,6 @@ flex: 4;
   display: flex;
   align-items: center;
 } */
-
-.searchKholabar{
-  display: flex;
-}
 
 .homesearchContainer{
   flex: 1;

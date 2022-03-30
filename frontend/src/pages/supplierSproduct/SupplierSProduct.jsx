@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SupplierSProduct() {
   
-  const [singleProduct, setSingleProduct] = useState([]);
+  const [singleProduct, setSingleProduct] = useState();
   let navigate = useNavigate();
   
 
@@ -45,8 +45,8 @@ function SupplierSProduct() {
   
  // getting list of user products based on user id 
  useEffect(() => { 
-    var id = localStorage.getItem('ProductId');
-      axios.get(`https://serveriweta.herokuapp.com/product/byId`||`http://localhost:3001/product/byId/${id}`).then((response) => {
+    var ProductId = localStorage.getItem('ProductId');
+      axios.get(`http://localhost:3001/product/byId/${ProductId}`).then((response) => {
           console.log(response.data);
          setSingleProduct(response.data);
           
@@ -55,7 +55,7 @@ function SupplierSProduct() {
   
   return (
   <div>
-     <p> {singleProduct.Name} </p>
+     {/* <p> {singleProduct.Name} </p> */}
   </div>
     
   );

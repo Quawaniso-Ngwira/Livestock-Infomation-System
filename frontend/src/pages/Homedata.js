@@ -17,7 +17,7 @@ function Homedata() {
       navigate("/login");
     } else {
       axios
-        .get("https://serveriweta.herokuapp.com/posts", {
+        .get("http://localhost:3001/posts", {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -34,7 +34,7 @@ function Homedata() {
   const likeAPost = (postId) => {
     axios
       .post(
-        "https://serveriweta.herokuapp.com/likes",
+        "http://localhost:3001/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )

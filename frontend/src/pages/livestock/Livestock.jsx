@@ -112,7 +112,7 @@ useEffect(()=>{
   const onSubmit = (data) => {
    console.log(data)
     axios
-      .post(`https://serveriweta.herokuapp.com/api/livestock/${breedId}/${userId}`, data, {
+      .post(`http://localhost:3001/api/livestock/${breedId}/${userId}`, data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
@@ -122,16 +122,16 @@ useEffect(()=>{
       }).catch(err=>console.log(err));
   };
   //for getting data from the database
-  // useEffect(() => {
-  //   axios.get(`https://serveriweta.herokuapp.com/api/breeds/byId/${id}`).then((response) => {
-  //     setBreedObject(response.data);
-  //     console.log(setBreedObject);
-  //   });
+  useEffect(() => {
+    axios.get(`http://localhost:3001/api/breeds/byId/${id}`).then((response) => {
+      setBreedObject(response.data);
+      console.log(setBreedObject);
+    });
 
-  //   axios.get(`https://serveriweta.herokuapp.com/api/livestock/${id}`).then((response) => {
-  //     setLivestocksObject(response.data);
-  //   });
-  // }, []);
+    axios.get(`http://localhost:3001/api/livestock/${id}`).then((response) => {
+      setLivestocksObject(response.data);
+    });
+  }, []);
 
   return (
     <div className="livestock">

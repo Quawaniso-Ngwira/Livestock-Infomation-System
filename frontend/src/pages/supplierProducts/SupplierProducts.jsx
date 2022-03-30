@@ -50,7 +50,7 @@ function SupplierProducts() {
    var id = localStorage.getItem("id");
    console.log(data);
     axios
-      .post(`https://serveriweta.herokuapp.com/product/create/${id}`||`http://localhost:3001/product/create/${id}`, data, {
+      .post(`http://localhost:3001/product/create/${id}`, data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
@@ -83,8 +83,8 @@ function SupplierProducts() {
             name="Category"
             >
             <option value="choose"> </option>
-            <option value="Vaccine">Vaccine</option>
-            <option value="Feed">Feed</option>
+            <option value="cattle">Vaccine</option>
+            <option value="pig">Feed</option>
           </Field>
 
 

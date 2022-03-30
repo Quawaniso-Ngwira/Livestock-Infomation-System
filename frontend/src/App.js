@@ -23,6 +23,7 @@ import NewBreed from "./pages/newbreed/NewBreed";
 import RegisterLivestock from "./pages/registerLivestock/RegisterLivestock";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
+import TopbarSupplier from "./components/topbarSupplier/TopbarSupplier";
 import { Outlet } from 'react-router-dom';
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
@@ -38,6 +39,9 @@ import Supplier from "./pages/supplierLandingPage/Supplier";
 import SupplierMarket from "./pages/supplierMarket/SupplierMarket";
 import SupplierProducts from "./pages/supplierProducts/SupplierProducts";
 import SupplierSProduct from "./pages/supplierSproduct/SupplierSProduct";
+import WebPage from "./pages/WebPage/WebPage";
+import TopbarWebPage from "./components/topbarWebPage/TopbarWebPage";
+import ForumWeb from "./pages/ForumWeb/ForumWeb";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,63 +90,35 @@ const style = {
 
 
 const SidebarLayout = () => (
-  <div style={{display: "flex"}}>
+  <>
     <Sidebar/>
-    <div style={{flex: 4}}>
     <Outlet />
-    </div>
-  </div>
+  </>
+);
+
+
+const WebSite = () => (
+ 
+ <>
+   <TopbarWebPage/>      
+   <Outlet />
+   </>
 );
 
 const AdminLayout = () => (
  
-  <div>
-  <div style={{backgroundColor: "blue", width: "190vh", position:"sticky", top: 0}}>
-       <div className="inlineNav">
-         <NavLink to="/supplier">
-         <div><h4>SUPPLIER</h4></div>
-         </NavLink>
-         <NavLink to="/supplierProducts">
-         <div><h4>ADD PRODUCT</h4></div>
-         </NavLink>
-         <NavLink to="/supplierMarket">
-         <div><h4>MARKET</h4></div>
-         </NavLink>
-         
-       </div>
-       </div>
-  
-              
+  <>
+    <TopbarSupplier/>      
     <Outlet />
-    </div>
+    </>
 );
 
 const TopbarLayout = () => (
  
-  <div>
-  <div style={{backgroundColor: "#1C321C", width: "192vh", position:"sticky", top: 0}}>
-       <div className="inlineNav">
-         <NavLink to="/">
-         <div><h4>HOME</h4></div>
-         </NavLink>
-         <NavLink to="/kholaPage">
-         <div><h4>MY KHOLA</h4></div>
-         </NavLink>
-         <NavLink to="/choose">
-         <div><h4>MANAGE</h4></div>
-         </NavLink>
-         <NavLink to="/market">
-         <div><h4>MARKET</h4></div>
-         </NavLink>
-         <NavLink to="/aboutUs">
-         <div><h4>ABOUT US</h4></div>
-         </NavLink>
-       </div>
-       </div>
-  
-              
-    <Outlet />
-    </div>
+  <>
+    <Topbar/>
+    <Outlet/>
+  </>
   
 );
 
@@ -237,7 +213,12 @@ useEffect(()=> {
             </div>
            
             <div className="loggedInContainer">
-            <h3 style={{color: "black", padding: "15px"}}> {authState.username} ({role}) </h3>
+            <h3 style={{color: "black", padding: "15px"}}> {authState.username}
+            {authState.status && <>
+          &nbsp; ({role})
+            </>}
+            
+              </h3>
             <></>
             {authState.status && <div className="topbarIconContainer">
                         <NotificationsNone/>
@@ -268,34 +249,7 @@ useEffect(()=> {
       {/* <h3>{authState.username} </h3> */}
       </div> 
            </div>
-          {/* {!authState.status ? (
-                <>   
-                </>
-              ) : (
-                <>
-            
-                <div style={{backgroundColor: "#1C321C"}}>
-       <div className="inlineNav">
-         <Link to="/">
-         <div><h4>HOME</h4></div>
-         </Link>
-         <Link to="/kholaPage">
-         <div><h4>MY KHOLA</h4></div>
-         </Link>
-         <Link to="/choose">
-         <div><h4>MANAGE</h4></div>
-         </Link>
-         <Link to="/market">
-         <div><h4>MARKET</h4></div>
-         </Link>
-         <Link to="/aboutUs">
-         <div><h4>ABOUT US</h4></div>
-         </Link>
-       </div>
-       </div>
-  
-                </>
-              )} */}
+        
       </div>
       
         
@@ -320,7 +274,6 @@ useEffect(()=> {
           <Route path="/kholaPage" exact element={<KholaPage/>} />
           <Route path="/emailRecovery" exact element={<EmailRecovery/>} />
           <Route path="/createKhola" exact element={<CreateKhola/>} />
-          <Route path="/aboutUs" exact element={<AboutUs/>} />
           <Route path="/upDateKhola" exact element={<UpDateKhola/>} />
           <Route path="/specificKhola" exact element={<SpecificKhola/>} />
         </Route>
@@ -331,6 +284,11 @@ useEffect(()=> {
         <Route path="/supplierProducts" exact element={<SupplierProducts/>} />
         <Route path="/supplierSProduct" exact element={<SupplierSProduct/>} />
         <Route path="/supplierMarket" exact element={<SupplierMarket/>} />
+        </Route>
+        <Route element={<WebSite/>}>  
+        <Route path="/web" exact element={<WebPage/>} />
+        <Route path="/aboutUs" exact element={<AboutUs/>} />
+        <Route path="/forumWeb" exact element={<ForumWeb/>} />
         </Route>
        </Routes>
        </div>

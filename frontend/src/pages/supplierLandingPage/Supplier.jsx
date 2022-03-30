@@ -56,7 +56,7 @@ function Supplier() {
  // getting list of user products based on user id 
   useEffect(() => { 
   var id = localStorage.getItem('id');
-    axios.get(`https://serveriweta.herokuapp.com/product/bySupplier/${id}`||`http://localhost:3001/product/bySupplier/${id}`).then((response) => {
+    axios.get(`http://localhost:3001/product/bySupplier/${id}`).then((response) => {
         console.log(response.data);
        setProducts(response.data);
         
@@ -120,7 +120,7 @@ function Supplier() {
             <div className="card__body">
             <h3 className="breedname">{value.Description} </h3>
             <h3 className="breedname">{value.Category} </h3>
-            <h3 className="breedname">{value.Price} </h3>
+            <h3 className="breedname">MK: {value.Price} </h3>
            
             </div>
            </div>

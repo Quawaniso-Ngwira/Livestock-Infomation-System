@@ -31,7 +31,7 @@ export default function Nutrition() {
 
 
   return (
-    <div className="user">
+    <div className="nutrition">
       <br/>
        <TextField style={{margin: "10px"}}
                 fullWidth

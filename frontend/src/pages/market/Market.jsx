@@ -10,6 +10,7 @@ import {  Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import {  TextField, IconButton } from '@material-ui/core';
 import { SearchOutlined } from '@material-ui/icons';
+import UserSupplier from '../../image/commentUser.jpg'
 import './market.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +57,7 @@ function Market() {
  // getting list of user products based on user id /product/All
   useEffect(() => { 
  
-    axios.get("https://serveriweta.herokuapp.com/product/All"||"http://localhost:3001/product/All").then((response) => {
+    axios.get("http://localhost:3001/product/All").then((response) => {
         console.log(response.data);
        setProducts(response.data);
         
@@ -104,8 +105,8 @@ function Market() {
            <div className="card__body">
            <p className="breedname">{value.Description} </p>
            <p className="breedname">{value.Category} </p>
-           <p className="breedname" style={{fontWeight:'bold',color:'#f79502'}} >MK:{value.Price} </p>
-           <h3 className="breedname" style={{color:'#915199'}}>Supplier:  {value.Supplier} </h3>
+           <p className="breedname" style={{color: "orange"}}>MK: {value.Price} </p>
+           <div className="card__image"><img src={UserSupplier} alt=" supplier of Product" style={{ height: "5%", width: "20%"}}></img></div>
 
            </div>
 

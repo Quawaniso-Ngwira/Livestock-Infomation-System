@@ -1,42 +1,66 @@
-import React, { useEffect, useState, useContext } from "react";
-import { BrowserRouter as Router, Route, Routes, Link, Navigate, } from "react-router-dom";
-import { AuthContext } from "../../helpers/AuthContext";
+import React, { useState } from "react";
+import {
+  AppBar,
+  Button,
+  Tab,
+  Tabs,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import {  Link } from "react-router-dom";
+import DrawerComp from './Drawer';
 
+const Topbar = () => {
+  const [value, setValue] = useState();
+  const theme = useTheme();
+  console.log(theme);
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  console.log(isMatch);
 
-export default function Topbar(){
-  const { authState } = useContext(AuthContext);
+  return (
+    <React.Fragment>
+      <AppBar sx={{ background: "#063970", marginTop:"65px" }}>
+        <Toolbar>
+          {isMatch ? (
+            <>
+              <Typography sx={{ fontSize: "2rem", paddingLeft: "10%" }}>
+                iWeta
+              </Typography>
+              <DrawerComp />
+            </>
+          ) : (
+            <>
+              <Tabs
+                sx={{ flexGrow: 1 }}
+                indicatorColor="secondary"
+                textColor="inherit"
+                value={value}
+                onChange={(e, value) => setValue(value)}
+                centered
+              >
+            
+              <Link to="/">
+                <Tab label="Home" />
+              </Link>
+              <Link to="/kholaPage">
+                <Tab label="My Khola" />
+              </Link>
+              <Link to="/choose">
+                <Tab label="Manage" />
+              </Link>
+              <Link to="/market">
+                <Tab label="Market" />
+              </Link> 
+              </Tabs>
+           
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+    </React.Fragment>
+  );
+};
 
-    return(
-       <>
-      {!authState.status ? (
-        <>   
-        </>
-      ) : (
-        <>
-    
-        <div style={{backgroundColor: "#1C321C"}}>
-<div className="inlineNav">
- <Link to="/">
- <div><h4>HOME</h4></div>
- </Link>
- <Link to="/kholaPage">
- <div><h4>MY KHOLA</h4></div>
- </Link>
- <Link to="/choose">
- <div><h4>MANAGE</h4></div>
- </Link>
- <Link to="/market">
- <div><h4>MARKET</h4></div>
- </Link>
- <Link to="/aboutUs">
- <div><h4>ABOUT US</h4></div>
- </Link>
-</div>
-</div>
-
-        </>
-      )} 
-        
-        </>   
-    )
-}
+export default Topbar;

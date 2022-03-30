@@ -50,11 +50,11 @@ function Post() {
 
 
   useEffect(() => {
-    axios.get(`https://serveriweta.herokuapp.com/posts/byId/${id}`).then((response) => {
+    axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
     });
 
-    axios.get(`https://serveriweta.herokuapp.com/comments/${id}`).then((response) => {
+    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
       setComments(response.data);
     });
   }, []);
@@ -62,7 +62,7 @@ function Post() {
   const addComment = () => {
     axios
       .post(
-        "https://serveriweta.herokuapp.com/comments",
+        "http://localhost:3001/comments",
         {
           commentBody: newComment,
           PostId: id,
@@ -89,7 +89,7 @@ function Post() {
 
   const deleteComment = (id) => {
     axios
-      .delete(`https://serveriweta.herokuapp.acom/comments/${id}`, {
+      .delete(`http://localhost:3001/comments/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
@@ -103,7 +103,7 @@ function Post() {
 
   const deletePost = (id) => {
     axios
-      .delete(`https://serveriweta.herokuapp.com/posts/${id}`, {
+      .delete(`http://localhost:3001/posts/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {

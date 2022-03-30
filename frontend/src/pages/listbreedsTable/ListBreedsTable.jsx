@@ -43,7 +43,7 @@ const tableIcons = {
 };
 
 const api = axios.create({
-  baseURL: `https://serveriweta.herokuapp.com/`
+  baseURL: `http://localhost:3001/`
 })
 
 

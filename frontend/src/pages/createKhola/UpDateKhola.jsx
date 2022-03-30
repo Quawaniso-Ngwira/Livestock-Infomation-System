@@ -28,7 +28,7 @@ function UpDateKhola() {
  //for identifying the khola details
  useEffect(() => {
   var KholaId = localStorage.getItem('KholaId');
-   axios.get(`https://serveriweta.herokuapp.com/khola/ById/${KholaId}`).then((response) => {
+   axios.get(`http://localhost:3001/khola/ById/${KholaId}`).then((response) => {
       // console.log(response.data.KholaName);
       setKholaNameEdit(response.data.KholaName);
       // console.log(response.data.Location);
@@ -62,7 +62,7 @@ const data = {
 
   var KholaId = localStorage.getItem('KholaId');
   axios
-    .put(`https://serveriweta.herokuapp.com/khola/update/${KholaId}`, data)
+    .put(`http://localhost:3001/khola/update/${KholaId}`, data)
     .then(() => {
       navigate("/specificKhola");
     });
