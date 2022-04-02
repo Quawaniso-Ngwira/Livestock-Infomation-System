@@ -21,6 +21,7 @@ import axios from "axios";
 import Nutrition from "./pages/nutrition/Nutrition";
 import NewBreed from "./pages/newbreed/NewBreed";
 import RegisterLivestock from "./pages/registerLivestock/RegisterLivestock";
+import DairyRecordings from "./pages/dairyRecordings/DairyRecordings";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import TopbarSupplier from "./components/topbarSupplier/TopbarSupplier";
@@ -35,6 +36,7 @@ import UpDateKhola from "./pages/createKhola/UpDateKhola";
 import KholaPage from "./pages/KholaPage/KholaPage";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import Market from "./pages/market/Market";
+import OrderProduct from "./pages/orderProduct/OrderProduct";
 import Supplier from "./pages/supplierLandingPage/Supplier";
 import SupplierMarket from "./pages/supplierMarket/SupplierMarket";
 import SupplierProducts from "./pages/supplierProducts/SupplierProducts";
@@ -271,7 +273,9 @@ useEffect(()=> {
           <Route path="/profile" exact element={<Profile/>} />
           <Route path="/choose" exact element={<Choose/>} />
           <Route path="/market" exact element={<Market/>} />
+          <Route path="/orderproduct" exact element={<OrderProduct/>} />
           <Route path="/kholaPage" exact element={<KholaPage/>} />
+          <Route path="/dairyRecording" exact element={<DairyRecordings/>} />
           <Route path="/emailRecovery" exact element={<EmailRecovery/>} />
           <Route path="/createKhola" exact element={<CreateKhola/>} />
           <Route path="/upDateKhola" exact element={<UpDateKhola/>} />

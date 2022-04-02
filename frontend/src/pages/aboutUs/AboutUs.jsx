@@ -111,27 +111,7 @@ ipsum dolor sit amet...'
           </Item>
           
         </Grid>
-        <Grid item xs={3}>
-          <Item>
-          <Card sx={{ maxWidth: 445 }}>
-          <img src={iweta} alt="aboutUs" style={{ height: "200px", width: "100%"}} />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-         i-Weta
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-          </Item>
-          
-        </Grid>
+
       </Grid>
     </Box>
   );

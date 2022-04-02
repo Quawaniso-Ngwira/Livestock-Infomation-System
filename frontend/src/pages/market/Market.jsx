@@ -102,7 +102,12 @@ function Market() {
 
  <div key={key} className="card">
            <div className="card__title">{value.Name} </div>
-           <div className="card__body">
+           <div className="card__body"
+           onClick={() => {
+                
+            navigate("/orderproduct");
+            localStorage.setItem("orderId", JSON.stringify(value.ProductId))
+           }}>
            <p className="breedname">{value.Description} </p>
            <p className="breedname">{value.Category} </p>
            <p className="breedname" style={{color: "orange"}}>MK: {value.Price} </p>

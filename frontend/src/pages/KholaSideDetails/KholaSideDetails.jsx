@@ -57,7 +57,9 @@ const updateKhola = () => {
         </div>
         <span className="featuredSub">{postKhola.Breed}</span>
       </div>
+    
       <div className="featuredItem">
+      <Link to="/dairyRecording">
         <span className="featuredTitle">Resources</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">2.5</span>
@@ -66,7 +68,9 @@ const updateKhola = () => {
           </span>
         </div>
         <span className="featuredSub">Compared to last month</span>
+        </Link>
       </div>
+   
     </div>
   );
 }

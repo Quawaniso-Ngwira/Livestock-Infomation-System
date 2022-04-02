@@ -114,7 +114,7 @@ function Supplier() {
   <div key={key} className="card">
      <div  onClick={() => {            
     navigate("/SupplierSProduct");
-    localStorage.setItem("ProductId", JSON.stringify(value.id))
+    localStorage.setItem("ProductId", JSON.stringify(value.ProductId))
    }}>
             <div className="card__title">{value.Name} </div>
             <div className="card__body">
