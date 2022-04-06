@@ -10,6 +10,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 
 
@@ -24,12 +26,30 @@ export default function DairyRecordings() {
       setOpen(false);
     };
   
-    const [product, setProductObject] = useState({});
+    const [product, setKholaObject] = useState({});
     const [listOfPosts, setListOfPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
     const [makolaById, setMakolaById] = useState([]);
     const [searchTitle, setSearchTitle] = useState("");
     let navigate = useNavigate();
+
+    const initialValues = {
+      Day: "",
+      Activities: "",
+      Deseases: "",
+      Affected:"",
+      Costs:"",
+      Comments:"",
+    };
+
+    const validationSchema = Yup.object().shape({
+      Day: Yup.string().required("You must input a Product Name!"),
+      Activities: Yup.string().required(),
+      // Deseases: Yup.string().required(),
+      // Affected: Yup.string().required(),
+      // Costs: Yup.string().required(),
+      // Comments: Yup.string().required()
+    });
 
  
   useEffect(() => {
@@ -61,9 +81,9 @@ export default function DairyRecordings() {
 
   
   useEffect(() => {
-    var OrderId = localStorage.getItem('orderId');
-      axios.get(`http://localhost:3001/product/byId/${OrderId}`).then((response) => {
-        setProductObject(response.data);
+    var KholaId = localStorage.getItem('KholaId');
+      axios.get(`http://localhost:3001/khola/ById/${KholaId}`).then((response) => {
+        setKholaObject(response.data);
         console.log(response.data)
       });
     }, []);
@@ -86,6 +106,12 @@ export default function DairyRecordings() {
           
       });
   }, []);
+
+  const onSubmit = (data) => {
+
+  console.log(data);
+  };
+
   
 
  return(
@@ -93,82 +119,96 @@ export default function DairyRecordings() {
     
     
     <div  className="cards__order__">
-    <div className="card__title" >{product.Name}</div>
+    <div className="card__title" >{product.KholaName} Khola</div>
     <hr/>
     <div className="card__body"> 
-     <p className="breedname"> {product.Description} </p>
-     <p className="breedname"> {product.Category} </p>
-     <p className="breedname">MK: {product.Price} </p>
+     <p className="breedname"> {product.Location} </p>
+     <p className="breedname"> {product.Number} {product.AnimalType} </p>
+     <p className="breedname"> {product.Breed} </p>
+  
+
       </div>
    </div>
   
 {/* //    break here */}
 <div  className="cards__order__two__">
-<div className="card__title" ><div> {product.Name} Schedules</div><div>       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add Activity
+<div className="card__title" ><div> {product.KholaName} Khola Schedules</div><div>       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+       Add Activity
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Add activity</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe add activity, please fill the form here.
+            Want to keep a record?, please fill the form here to record event.
           </DialogContentText>
-         
-           <TextField
-            autoFocus
-            margin="dense"
-            id="name"
+          
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        <Form className="formContainer">
+          <label>Day: </label>
+          <ErrorMessage name="Day" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="Day" 
             type="date"
-            fullWidth
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Activity"
+           <label>Activities: </label>
+          <ErrorMessage name="Activities" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="Activities"
             type="text"
-            fullWidth
+            />
+        
+          <label>Deseases: </label>
+          <ErrorMessage name="Deseases" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="Deseases"
           />
-           <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Desease"
+           
+  
+          <label>Affected: </label>
+          <ErrorMessage name="Affected" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="Affected"
             type="text"
-            fullWidth
           />
-           <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Affected"
-            type="text"
-            fullWidth
-          />
-           <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Cost"
+
+          
+        <label>Costs: </label>
+          <ErrorMessage name="Costs" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="Costs"
             type="number"
-            fullWidth
           />
-           <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Comment"
+
+          
+        <label>Comments: </label>
+          <ErrorMessage name="Comments" component="span" />
+          <Field
+            autocomplete="off"
+            id="inputCreatePost"
+            name="Comments"
             type="text"
-            fullWidth
           />
+
+          <button type="submit" style={{cursor: "pointer"}}> Add Activity</button>
+        
+        </Form>
+      </Formik>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button>
         </DialogActions>
       </Dialog>
 </div></div>

@@ -12,15 +12,15 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import { io } from "socket.io-client";
  
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    textAlign: 'right',
   },
   paper: {
     padding: theme.spacing(1),
-    textAlign: 'right',
+    // textAlign: 'right',
     color: theme.palette.text.primary,
   },
 }));
@@ -35,18 +35,6 @@ export default function Forum() {
   const  [user, setUser] = useState("");
   const listOfPostsNumber = listOfPosts.length;
   let navigate = useNavigate();
-
-
-  useEffect(() => {
-   const socket = io("http://localhost:5000");
-   console.log(socket.on("firstEvent",(msg)=>{
-     console.log(msg);
-   }));
-  }, []);
-
-  // useEffect(() => {
-  //  socket.emit("newUser", user);
-  //  }, [socket, user]);
 
 
   useEffect(() => {
@@ -109,25 +97,14 @@ export default function Forum() {
  <br/>
 
 <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          
-    <Paper className={classes.paper}>
-          <Link to="/createpost">   
-      <Button
-        variant="contained"
-        color="default"
-        className={classes.button}
-        startIcon={<AddIcon />}
-      >
-        Publish Querry
-      </Button>
+          <Link to="/createpost">  
+          <Button variant="outlined" color="primary">
+       Add Querry
+      </Button> 
       </Link> 
-      </Paper>
-        </Grid>   
-      </Grid>
     </div>
-<hr/>
+    <hr/>
+
         
       <div className="forumWidgets">
         {/* displaying the number of available posts */}

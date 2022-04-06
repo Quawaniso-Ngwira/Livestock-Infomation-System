@@ -5,6 +5,7 @@ import {  PermIdentity, PostAdd, NotificationsNone, PowerSettingsNewOutlined } f
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
+import PostWeb from "./pages/postWeb/PostWeb";
 import Registration from "./pages/Registration";
 import EmailRecovery from "./pages/EmailRecovery";
 import Login from "./pages/Login";
@@ -289,10 +290,12 @@ useEffect(()=> {
         <Route path="/supplierSProduct" exact element={<SupplierSProduct/>} />
         <Route path="/supplierMarket" exact element={<SupplierMarket/>} />
         </Route>
+        
         <Route element={<WebSite/>}>  
         <Route path="/web" exact element={<WebPage/>} />
         <Route path="/aboutUs" exact element={<AboutUs/>} />
         <Route path="/forumWeb" exact element={<ForumWeb/>} />
+        <Route path="/postWeb/:id" exact element={<PostWeb/>} />
         </Route>
        </Routes>
        </div>

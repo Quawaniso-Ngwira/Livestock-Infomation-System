@@ -8,7 +8,8 @@ import {
   ListItemText,
 } from "@mui/material";
 import { Menu } from "@material-ui/icons";
-const pages = ["Products", "Services", "ABoutUs", "ContactUs"];
+import { Link } from "react-router-dom"; 
+// const pages = ["Products", "Services", "ABoutUs", "ContactUs"];
 const DrawerWeb = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -20,13 +21,41 @@ const DrawerWeb = () => {
         onClose={() => setOpenDrawer(false)}
       >
         <List>
-          {pages.map((page, index) => (
+          {/* {pages.map((page, index) => (
             <ListItemButton key={index}>
               <ListItemIcon>
                 <ListItemText>{page}</ListItemText>
               </ListItemIcon>
             </ListItemButton>
-          ))}
+          ))} */}
+          <Link to="web">
+            <ListItemButton >
+              <ListItemIcon>
+                <ListItemText>Home</ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+          </Link>
+          <Link to="/graphs">
+            <ListItemButton >
+              <ListItemIcon>
+                <ListItemText>Graphs</ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            </Link>
+            <Link to="forumWeb">
+            <ListItemButton >
+              <ListItemIcon>
+                <ListItemText>Forum</ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            </Link>
+            <Link to="aboutUs">
+            <ListItemButton >
+              <ListItemIcon>
+                <ListItemText>About Us</ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            </Link>
         </List>
       </Drawer>
       <IconButton

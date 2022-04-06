@@ -45,6 +45,41 @@ body {
  
 }
 
+.formRegisterContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  border-radius: 5px;
+ 
+}
+.formRegisterContainer #inputCreatePost {
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+.formRegisterContainer button {
+  margin-top: 15px;
+  height: 40px;
+  border: none;
+  background-color: lightskyblue;
+  border-radius: 5px;
+  color: white;
+}
+
+.formRegisterContainer button:hover {
+  cursor: pointer;
+  background-color: dodgerblue;
+}
+
+
 .formContainer #inputCreatePost {
   height: 40px;
   margin-top: 10px;
@@ -168,11 +203,13 @@ button {
   margin-top: 90px;
 }
 
-.addCommentContainer button {
+
+
+/* .addCommentContainer button {
   background-color: dodgerblue;
   color: white;
   width: 170px;
-}
+} */
 
 .addCommentContainer input {
   border: 2px solid dodgerblue;

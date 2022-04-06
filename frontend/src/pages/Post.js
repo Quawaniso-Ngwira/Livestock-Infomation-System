@@ -27,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   height: '300px',
-  color: theme.palette.text.secondary,
+  color: theme.palette.text.primary,
 }));
 
 
@@ -134,8 +134,8 @@ function Post() {
               setNewComment(event.target.value);
             }}
           />
-
-<Button variant="contained"  onClick={addComment} className={classes.root}> Add Comment </Button>
+  &nbsp;&nbsp;&nbsp;
+<Button variant="outlined" color="primary" onClick={addComment} > Add Comment </Button>
            
         </div>
          </div>

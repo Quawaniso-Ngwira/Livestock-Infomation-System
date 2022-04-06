@@ -58,7 +58,8 @@ export default function Sidebar(){
                         Production
                   </li>
                   </Link> */}
-
+             
+                   <h3 className="sidebarTitle">Social Menu</h3>
                   <Link to="/forum" className="link">
                   <li className="sidebarListItem">
                         <Feedback className="sidebarIcon"/>

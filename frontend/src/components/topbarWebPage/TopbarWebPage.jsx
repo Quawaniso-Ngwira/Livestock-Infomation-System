@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   AppBar,
-  Button,
   Tab,
   Tabs,
   Toolbar,
@@ -9,6 +8,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Button from '@material-ui/core/Button';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {  Link } from "react-router-dom";
 import DrawerWeb from "./DrawerWeb";
 const TopbarWebPage= () => {
@@ -51,15 +52,15 @@ const TopbarWebPage= () => {
               </Link> 
               </Tabs>
               <Link to="/login">
-              <Button sx={{ marginLeft: "auto" }} variant="contained">
-                Login
+              <Button sx={{ marginLeft: "auto" }} variant="contained" color="white" startIcon={<AccountCircleIcon/>}>
+                SIGN IN
               </Button>
               </Link>
-              <Link to="/registration">
+              {/* <Link to="/registration">
               <Button sx={{ marginLeft: "10px" }} variant="contained">
                 SignUp
               </Button>
-              </Link>
+              </Link> */}
             </>
           )}
         </Toolbar>
