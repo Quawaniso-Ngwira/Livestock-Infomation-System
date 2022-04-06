@@ -47,7 +47,7 @@ const Topbar = () => {
               <Link to="/kholaPage">
                 <Tab label="My Khola" />
               </Link>
-              <Link to="/choose">
+              <Link to="/nutrition">
                 <Tab label="Manage" />
               </Link>
               <Link to="/market">

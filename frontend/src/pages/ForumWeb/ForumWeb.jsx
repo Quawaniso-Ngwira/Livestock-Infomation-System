@@ -8,24 +8,23 @@ import CommentIcon from "@material-ui/icons/Comment";
 import { AuthContext } from "../../helpers/AuthContext";
 import {  Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-
+import {  TextField, IconButton } from '@material-ui/core';
+import { SearchOutlined } from '@material-ui/icons';
  
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    textAlign: 'right',
   },
   paper: {
     padding: theme.spacing(1),
-    textAlign: 'right',
+    // textAlign: 'right',
     color: theme.palette.text.primary,
   },
 }));
 
 export default function ForumWeb() {
+  const [searchTitle, setSearchTitle] = useState("");
   const classes = useStyles();
   var numberOfComments = localStorage.getItem("numberOfComments");
   const [listOfPosts, setListOfPosts] = useState([]);
@@ -36,12 +35,9 @@ export default function ForumWeb() {
   const listOfPostsNumber = listOfPosts.length
   let navigate = useNavigate();
 
-  // useEffect(() => {
-  //  socket.emit("newUser", user);
-  //  }, [socket, user]);
-
 
   useEffect(() => {
+  
       axios
         .get("http://localhost:3001/posts")
         .then((response) => {
@@ -52,7 +48,7 @@ export default function ForumWeb() {
             })
           );
         });
-    
+  
   }, []);
 
   const likeAPost = (postId) => {
@@ -95,39 +91,41 @@ export default function ForumWeb() {
     <div className="forum">
  <br/>
 
-<div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          
-    <Paper className={classes.paper}>
-          <Link to="/createpost">   
-      <Button
-        variant="contained"
-        color="default"
-        className={classes.button}
-        startIcon={<AddIcon />}
-      >
-        Publish Querry
-      </Button>
-      </Link> 
-      </Paper>
-        </Grid>   
-      </Grid>
-    </div>
-<hr/>
-        
+ <TextField style={{margin: "10px", backgroundColor: "#fafafa"}}
+          onChange={(e) => setSearchTitle(e.target.value)}
+               
+                id="standard-bare"
+                variant="outlined"
+                placeholder="(Search Product)"
+                InputProps={{
+                  endAdornment: (
+                    <IconButton>
+                      <SearchOutlined />
+                    </IconButton>
+                  ),
+                }}
+              />
+    <hr/>
       <div className="forumWidgets">
         {/* displaying the number of available posts */}
-      <h3> Total Available Querries:  {listOfPostsNumber} </h3>
+      <h3> Other peoples Querries:  {listOfPostsNumber} </h3>
        {/* array printing the available post made using map method */}
-    {listOfPosts.map((value, key) => {
+    {listOfPosts.filter((value) => {
+           if (searchTitle === "") {
+             return value;
+           } else if (
+             value.title?.toLowerCase().includes(searchTitle.toLowerCase())
+           ) {
+             return value;
+           }
+         }).map((value, key) => {
         return (
-          <div key={key} socket={socket} user={user} className="post">
+          <div key={key}  className="post">
             <div className="title"> {value.title} </div>
             <div
               className="body"
               onClick={() => {
-               navigate(`/post/${value.id}`);
+               navigate(`/postWeb/${value.id}`);
               }}
             >
               {value.postText}

@@ -102,7 +102,7 @@ export default function RenderKholas(props) {
                }}
             >
               <div className="arrange"><div className="split">
-             <h3 className="breedname">{value.KholaName} Khola </h3>
+             <h4 className="breedname">{value.KholaName} khola </h4>
               </div>
               </div> </div>
            </div>

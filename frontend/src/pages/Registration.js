@@ -23,7 +23,7 @@ function Registration() {
     phone: Yup.string().min(10).max(15).required(),
     email: Yup.string().email("Invalid email address format").min(11).max(150).required(),
     role: Yup.string().min(3).max(15).required(),
-    address: Yup.string().min(3).max(15).required(),
+    address: Yup.string().min(3).max(150).required(),
     password: Yup.string().min(4).max(20).required(),
     comfirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
@@ -31,26 +31,25 @@ function Registration() {
 
 // onsubmit send the values and navigate to login page
   const onSubmit = (data) => {
+    console.log(data)
     axios.post("http://localhost:3001/auth/register", data).then(() => {
       console.log(data);
       navigate('/login')
     });
   };
 
-  
-
   return (
-    <div className="loginContainer">
+    <div className="createPostPage">
         <h1>Register Account</h1>
         <img src={User} alt="login symbol" style={{ height: "70px", width: "70px"}} />
-     <div className="loginContainer">
+    
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         
-        <Form className="loginContainer">
+        <Form className="formRegisterContainer">
           <label>Username: </label>
           <ErrorMessage name="username" component="span" />
           <Field
@@ -79,11 +78,16 @@ function Registration() {
            <label>Role: </label>
           <ErrorMessage name="role" component="span" />
           <Field
-            type="select"
+            component="select"
             autocomplete="off"
             id="inputCreatePost"
-            name="role"
-          />
+            name="role">
+          <option value="choose"> --- Select Role --- </option>
+          <option value="Farmer">Farmer</option>
+          <option value="Supplier">Supplier</option>
+        </Field>
+
+
           <label>Address: </label>
           <ErrorMessage name="address" component="span" />
           <Field
@@ -117,7 +121,7 @@ function Registration() {
         </Form>
       </Formik>
     </div>
-   </div>
+  
    
   );
 }

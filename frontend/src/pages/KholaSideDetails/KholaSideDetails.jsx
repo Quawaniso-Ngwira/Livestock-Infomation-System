@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"; 
 import axios from "axios";
-import { ArrowDownward, ArrowUpward, PermIdentity, DeleteOutline, EditOutlined  } from "@material-ui/icons";
+import { ArrowDownward, ArrowUpward, PermIdentity, DeleteOutline, EditOutlined, NoteAddIcon  } from "@material-ui/icons";
 
 
 export default function KholaSideDetails() {
@@ -60,14 +60,14 @@ const updateKhola = () => {
     
       <div className="featuredItem">
       <Link to="/dairyRecording">
-        <span className="featuredTitle">Resources</span>
+        <span className="featuredTitle">Dairy Recordings</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">2.5</span>
+          <span className="featuredMoney"></span>
           <span className="featuredMoneyRate">
             +2.4 <ArrowUpward className="featuredIcon"/>
           </span>
         </div>
-        <span className="featuredSub">Compared to last month</span>
+        <span className="featuredSub">Stay updated record your notes by clicking here</span>
         </Link>
       </div>
    
