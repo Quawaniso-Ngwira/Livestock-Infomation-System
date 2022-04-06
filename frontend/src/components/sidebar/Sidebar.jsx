@@ -28,7 +28,7 @@ export default function Sidebar(){
       }, [])
 
           useEffect(() => {
-            axios.get(`http://localhost:3001/api/breeds/byuserId/${userId}`).then((response) => {
+            axios.get(`https://serveriweta.herokuapp.com/api/breeds/byuserId/${userId}`).then((response) => {
                   setListOfBreeds(response.data);
               });
           }, [userId]);

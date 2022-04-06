@@ -53,7 +53,7 @@ function CreateKhola() {
    var id = localStorage.getItem("id");
    console.log(data);
     axios
-      .post(`http://localhost:3001/khola/create/${id}`, data, {
+      .post(`https://serveriweta.herokuapp.com/khola/create/${id}`, data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {

@@ -55,7 +55,7 @@ function KholaPage() {
    ///khola/ByUserId/
    useEffect(() => { 
     var id = localStorage.getItem('id');
-      axios.get(`http://localhost:3001/khola/ByUserId/${id}`).then((response) => {
+      axios.get(`https://serveriweta.herokuapp.com/khola/ByUserId/${id}`).then((response) => {
           console.log(response.data);
          setMakolaById(response.data);
           
@@ -109,7 +109,8 @@ function KholaPage() {
                }}
             >
               <div className="arrange"><div className="split">
-             <h3 className="breedname">{value.KholaName} Khola </h3>
+             <h3 className="breedname">{value.KholaName} Khola </h3> 
+             <p className="breedname">{value.Location}</p>
               </div>
               </div> </div>
            </div>

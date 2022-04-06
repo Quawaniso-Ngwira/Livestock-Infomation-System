@@ -42,7 +42,7 @@ export default function Forum() {
       navigate("/login");
     } else {
       axios
-        .get("http://localhost:3001/posts/All", {
+        .get("https://serveriweta.herokuapp.com/posts/All", {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -59,7 +59,7 @@ export default function Forum() {
   const likeAPost = (postId) => {
     axios
       .post(
-        "http://localhost:3001/likes",
+        "https://serveriweta.herokuapp.com/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )

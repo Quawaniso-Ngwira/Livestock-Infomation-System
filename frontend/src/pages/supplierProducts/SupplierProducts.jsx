@@ -50,7 +50,7 @@ function SupplierProducts() {
    var id = localStorage.getItem("id");
    console.log(data);
     axios
-      .post(`http://localhost:3001/product/create/${id}`, data, {
+      .post(`https://serveriweta.herokuapp.com/product/create/${id}`, data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {

@@ -39,7 +39,7 @@ export default function ForumWeb() {
   useEffect(() => {
   
       axios
-        .get("http://localhost:3001/posts")
+        .get("https://serveriweta.herokuapp.com/posts/All")
         .then((response) => {
           setListOfPosts(response.data.listOfPosts);
           setLikedPosts(
@@ -54,7 +54,7 @@ export default function ForumWeb() {
   const likeAPost = (postId) => {
     axios
       .post(
-        "http://localhost:3001/likes",
+        "https://serveriweta.herokuapp.com/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )

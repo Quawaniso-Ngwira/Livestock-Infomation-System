@@ -51,7 +51,7 @@ function SupplierSProduct() {
  // getting list of user products based on user id 
  useEffect(() => { 
     var ProductId = localStorage.getItem('ProductId');
-      axios.get(`http://localhost:3001/product/byId/${ProductId}`).then((response) => {
+      axios.get(`https://serveriweta.herokuapp.com/product/byId/${ProductId}`).then((response) => {
           console.log(response.data);
            // console.log(response.data.Name);
           setName(response.data.Name);
@@ -84,7 +84,7 @@ const data = {
 ///product/update/:id
   var ProductId = localStorage.getItem('ProductId');
   axios
-    .put(`http://localhost:3001/product/update/${ProductId}`, data)
+    .put(`https://serveriweta.herokuapp.com/product/update/${ProductId}`, data)
     .then(() => {
       navigate("/supplier");
     });
@@ -94,7 +94,7 @@ const data = {
 const deleteProduct = () => {
   var productId = localStorage.getItem('ProductId');
   axios
-    .delete(`http://localhost:3001/product/delete/${productId}`, {
+    .delete(`https://serveriweta.herokuapp.com/product/delete/${productId}`, {
       headers: { accessToken: localStorage.getItem("accessToken") },
     })
     .then(() => {

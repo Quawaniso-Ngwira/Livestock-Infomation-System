@@ -26,7 +26,7 @@ function CreatePost() {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:3001/posts/create", data, {
+      .post("https://serveriweta.herokuapp.com/posts/create", data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {

@@ -57,7 +57,7 @@ function Market() {
  // getting list of user products based on user id /product/All
   useEffect(() => { 
  
-    axios.get("http://localhost:3001/product/All").then((response) => {
+    axios.get("https://serveriweta.herokuapp.com/product/All").then((response) => {
         console.log(response.data);
        setProducts(response.data);
         
