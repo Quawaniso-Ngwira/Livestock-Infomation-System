@@ -32,8 +32,8 @@ export default function Forum() {
   const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
   const [socket, setSocket] = useState(null); 
-  const  [user, setUser] = useState("")
-  const listOfPostsNumber = listOfPosts.length
+  const  [user, setUser] = useState("");
+  const listOfPostsNumber = listOfPosts.length;
   let navigate = useNavigate();
 
 
@@ -54,7 +54,7 @@ export default function Forum() {
       navigate("/login");
     } else {
       axios
-        .get("http://localhost:3001/posts", {
+        .get("http://localhost:3001/posts/All", {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
