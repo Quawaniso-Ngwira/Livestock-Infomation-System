@@ -109,8 +109,8 @@ function KholaPage() {
                }}
             >
               <div className="arrange"><div className="split">
-             <h3 className="breedname">{value.KholaName} Khola </h3> 
-             <p className="breedname">{value.Location}</p>
+             <h4 className="breedname">{value.KholaName} Khola </h4> 
+             
               </div>
               </div> </div>
            </div>
