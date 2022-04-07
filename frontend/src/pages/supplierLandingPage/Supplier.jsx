@@ -97,6 +97,8 @@ function Supplier() {
                 }}
               />
               <hr/>
+             
+       <h2 style={{textAlign: "center"}}> Your Products</h2>
     
  <div className="cards-container">
 

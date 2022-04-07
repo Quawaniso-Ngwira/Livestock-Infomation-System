@@ -26,10 +26,10 @@ export default function Production(props) {
 
 
   useEffect(() => { 
-    axios.get(`https://serveriweta.herokuapp.com/auth/basicinfo/${id}`).then((response) => {
+    axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
       setUsername(response.data.username);
   });
-    axios.get(`https://serveriweta.herokuapp.com/api/breeds/byuserId/${id}`).then((response) => {
+    axios.get(`http://localhost:3001/api/breeds/byuserId/${id}`).then((response) => {
         setListOfBreeds(response.data);
     });
 }, []);

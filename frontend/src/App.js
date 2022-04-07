@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Link, Navigate, NavLink } from 
 import {  PermIdentity, PostAdd, NotificationsNone, PowerSettingsNewOutlined } from "@material-ui/icons";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
+import UpdatePost from "./pages/UpdatePost";
 import Post from "./pages/Post";
 import PostWeb from "./pages/postWeb/PostWeb";
 import Registration from "./pages/Registration";
@@ -11,6 +12,7 @@ import EmailRecovery from "./pages/EmailRecovery";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import Production from "./pages/production/Production";
+import CreateActivity from "./pages/createActivity/CreateActivity";
 import Forum from "./pages/forum/Forum";
 import Choose from "./pages/chooseCategory/Choose";
 import Profile from "./pages/Profile"; 
@@ -20,6 +22,7 @@ import SpecificKhola from "./pages/specificKhola/SpecificKhola";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Nutrition from "./pages/nutrition/Nutrition";
+import Activites from "./pages/activites/Activites";
 import NewBreed from "./pages/newbreed/NewBreed";
 import RegisterLivestock from "./pages/registerLivestock/RegisterLivestock";
 import DairyRecordings from "./pages/dairyRecordings/DairyRecordings";
@@ -33,6 +36,7 @@ import R from './image/IMG-20220120-WA0010.png';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CreateKhola from "./pages/createKhola/CreateKhola";
+import CreateRecord from "./pages/createRecord/CreateRecord";
 import UpDateKhola from "./pages/createKhola/UpDateKhola";
 import KholaPage from "./pages/KholaPage/KholaPage";
 import AboutUs from "./pages/aboutUs/AboutUs";
@@ -157,7 +161,7 @@ useEffect(()=> {
 // verify that the user has a valid token and is aunthticated
   useEffect(() => {
     axios
-      .get("https://serveriweta.herokuapp.com/auth/login", {
+      .get("http://localhost:3001/auth/login", {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -264,6 +268,7 @@ useEffect(()=> {
               <Route path="/production/:id" exact element={<Production/>}  />
               <Route path="/forum" exact element={<Forum/>} />
               <Route path="/createpost" exact element={<CreatePost/>} />
+              <Route path="/updatepost" exact element={<UpdatePost/>} />
               <Route path="/post/:id" exact element={<Post/>}/>
               <Route path="/livestock/:id" exact element={<Livestock/>}/>
               <Route path="/createlivestock" exact element={<RegisterLivestock/>} />
@@ -279,6 +284,9 @@ useEffect(()=> {
           <Route path="/dairyRecording" exact element={<DairyRecordings/>} />
           <Route path="/emailRecovery" exact element={<EmailRecovery/>} />
           <Route path="/createKhola" exact element={<CreateKhola/>} />
+          <Route path="/createActivity" exact element={<CreateActivity/>} />
+          <Route path="/activites" exact element={<Activites/>} />
+          <Route path="/createRecord" exact element={<CreateRecord/>} />
           <Route path="/upDateKhola" exact element={<UpDateKhola/>} />
           <Route path="/specificKhola" exact element={<SpecificKhola/>} />
         </Route>

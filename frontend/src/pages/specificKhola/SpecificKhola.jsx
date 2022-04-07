@@ -12,6 +12,7 @@ import VaccinationTable from '../vaccinationTable/VaccinationTable';
 import FeedsTable from '../feedsTable/FeedsTable';
 import KholaSideDetails from '../KholaSideDetails/KholaSideDetails';
 import {  Delete, Edit } from "@material-ui/icons";
+import {  ArrowBackIos, ArrowBack } from "@material-ui/icons";
 
 
 export default function SpecificKhola(props) {
@@ -29,6 +30,10 @@ export default function SpecificKhola(props) {
    
    
     let navigate = useNavigate();
+
+    const back = () => {
+      navigate("/kholaPage");
+  };
  
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -87,7 +92,8 @@ export default function SpecificKhola(props) {
 
  return(
    <div style={{ width: "100%", height: "100%"}}>
-     <br/>
+    
+     <p onClick={back} className="backArrow"><ArrowBack/>Back</p> 
           <KholaSideDetails/>
       <br/>        
           <VaccinationTable/>

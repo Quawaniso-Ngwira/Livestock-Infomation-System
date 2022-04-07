@@ -2,49 +2,31 @@
     flex: 4;
    
   }
-  .forumWidgets{
-    margin: 20px;
+  .forumWidgets__{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
-
-  .createPostt{
-    height: 50px;
-    width: 100px;
-    float: right;
-    cursor: pointer;
-    background-color: rgba(231, 10, 21, 0.452);
-  }
-
-    
-  .createpostcontainer{
-    flex: 1;
-    height: 70px;
-    margin: 0px 10px;
-    padding: 5px;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 11px -1px #9b8989;
-    box-shadow: 0px 0px 11px #9b8989;
-    }
-
-    
-.post {
-  width: 90%;
-  height: 120px;
+     
+.post__ {
+  margin: 0.5rem 0rem 0.5rem 0;
+  /* padding: 1.5rem; */
+  width: 70%;
+  box-shadow: 0 0 28px 4px rgba(0,0,0,0.1);
+  transition: transform .3s ease;
+  cursor: pointer;
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
   border: 1px solid lightgray;
-  font-family: Arial, Helvetica, sans-serif;
-  
 
 }
 
-.post:hover {
+.post__:hover {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
 }
 
-.post .body {
+.post__ .body {
   flex: 60%;
   align-items: center;
   display: grid;
@@ -54,7 +36,7 @@
 }
 
 
-.post .footer {
+.post__ .footer {
   flex: 20%;
   display: flex;
   align-items: center;
@@ -65,7 +47,7 @@
   border-bottom-right-radius: 10px;
 }
 
-.post .title {
+.post__ .title {
   flex: 20%;
   display: grid;
   place-content: center;
@@ -97,4 +79,10 @@
   margin-left: 10px;
 }
 
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
   

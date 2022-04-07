@@ -9,22 +9,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import {  Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import {  TextField, IconButton } from '@material-ui/core';
-import { SearchOutlined, Add } from '@material-ui/icons';
+import { SearchOutlined, Add, Delete } from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import {  ArrowBackIos, ArrowBack } from "@material-ui/icons";
-import './dairyRecordings.css';
+import './activites.css';
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//     textAlign: 'right',
-//   },
-//   paper: {
-//     padding: theme.spacing(1),
-//     // textAlign: 'right',
-//     color: theme.palette.text.primary,
-//   },
-// }));
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -53,13 +42,11 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-function DairyRecordings() {
+function Activites() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const [makolaById, setMakolaById] = useState([]);
-   const listOfKholaNumber = makolaById.length
-   localStorage.setItem("listOfKholaNumber", listOfKholaNumber);
   const [searchTitle, setSearchTitle] = useState("");
+  const [makolaById, setMakolaById] = useState([]);
   
 
   useEffect(() => {
@@ -73,6 +60,31 @@ function DairyRecordings() {
   const back = () => {
     navigate("/specificKhola");
 };
+///schedules/bykhola/:kholaId
+    
+    useEffect(() => { 
+        var id = localStorage.getItem('KholaId');
+        console.log(id);
+          axios.get(`https://serveriweta.herokuapp.com/schedules/bykhola/${id}`).then((response) => {
+              console.log(response.data);
+              setMakolaById(response.data);
+              
+          });
+      }, []);
+
+      //deleting the khola
+const deleteActivity = () => {
+    var KholaId = localStorage.getItem('KholaId');
+    axios
+      .delete(`https://serveriweta.herokuapp.com/khola/delete/${KholaId}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then(() => {
+        navigate("/activites");
+      });
+    };
+    
+
 
   
   return (
@@ -95,17 +107,46 @@ function DairyRecordings() {
               />
               
         <div className={classes.root}>
-          <Link to="/createRecord">  
+          <Link to="/createActivity">  
           <Button variant="outlined" color="primary" startIcon={<Add/>}>
-       Create Record
+       Create Schedules
       </Button> 
       </Link> 
     </div>
     </div> 
               <hr/>
-              <h2 style={{textAlign: "center"}}> Recordings</h2>
+              <h2 style={{textAlign: "center"}}> Schedules</h2>
     
 <div className="cards-container">  
+
+{makolaById.filter((value) => {
+            if (searchTitle === "") {
+              return value;
+            } else if (
+              value.Activity?.toLowerCase().includes(searchTitle.toLowerCase())
+            ) {
+              return value;
+            }
+          }).map((value, key) => {
+  return (
+
+       <div key={key} className="cards">
+            <div className="" >
+            <div className="breeedcategory">
+              <div className="arrange"><div className="split__">
+             <h2 className="breedname"> 
+             {value.Activity} </h2>
+             <p className="breedname"> Due on: {value.Day} </p>
+             <p className="breedname"> <Delete onClick={deleteActivity}/> </p>
+              </div>
+              </div> </div>
+           </div>
+           </div>
+            
+        
+        );
+      })}
+
 
 </div>
 
@@ -117,4 +158,4 @@ function DairyRecordings() {
   );
 }
 
-export default DairyRecordings;
+export default Activites;

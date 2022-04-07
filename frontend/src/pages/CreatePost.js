@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../helpers/AuthContext";
+import {  ArrowBackIos, ArrowBack } from "@material-ui/icons";
 
 function CreatePost() {
   const { authState } = useContext(AuthContext);
@@ -13,6 +14,11 @@ function CreatePost() {
     title: "",
     postText: "",
   };
+
+  const back = () => {
+    var id = localStorage.getItem('PostId');
+    navigate("/forum");
+};
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -37,6 +43,7 @@ function CreatePost() {
   return (
 
     <div className="forum">
+    <p onClick={back} className="backArrow"><ArrowBack/>Back</p> 
     <div className="createPostPage">
     <p>Create Post</p>
       <Formik

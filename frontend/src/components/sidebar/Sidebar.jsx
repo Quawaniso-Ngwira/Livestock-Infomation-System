@@ -28,7 +28,7 @@ export default function Sidebar(){
       }, [])
 
           useEffect(() => {
-            axios.get(`https://serveriweta.herokuapp.com/api/breeds/byuserId/${userId}`).then((response) => {
+            axios.get(`http://localhost:3001/api/breeds/byuserId/${userId}`).then((response) => {
                   setListOfBreeds(response.data);
               });
           }, [userId]);
@@ -37,9 +37,8 @@ export default function Sidebar(){
         <div className="sidebar">
           <div className="sidebarWrapper">
               <div className="sidebarMenu">
-                  <h3 className="sidebarTitle">Quick Menu</h3>
                   <ul className="sidebarList"> 
-                  <Link to="/" className="link">
+                  {/* <Link to="/" className="link">
                   <li className="sidebarListItem active">
                         <Home className="sidebarIcon"/>
                         Home
@@ -51,7 +50,7 @@ export default function Sidebar(){
                         <TrendingUp className="sidebarIcon"/>
                         Diseases
                   </li>
-                  </Link>
+                  </Link> */}
                   {/* <Link to={`/production/${userId}`} className='link'>
                   <li className="sidebarListItem">
                         <DynamicFeed className="sidebarIcon"/>
@@ -63,7 +62,7 @@ export default function Sidebar(){
                   <Link to="/forum" className="link">
                   <li className="sidebarListItem">
                         <Feedback className="sidebarIcon"/>
-                        pig Forum
+                         Forum
                   </li>
                   </Link>
                 </ul>

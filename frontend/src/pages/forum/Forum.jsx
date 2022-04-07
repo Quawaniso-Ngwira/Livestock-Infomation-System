@@ -32,8 +32,8 @@ export default function Forum() {
   const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
   const [socket, setSocket] = useState(null); 
-  const  [user, setUser] = useState("");
-  const listOfPostsNumber = listOfPosts.length;
+  const  [user, setUser] = useState("")
+  const listOfPostsNumber = listOfPosts.length
   let navigate = useNavigate();
 
 
@@ -108,7 +108,7 @@ export default function Forum() {
         
       <div className="forumWidgets">
         {/* displaying the number of available posts */}
-      <h3> Total Available Querries:  {listOfPostsNumber} </h3>
+      <h2 style={{textAlign: "center"}}> Total Querries:{listOfPostsNumber}</h2>
        {/* array printing the available post made using map method */}
     {listOfPosts.map((value, key) => {
         return (
@@ -118,6 +118,7 @@ export default function Forum() {
               className="body"
               onClick={() => {
                navigate(`/post/${value.id}`);
+               localStorage.setItem("PostId", JSON.stringify(value.id))
               }}
             >
               {value.postText}

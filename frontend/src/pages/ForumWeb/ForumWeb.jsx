@@ -106,9 +106,11 @@ export default function ForumWeb() {
                 }}
               />
     <hr/>
-      <div className="forumWidgets">
-        {/* displaying the number of available posts */}
-      <h3> Other peoples Querries:  {listOfPostsNumber} </h3>
+ {/* displaying the number of available posts */}
+ <h2 style={{textAlign: "center"}}> Total Querries:{listOfPostsNumber}</h2>
+
+      <div className="forumWidgets__">
+       
        {/* array printing the available post made using map method */}
     {listOfPosts.filter((value) => {
            if (searchTitle === "") {
@@ -120,7 +122,7 @@ export default function ForumWeb() {
            }
          }).map((value, key) => {
         return (
-          <div key={key}  className="post">
+          <div key={key}  className="post__">
             <div className="title"> {value.title} </div>
             <div
               className="body"

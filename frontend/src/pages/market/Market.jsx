@@ -86,6 +86,7 @@ function Market() {
                 }}
               />
               <hr/>
+              <h2 style={{textAlign: "center"}}> The Market</h2>
     
 <div className="cards-container">
 
@@ -111,7 +112,7 @@ function Market() {
            <p className="breedname">{value.Description} </p>
            <p className="breedname">{value.Category} </p>
            <p className="breedname" style={{color: "orange"}}>MK: {value.Price} </p>
-           <div className="card__image"><img src={UserSupplier} alt=" supplier of Product" style={{ height: "5%", width: "20%"}}></img></div>
+           <div className="card__image">Supplier {value.Supplier}</div>
 
            </div>
 

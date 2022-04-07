@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../../helpers/AuthContext";
 import './createKhola.css';
 import Notifications from '../Notifications';
+import {  ArrowBackIos, ArrowBack } from "@material-ui/icons";
 
 function UpDateKhola() {
   let { id } = useParams();
@@ -18,7 +19,10 @@ function UpDateKhola() {
 
   let navigate = useNavigate();
 
-  
+  const back = () => {
+    navigate("/specificKhola");
+};
+
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       navigate( "/home");
@@ -28,7 +32,7 @@ function UpDateKhola() {
  //for identifying the khola details
  useEffect(() => {
   var KholaId = localStorage.getItem('KholaId');
-   axios.get(`https://serveriweta.herokuapp.com/khola/ById/${KholaId}`).then((response) => {
+   axios.get(`http://localhost:3001/khola/ById/${KholaId}`).then((response) => {
       // console.log(response.data.KholaName);
       setKholaNameEdit(response.data.KholaName);
       // console.log(response.data.Location);
@@ -62,7 +66,7 @@ const data = {
 
   var KholaId = localStorage.getItem('KholaId');
   axios
-    .put(`https://serveriweta.herokuapp.com/khola/update/${KholaId}`, data)
+    .put(`http://localhost:3001/khola/update/${KholaId}`, data)
     .then(() => {
       navigate("/specificKhola");
     });
@@ -71,11 +75,11 @@ const data = {
 
   return (
     
-    //login page forms
-   <div className="loginContainer"> 
+    <div className="forum"> 
+    <p onClick={back} className="backArrow"><ArrowBack/>Back</p> 
+   <div className="createPostPage"> 
         <h1>Update Khola</h1>
-        
-           <div className="loginContainer">
+           <div className="formContainer__">
       <label>KholaName:</label>
       <input
         type="text"
@@ -116,7 +120,8 @@ const data = {
  {/* *************************************       */}
      </div>
     </div>
-    
+    </div>
+  
   );
 }
 

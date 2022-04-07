@@ -21,7 +21,7 @@ body {
   flex-direction: column;
   width: 100% !important;
   height: 100vh;
-  padding-top: 20px;
+  padding-top: 10px;
   z-index: 999;
 }
 /* Create livestock*/
@@ -44,6 +44,39 @@ body {
   border-radius: 5px;
  
 }
+
+
+.formContainer__ {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  border: 2px solid dodgerblue;
+  border-radius: 5px;
+ 
+}
+
+
+.formContainer__ input{
+  width: 93%;
+  height: 40px;
+  border-radius: 8px;
+  margin: 10px;
+  border: 2px solid dodgerblue;
+ 
+}
+
+.formContainer__ button {
+  width: 93%;
+  height:40px;
+  border-radius: 8px;
+  margin: 10px;
+  background-color: dodgerblue;
+  color: white;
+}
+
 
 .formRegisterContainer {
   display: flex;
@@ -472,3 +505,12 @@ flex: 4;
 }
 /* style={{color: "blue",display: "flex", margin: "4"}} */
 
+.backArrow{
+display: flex;
+cursor: pointer;
+}
+
+.Layout{
+  margin: 5px;
+  
+}

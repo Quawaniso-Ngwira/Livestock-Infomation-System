@@ -41,14 +41,14 @@ const TopbarWebPage= () => {
                 onChange={(e, value) => setValue(value)}
                 centered
               >
-           
+                <Link to="/web">
                 <Tab label="Home" />
-                <Tab label="Graphs" />
+                </Link>
                 <Link to="/forumWeb">
                 <Tab label="Forum" />
                 </Link>
                 <Link to="/aboutUs">
-                <Tab label="AboutUs" />
+                <Tab label="About Us" />
               </Link> 
               </Tabs>
               <Link to="/login">

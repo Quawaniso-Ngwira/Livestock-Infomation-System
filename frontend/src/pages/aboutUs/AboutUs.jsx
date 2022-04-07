@@ -52,6 +52,7 @@ function AboutUs() {
         The systm focus on providing vaccination and feeding information. Our primary target was the local malawian farmer.
         We hope this product will contribute to the development of Malawi espcially in the Livestock sector of Agriculture.
       </p>
+      
       <p style={{marginLeft: "40%"}}>+265 YYY YYY YYY/ +265 AAA AAA AAA</p>
       </div>
       </>

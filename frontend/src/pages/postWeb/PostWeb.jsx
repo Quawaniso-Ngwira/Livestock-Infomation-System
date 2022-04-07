@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import UserComment from '../../image/commentUser.jpg'
 import Button from '@material-ui/core/Button';
+import {  ArrowBackIos, ArrowBack } from "@material-ui/icons";
 
 
 
@@ -40,12 +41,16 @@ function PostWeb() {
 
   let navigate = useNavigate();
 
+  const back = () => {
+    navigate("/forumWeb");
+};
+
   useEffect(() => {
-    axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
+    axios.get(`https://serveriweta.herokuapp.com/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
     });
 
-    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+    axios.get(`https://serveriweta.herokuapp.com/comments/byPost/${id}`).then((response) => {
       setComments(response.data);
     });
   }, []);
@@ -54,6 +59,7 @@ function PostWeb() {
     <div className="postPage">
       <div className="postlayout">
     <Box sx={{ width: '100%' }}>
+    <p onClick={back} className="backArrow"><ArrowBack/>Back</p>  
     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       <Grid item xs={10}>
         <Item>

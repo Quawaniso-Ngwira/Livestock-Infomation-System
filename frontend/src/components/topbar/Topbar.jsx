@@ -47,8 +47,8 @@ const Topbar = () => {
               <Link to="/kholaPage">
                 <Tab label="My Khola" />
               </Link>
-              <Link to="/nutrition">
-                <Tab label="Manage" />
+              <Link to="/forum">
+                <Tab label="Forum" />
               </Link>
               <Link to="/market">
                 <Tab label="Market" />

@@ -9,8 +9,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import {  Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import {  TextField, IconButton } from '@material-ui/core';
-import { SearchOutlined } from '@material-ui/icons';
+import { SearchOutlined, Add } from '@material-ui/icons';
+import Button from '@material-ui/core/Button';
 import './kholaPage.css';
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//     textAlign: 'right',
+//   },
+//   paper: {
+//     padding: theme.spacing(1),
+//     // textAlign: 'right',
+//     color: theme.palette.text.primary,
+//   },
+// }));
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -19,11 +32,14 @@ const useStyles = makeStyles((theme) => ({
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
+  }, root: {
+    flexGrow: 1,
+    textAlign: 'right',
   },
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
+  paper: {
+    padding: theme.spacing(1),
+    // textAlign: 'right',
+    color: theme.palette.text.primary,
   },
 }));
 
@@ -37,6 +53,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 function KholaPage() {
+  const classes = useStyles();
   const navigate = useNavigate();
   const [makolaById, setMakolaById] = useState([]);
    const listOfKholaNumber = makolaById.length
@@ -69,9 +86,8 @@ function KholaPage() {
     <div className="home"> 
          
            <br/>
-           
-       
-           <TextField style={{margin: "10px", backgroundColor: "#fafafa"}}
+          <div style={{display: "flex"}}>
+           <TextField style={{ backgroundColor: "#fafafa"}}
                 onChange={(e) => setSearchTitle(e.target.value)}
                 id="standard-bare"
                 variant="outlined"
@@ -84,7 +100,17 @@ function KholaPage() {
                   ),
                 }}
               />
+              
+        <div className={classes.root}>
+          <Link to="/createKhola">  
+          <Button variant="outlined" color="primary" startIcon={<Add/>}>
+       Create Khola
+      </Button> 
+      </Link> 
+    </div>
+    </div> 
               <hr/>
+              <h2 style={{textAlign: "center"}}> The available Khola(s)</h2>
     
 <div className="cards-container">  
 
@@ -109,8 +135,7 @@ function KholaPage() {
                }}
             >
               <div className="arrange"><div className="split">
-             <h4 className="breedname">{value.KholaName} Khola </h4> 
-             
+             <p className="breedname">{value.KholaName} Khola </p>
               </div>
               </div> </div>
            </div>

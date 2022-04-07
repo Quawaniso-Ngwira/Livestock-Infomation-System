@@ -8,6 +8,7 @@ import User from '../image/login.jpg';
 import Input from '@mui/material/Input';
 import { SearchOutlined } from '@material-ui/icons';
 import Notifications from './Notifications';
+import {  ArrowBackIos, ArrowBack } from "@material-ui/icons";
 
 
 function Login() {
@@ -18,7 +19,10 @@ function Login() {
 
   let navigate = useNavigate();
 
-  
+  const back = () => {
+    navigate("/web");
+};
+
   const register = () => {
         navigate("/registration");
   };
@@ -68,8 +72,10 @@ function Login() {
     });
   };
   return (
-    //login page forms
+    <div className="forum">
+ <p onClick={back} className="backArrow"><ArrowBack/>Back</p> 
    <div className="loginContainer"> 
+  
         <h1>Login</h1>
         <img src={User} alt="login symbol" style={{ height: "70px", width: "70px"}} />
            <div className="loginContainer">
@@ -100,6 +106,7 @@ function Login() {
       <Link to="/emailRecovery"><p className="RegisterStatement" style={{color: 'orangered'}}>Forget password? Click here to reset</p></Link>
     
      </div>
+    </div>
     </div>
     
   );

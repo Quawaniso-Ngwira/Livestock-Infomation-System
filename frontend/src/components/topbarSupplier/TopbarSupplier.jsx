@@ -43,7 +43,7 @@ const TopbarSupplier = () => {
             
             
               <Link to="/supplier">
-                <Tab label="My Supplies" />
+                <Tab label="Home" />
               </Link>
               <Link to="/supplierProducts">
                 <Tab label="Add Product" />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import {  Delete } from "@material-ui/icons";
+import {  Delete, Edit } from "@material-ui/icons";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
@@ -10,7 +10,8 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import UserComment from '../image/commentUser.jpg'
 import Button from '@material-ui/core/Button';
-
+import {  ArrowBackIos, ArrowBack } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,10 +44,9 @@ function Post() {
 
   let navigate = useNavigate();
 
-
-  useEffect(() => {
-   
-    });
+  const back = () => {
+    navigate("/forum");
+};
 
 
   useEffect(() => {
@@ -59,10 +59,11 @@ function Post() {
     });
   }, []);
 
+///postComment/:postId
   const addComment = () => {
     axios
       .post(
-        `https://serveriweta.herokuapp.com/comments/postComment/${id}`,
+        `https://serveriweta.herokuapp.com/comments/postComment/:id`,
         {
           commentBody: newComment,
           PostId: id,
@@ -111,10 +112,15 @@ function Post() {
       });
   };
 
+  const editPost = () => {
+   navigate("/updatePost")
+  };
+
   return (
     <div className="postPage">
-      <div className="postlayout">
-    <Box sx={{ width: '100%' }}>
+      <div className="postlayout">   
+    <Box sx={{ width: '100%' }}>   
+       <p onClick={back} className="backArrow"><ArrowBack/>Back</p>  
     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       <Grid item xs={10}>
         <Item>
@@ -144,9 +150,18 @@ function Post() {
       <Grid item xs={2}>
         <Item>
         <p>Posted by:</p> <h3>{postObject.username} </h3>
+        
         <div className="">
           
             {authState.username === postObject.username && (
+              <Edit  className="deletePosterscomment"
+                onClick={editPost}
+              >
+                {" "}
+              </Edit>
+            )}
+
+              {authState.username === postObject.username && (
               <Delete className="deletePosterscomment"
                 onClick={() => {
                   deletePost(postObject.id);
@@ -189,6 +204,7 @@ function Post() {
   </Box>
   </div>
   </div>
+  
   );
 }
 export default Post;

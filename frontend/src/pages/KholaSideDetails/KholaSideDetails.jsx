@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"; 
 import axios from "axios";
+import Button from '@material-ui/core/Button';
+import { SearchOutlined, Add } from '@material-ui/icons';
 import { ArrowDownward, ArrowUpward, PermIdentity, DeleteOutline, EditOutlined, NoteAddIcon  } from "@material-ui/icons";
 
 
@@ -47,6 +49,7 @@ const updateKhola = () => {
           <span className="featuredMoney">
           &nbsp;&nbsp;&nbsp; <DeleteOutline onClick={deleteKhola} variant="contained" color="primary" style={{cursor: "pointer"}}/>
           </span>
+         
         </div>
         <span className="featuredSub">Created on {postKhola.createdAt}</span>
       </div>
@@ -59,16 +62,27 @@ const updateKhola = () => {
       </div>
     
       <div className="featuredItem">
-      <Link to="/dairyRecording">
-        <span className="featuredTitle">Dairy Recordings</span>
+     
         <div className="featuredMoneyContainer">
           <span className="featuredMoney"></span>
           <span className="featuredMoneyRate">
-            +2.4 <ArrowUpward className="featuredIcon"/>
+          <span className=""> <Link to="/dairyRecording">  
+          <Button variant="outlined" color="primary" startIcon={<Add/>}>
+       View Records
+      </Button> 
+      </Link> 
+          </span>
+
+          <span className=""> <Link to="/activites">  
+          <Button variant="outlined" color="primary" startIcon={<Add/>}>
+       View Schedules
+      </Button> 
+      </Link> 
+          </span>
+
           </span>
         </div>
-        <span className="featuredSub">Stay updated record your notes by clicking here</span>
-        </Link>
+      
       </div>
    
     </div>

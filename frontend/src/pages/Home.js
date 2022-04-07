@@ -1,114 +1,60 @@
-import React, { useContext } from "react";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import { AuthContext } from "../helpers/AuthContext";
+import React, { useContext, useEffect, useState } from "react";
 import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import cattlepig from '../image/livestock_banner.jpg';
+import Paper from '@mui/material/Paper';
+// import khola from '../../image/khola.jpg';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import {  Link } from "react-router-dom";
+import Slider from '../components/slider/Slider'
 import { useParams, useNavigate } from "react-router-dom";
-import Chart from './Charts/BarChart';
+
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
   root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
 }));
+
 
 const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  height: '400px',
-  color: theme.palette.text.secondary,
-}));
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
+function Home() { 
+  const navigate = useNavigate();
+  const classes = useStyles(); 
 
-function Home() {
-
-  // initialising classes to the methodof UseStyles() method
-  const classes = useStyles();
-  
-
-  const { authState } = useContext(AuthContext);
-  let navigate = useNavigate();
-   var listOfKholaNumber = localStorage.getItem("listOfKholaNumber");
   
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
+      navigate("/web");
     } else {
      console.log("")
     }
   }, []);
-
+ 
   return (
-    <div className="home">
-     
-      <div className="homeWidgets">
-          <div className="featured">
-          <Box sx={{ width: '100%' }}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={6}>
-          <Item className={classes.root}>
-             
-             <h2 style={{color:"blue"}}> Livestock Information System</h2>
-            
-             <p>iWeta gives you all the infomation you need
-                for sucessful cattle and pig production</p>
-                <br/><br/><br/> <br/><br/><br/>
-              {/* Button that allows the user of the system to fill the form to create a khola */}
-              <Link to="/createKhola">
-                <Button variant="contained" color="secondary" >
-                    <p style={{color: "white"}}> Create Your Khola</p>
-                </Button>
-                </Link>
-                
-          </Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>
-          <h2> Number of Your Kholas</h2>
-          <br/>
-         <h1> {listOfKholaNumber} </h1>
-         <p> Compared to last month</p>
-          {/* <img src={cattlepig} alt="cattlepig pic" style={{ height: "100%", width: "100%"}} className=""/> */}
-            </Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>xs=4</Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>
-         kkk
-          </Item>
-        </Grid>
-      </Grid>
-    </Box>
-
-          </div>
-      </div>
- {/* bar that is located in the homepage containing search functionality of the kholas */}
+   <>
+      <div className="Layout">
+      <h3 style={{marginLeft: "50%", color: "orange"}}>iWeta</h3>
+      <p style={{margin: "10%"}}>iWeta Livestock infomation system is a system that intends to help livestock farmers with their livestock infomation needs.
+        The systm focus on providing vaccination and feeding information. Our primary target was the local malawian farmer.
+        We hope this product will contribute to the development of Malawi espcially in the Livestock sector of Agriculture.
+      </p>
       
-  {/* <div className="homesearchContainer">
-
-      <RenderKholas/>
-    </div> */}
-    </div>
+      <p style={{marginLeft: "40%"}}>+265 YYY YYY YYY/ +265 AAA AAA AAA</p>
+      </div>
+      {/* <img src={khola} alt="aboutUs" style={{ height: "350px", width: "100%"}}/> */}
+   <Slider/>
+      </>
   );
 }
 

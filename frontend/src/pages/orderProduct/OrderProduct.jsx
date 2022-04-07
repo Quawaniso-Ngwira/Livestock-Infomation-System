@@ -18,7 +18,7 @@ export default function OrderProduct() {
   
   useEffect(() => {
     var OrderId = localStorage.getItem('orderId');
-      axios.get(`http://localhost:3001/product/byId/${OrderId}`).then((response) => {
+      axios.get(`https://serveriweta.herokuapp.com/product/byId/${OrderId}`).then((response) => {
         setProductObject(response.data);
         console.log(response.data)
       });
