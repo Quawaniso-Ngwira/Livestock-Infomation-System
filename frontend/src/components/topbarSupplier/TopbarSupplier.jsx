@@ -11,17 +11,29 @@ import {
 } from "@mui/material";
 import {  Link } from "react-router-dom";
 import DrawerSup from './DrawerSupplier';
+import { useNavigate } from "react-router-dom";
 
 const TopbarSupplier = () => {
+  const navigate = useNavigate();
   const [value, setValue] = useState();
   const theme = useTheme();
   console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   console.log(isMatch);
 
+  const Forum = () =>{
+    navigate("/supplier");
+  };
+  const Web = () =>{
+    navigate("/supplierProducts");
+  };
+  const About = () =>{
+    navigate("/supplierMarket");
+  };
+
   return (
     <React.Fragment>
-      <AppBar sx={{ background: "#063970", marginTop:"65px" }}>
+      <AppBar sx={{ background: "#046904", marginTop:"65px" }}>
         <Toolbar>
           {isMatch ? (
             <>
@@ -41,16 +53,10 @@ const TopbarSupplier = () => {
                 centered
               >
             
-            
-              <Link to="/supplier">
-                <Tab label="Home" />
-              </Link>
-              <Link to="/supplierProducts">
-                <Tab label="Add Product" />
-              </Link>
-              <Link to="/supplierMarket">
-                <Tab label="Market" />
-              </Link>
+                <Tab label="Home" onClick={Forum}/>
+                <Tab label="Add Product" onClick={Web}/>
+                <Tab label="Market" onClick={About}/>
+             
               </Tabs>
            
             </>

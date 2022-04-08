@@ -9,9 +9,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import {  Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import {  TextField, IconButton } from '@material-ui/core';
-import { SearchOutlined, Add } from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import {  ArrowBackIos, ArrowBack } from "@material-ui/icons";
+import { SearchOutlined, Add, Delete } from '@material-ui/icons';
 import './dairyRecordings.css';
 
 // const useStyles = makeStyles((theme) => ({
@@ -74,7 +74,16 @@ function DairyRecordings() {
     navigate("/specificKhola");
 };
 
-  
+useEffect(() => { 
+  var id = localStorage.getItem('KholaId');
+  console.log(id);
+    axios.get(`https://serveriweta.herokuapp.com/records/bykhola/${id}`).then((response) => {
+        console.log(response.data);
+        setMakolaById(response.data);
+        
+    });
+}, []);
+
   return (
     <div className="home"> 
          <p onClick={back} className="backArrow"><ArrowBack/>Back</p> 
@@ -106,6 +115,34 @@ function DairyRecordings() {
               <h2 style={{textAlign: "center"}}> Recordings</h2>
     
 <div className="cards-container">  
+
+{makolaById.filter((value) => {
+            if (searchTitle === "") {
+              return value;
+            } else if (
+              value.Activity?.toLowerCase().includes(searchTitle.toLowerCase())
+            ) {
+              return value;
+            }
+          }).map((value, key) => {
+  return (
+
+       <div key={key} className="cards">
+            <div className="" >
+            <div className="breeedcategory">
+              <div className="arrange"><div className="split__">
+             <h2 className="breedname"> 
+             {value.Activity} </h2>
+             <p className="breedname"> Due on: {value.Day} </p>
+             <p className="breedname"> <Delete/> </p>
+              </div>
+              </div> </div>
+           </div>
+           </div>
+            
+        
+        );
+      })}
 
 </div>
 

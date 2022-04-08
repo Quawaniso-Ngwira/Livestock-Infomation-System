@@ -25,7 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
-  height: '300px',
+  height: '150px',
   color: theme.palette.text.primary,
 }));
 

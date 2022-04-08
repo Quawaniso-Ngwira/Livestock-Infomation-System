@@ -37,7 +37,7 @@ function NewBreed() {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:3001/api/breeds", data, {
+      .post("https://serveriweta.herokuapp.com/api/breeds", data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {

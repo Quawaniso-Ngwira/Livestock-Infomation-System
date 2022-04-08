@@ -120,9 +120,9 @@ function Supplier() {
    }}>
             <div className="card__title">{value.Name} </div>
             <div className="card__body">
-            <h3 className="breedname">{value.Description} </h3>
-            <h3 className="breedname">{value.Category} </h3>
-            <h3 className="breedname">MK: {value.Price} </h3>
+            <p className="breedname">{value.Description} </p>
+            <p className="breedname">{value.Category} </p>
+            <p className="breedname">MK: {value.Price} </p>
            
             </div>
            </div>

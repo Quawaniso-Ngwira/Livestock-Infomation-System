@@ -10,9 +10,6 @@
 
 }
 
-.cards:hover {
-    transform: scale(1.1);
-}
 
 .card__title {
     font-weight: 300;

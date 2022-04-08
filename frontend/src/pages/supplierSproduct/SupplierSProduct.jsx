@@ -84,7 +84,7 @@ const data = {
 ///product/update/:id
   var ProductId = localStorage.getItem('ProductId');
   axios
-    .put(`https://serveriweta.herokuapp.com/product/update/${ProductId}`, data)
+    .put(`http://localhost:3001/product/update/${ProductId}`, data)
     .then(() => {
       navigate("/supplier");
     });
@@ -94,7 +94,7 @@ const data = {
 const deleteProduct = () => {
   var productId = localStorage.getItem('ProductId');
   axios
-    .delete(`https://serveriweta.herokuapp.com/product/delete/${productId}`, {
+    .delete(`http://localhost:3001/product/delete/${productId}`, {
       headers: { accessToken: localStorage.getItem("accessToken") },
     })
     .then(() => {

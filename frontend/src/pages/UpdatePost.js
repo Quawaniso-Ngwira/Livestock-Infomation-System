@@ -26,7 +26,7 @@ function UpdatePost() {
  // getting list of user products based on user id 
  useEffect(() => { 
     var id = localStorage.getItem('PostId');
-    axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
+    axios.get(`https://serveriweta.herokuapp.com/posts/byId/${id}`).then((response) => {
           console.log(response.data);
            // console.log(response.data.Name);
           setTitle(response.data.title);
@@ -50,7 +50,7 @@ const data = {
 ////updatePost/:postId
  var PostId = localStorage.getItem('PostId'); 
   axios
-    .put(`http://localhost:3001/posts/updatePost/${PostId}`, data)
+    .put(`https://serveriweta.herokuapp.com/posts/updatePost/${PostId}`, data)
     .then(() => {
        navigate(`/post/${PostId}`);
     });

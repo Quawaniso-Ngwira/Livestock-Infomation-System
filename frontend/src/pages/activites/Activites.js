@@ -47,6 +47,7 @@ function Activites() {
   const navigate = useNavigate();
   const [searchTitle, setSearchTitle] = useState("");
   const [makolaById, setMakolaById] = useState([]);
+  const [postKhola, setKholaObject] = useState({});
   
 
   useEffect(() => {
@@ -61,6 +62,13 @@ function Activites() {
     navigate("/specificKhola");
 };
 ///schedules/bykhola/:kholaId
+useEffect(() => {
+  var KholaId = localStorage.getItem('KholaId');
+    axios.get(`https://serveriweta.herokuapp.com/khola/ById/${KholaId}`).then((response) => {
+      setKholaObject(response.data);
+      console.log(response.data)
+    });
+  }, []);
     
     useEffect(() => { 
         var id = localStorage.getItem('KholaId');
@@ -109,14 +117,14 @@ const deleteActivity = () => {
         <div className={classes.root}>
           <Link to="/createActivity">  
           <Button variant="outlined" color="primary" startIcon={<Add/>}>
-       Create Schedules
+       Add Schedules
       </Button> 
       </Link> 
     </div>
     </div> 
               <hr/>
-              <h2 style={{textAlign: "center"}}> Schedules</h2>
-    
+              <h2 style={{textAlign: "center"}}> {postKhola.KholaName} Khola Schedules</h2>
+             
 <div className="cards-container">  
 
 {makolaById.filter((value) => {

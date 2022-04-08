@@ -10,18 +10,33 @@ import {
   useTheme,
 } from "@mui/material";
 import {  Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DrawerComp from './Drawer';
 
 const Topbar = () => {
+   const navigate = useNavigate();
   const [value, setValue] = useState();
   const theme = useTheme();
   console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   console.log(isMatch);
 
+const Home = () =>{
+    navigate("/");
+};
+const Khola = () =>{
+  navigate("/kholaPage");
+};
+const Forum = () =>{
+  navigate("/forum");
+};
+const Market = () =>{
+  navigate("/market");
+};
+
   return (
     <React.Fragment>
-      <AppBar sx={{ background: "#063970", marginTop:"65px" }}>
+      <AppBar sx={{ background: "#046904", marginTop:"65px" }}>
         <Toolbar>
           {isMatch ? (
             <>
@@ -41,18 +56,10 @@ const Topbar = () => {
                 centered
               >
             
-              <Link to="/">
-                <Tab label="Home" />
-              </Link>
-              <Link to="/kholaPage">
-                <Tab label="My Khola" />
-              </Link>
-              <Link to="/forum">
-                <Tab label="Forum" />
-              </Link>
-              <Link to="/market">
-                <Tab label="Market" />
-              </Link> 
+                <Tab label="Home" onClick={Home} />
+                <Tab label="My Khola" onClick={Khola} />
+                <Tab label="Forum" onClick={Forum}/>
+                <Tab label="Market" onClick={Market} /> 
               </Tabs>
            
             </>

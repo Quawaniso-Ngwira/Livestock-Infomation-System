@@ -2,3 +2,12 @@
     margin: 5px;
     
 }
+.display{
+    display: flex;
+}
+.Layout2{
+    margin: 5px;
+    border: 1px solid blue;
+    -webkit-box-shadow: 0px 0px 11px -1px #9b8989;
+    box-shadow: 0px 0px 11px #89919bb7;
+}

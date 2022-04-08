@@ -59,7 +59,7 @@ export default function Forum() {
   const likeAPost = (postId) => {
     axios
       .post(
-        "https://serveriweta.herokuapp.com/likes",
+        https://serveriweta.herokuapp.com/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
@@ -99,7 +99,7 @@ export default function Forum() {
 <div className={classes.root}>
           <Link to="/createpost">  
           <Button variant="outlined" color="primary">
-       Add Querry
+       Add Post
       </Button> 
       </Link> 
     </div>
@@ -108,7 +108,6 @@ export default function Forum() {
         
       <div className="forumWidgets">
         {/* displaying the number of available posts */}
-      <h2 style={{textAlign: "center"}}> Total Querries:{listOfPostsNumber}</h2>
        {/* array printing the available post made using map method */}
     {listOfPosts.map((value, key) => {
         return (

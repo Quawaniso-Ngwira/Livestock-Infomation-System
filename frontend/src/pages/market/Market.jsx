@@ -86,7 +86,7 @@ function Market() {
                 }}
               />
               <hr/>
-              <h2 style={{textAlign: "center"}}> The Market</h2>
+              
     
 <div className="cards-container">
 

@@ -73,7 +73,6 @@ function Login() {
   };
   return (
     <div className="forum">
- <p onClick={back} className="backArrow"><ArrowBack/>Back</p> 
    <div className="loginContainer"> 
   
         <h1>Login</h1>

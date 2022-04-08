@@ -110,7 +110,7 @@ function KholaPage() {
     </div>
     </div> 
               <hr/>
-              <h2 style={{textAlign: "center"}}> The available Khola(s)</h2>
+             
     
 <div className="cards-container">  
 
@@ -136,6 +136,7 @@ function KholaPage() {
             >
               <div className="arrange"><div className="split">
              <p className="breedname">{value.KholaName} Khola </p>
+             <p className="breedname">Khola ID:{value.id} </p>
               </div>
               </div> </div>
            </div>

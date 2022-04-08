@@ -241,7 +241,7 @@ useEffect(()=> {
         BackdropComponent={Backdrop}>
         <Box sx={style}>
         
-        <Link to="/login">
+        <Link to="/web">
       
        <p onClick={logout} className="popup"><PowerSettingsNewOutlined/>Logout</p>
        </Link>

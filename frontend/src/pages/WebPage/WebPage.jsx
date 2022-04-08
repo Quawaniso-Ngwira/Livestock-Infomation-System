@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import './webPage.css';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -6,6 +7,11 @@ import Paper from '@mui/material/Paper';
 import khola from '../../image/khola.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '../../components/slider/Slider'
+import Button from '@material-ui/core/Button';
+import {  Link } from "react-router-dom";
+import Grid from '@material-ui/core/Grid';
+import expand from '../../image/expand.png';
+import axios from "axios";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,19 +26,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
 
-function WebPage() { 
-  const classes = useStyles(); 
+function WebPage() {  
+  const navigate = useNavigate();
+  const classes = useStyles();
+  const [users, setUsers] = useState([]);
+  
+  useEffect(() => { 
+    var id = localStorage.getItem('id');
+      axios.get("https://serveriweta.herokuapp.com/auth/users").then((response) => {
+          console.log(response.data);
+          setUsers(response.data);
+          
+      });
+  }, []);
+
+  const navigateM = () =>{
+    navigate("/forumWeb");
+  };
  
   return (
-   <>
+    <div>
+   <div className="display">
       <div className="Layout">
       <h3 style={{marginLeft: "50%"}}>iWeta</h3>
       <p style={{margin: "10%"}}>iWeta Livestock infomation system is a system that intends to help livestock farmers with their livestock infomation needs.
@@ -40,11 +55,40 @@ function WebPage() {
         We hope this product will contribute to the development of Malawi espcially in the Livestock sector of Agriculture.
       </p>
       
-      <p style={{marginLeft: "40%"}}>+265 YYY YYY YYY/ +265 AAA AAA AAA</p>
+      <Link to="/login">
+              <Button style={{marginLeft: "40%"}}variant="contained">
+               Start 
+              </Button>
+              </Link>
+
+              <br/>
+              
       </div>
-      {/* <img src={khola} alt="aboutUs" style={{ height: "350px", width: "100%"}}/> */}
+     
    <Slider/>
-      </>
+   
+      </div>
+      
+<br/><br/><br/><br/><br/><hr/>
+<div className={classes.root}>
+      <Grid container spacing={3}>
+       
+        <Grid item xs={12} sm={6}>
+          <Paper className={classes.paper}>
+            <h3>Trusted Users Countrywide</h3>
+            <h1 style={{fontSize: "40px"}}>{users.length}<img src={expand} alt="User who commented" style={{ height: "2.5%", width: "2.5%"}}/></h1>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper className={classes.paper}>
+          <h3>Check Our Interactive Posts</h3>
+          <h1 style={{fontSize: "40px"}} onClick={navigateM}><img src={expand} alt="User who commented" style={{ height: "3.5%", width: "3.5%"}}/></h1>
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
+
+      </div>
   );
 }
 

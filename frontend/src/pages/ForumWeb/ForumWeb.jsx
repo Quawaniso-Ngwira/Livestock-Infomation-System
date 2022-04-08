@@ -39,7 +39,7 @@ export default function ForumWeb() {
   useEffect(() => {
   
       axios
-        .get("https://serveriweta.herokuapp.com/posts/All")
+        .get("http://localhost:3001/posts/All")
         .then((response) => {
           setListOfPosts(response.data.listOfPosts);
           setLikedPosts(
@@ -107,7 +107,6 @@ export default function ForumWeb() {
               />
     <hr/>
  {/* displaying the number of available posts */}
- <h2 style={{textAlign: "center"}}> Total Querries:{listOfPostsNumber}</h2>
 
       <div className="forumWidgets__">
        
