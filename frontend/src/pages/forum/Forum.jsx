@@ -59,7 +59,7 @@ export default function Forum() {
   const likeAPost = (postId) => {
     axios
       .post(
-        https://serveriweta.herokuapp.com/likes",
+        "https://serveriweta.herokuapp.com/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
