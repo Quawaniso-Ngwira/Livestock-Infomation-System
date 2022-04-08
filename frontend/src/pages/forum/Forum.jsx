@@ -55,7 +55,7 @@ export default function Forum() {
         });
     }
   }, []);
-
+  
   const likeAPost = (postId) => {
     axios
       .post(
