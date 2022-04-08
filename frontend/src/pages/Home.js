@@ -54,7 +54,7 @@ function Home() {
         We hope this product will contribute to the development of Malawi espcially in the Livestock sector of Agriculture.
       </p>
       
-      <Link to="/createKhola">
+      <Link to="/kholaPage">
               <Button style={{marginLeft: "40%"}}variant="contained">
                Getting Started
               </Button>
